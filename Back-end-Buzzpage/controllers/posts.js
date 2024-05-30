@@ -94,4 +94,26 @@ router.delete('/:postId', async (req, res) => {
     }
 });
 
+//create a commet
+router.post('/:postId/comments', async (req, res) => {
+  try {
+    req.body.author = req.user._id;
+    req.body.post = req.params.postId;
+    const posts = await Post.findById(req.params.postId);
+    posts.comments.push(req.body);
+    await posts.save();
+    // Find the newly created comment:
+    const newComment = posts.comments[posts.comments.length - 1];
+    newComment._doc.author = req.user;
+    // Respond with the newComment:
+    res.status(201).json(newComment);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
+//update a comment
+
+//delete a comment
+
 module.exports = router;
