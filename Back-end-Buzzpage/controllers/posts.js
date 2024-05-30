@@ -34,8 +34,18 @@ router.get('/', async (req, res) => {
     }
 });
 
-
-// show by id
+// show post by id
+router.get('/:postId', async (req, res) => {
+    try {
+      const post = await Post.findById(req.params.postId).populate([
+        'author',
+        'comments.author',
+      ]);
+      res.status(200).json(post);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+});
 
 // delete
 
