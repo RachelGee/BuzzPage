@@ -6,7 +6,9 @@ const commentSchema = new mongoose.Schema(
         type: String,
         required: true
       },
-      author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
+      author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+      post: { type: mongoose.Schema.Types.ObjectId, ref: 'Post' },
+      like: Number
     },
     { timestamps: true }
 );
@@ -21,13 +23,17 @@ const postSchema = new mongoose.Schema(
         type: String,
         required: true,
       },
+      image:{
+        type: String
+      },
       category: {
         type: String,
         required: true,
         enum: ['News', 'Sports', 'Games', 'Movies', 'Music', 'Television'],
       },
       author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-      comments: [commentSchema]
+      comments: [commentSchema],
+      like: Number
     },
     { timestamps: true }
 );
