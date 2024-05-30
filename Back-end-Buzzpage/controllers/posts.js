@@ -8,7 +8,7 @@ const router = express.Router();
 // ========= Protected Routes =========
 
 router.use(verifyToken);
-
+// Need to create logic for COMMENTS
 // create
 router.post('/', async (req, res) => {
     try {
@@ -46,6 +46,36 @@ router.get('/:postId', async (req, res) => {
       res.status(500).json(error);
     }
 });
+
+// update 
+
+router.put('/:postId', async (req, res) => {
+    try {
+      // Find the post:
+      const post = await Post.findById(req.params.postId);
+  
+      // Check permissions:
+      if (!post.author.equals(req.user._id)) {
+        return res.status(403).send("You're not allowed to do that!");
+      }
+  
+      // Update Post:
+      const updatedPost = await Post.findByIdAndUpdate(
+        req.params.postId,
+        req.body,
+        { new: true }
+      );
+  
+      // Append req.user to the author property:
+      updatedPost._doc.author = req.user;
+  
+      // Issue JSON response:
+      res.status(200).json(updatedPost);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+});
+
 
 // delete
 
