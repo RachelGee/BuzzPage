@@ -22,7 +22,18 @@ router.post('/', async (req, res) => {
     }
 });
 
-// index
+// index to show all post "Hive Feed"
+router.get('/', async (req, res) => {
+    try {
+      const posts = await Post.find({})
+        .populate('author')
+        .sort({ createdAt: 'desc' });
+      res.status(200).json(posts);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+});
+
 
 // show by id
 
