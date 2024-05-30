@@ -25,4 +25,31 @@ router.get('/:userId', verifyToken, async (req, res) => {
     }
 });
 
+// update and return the user object
+router.put('/:userId', verifyToken, async (req, res) => {
+    try {
+        // req.user is set using verifyToken
+        if (req.user._id !== req.params.userId){
+            return res.status(401).json({ error: "Unauthorized"})
+        }
+        const user = await User.findById(req.user._id);
+        if (!user) {
+            res.status(404)
+            throw new Error('Profile not found.');
+        }
+        const updatedUser = await User.findByIdAndUpdate(
+            req.params.userId,
+            req.body,
+            {new:true}
+        )
+        res.json({ updatedUser });
+    } catch (error) {
+        if (res.statusCode === 404) {
+            res.status(404).json({ error: error.message });
+        } else {
+            res.status(500).json({ error: error.message });
+        }
+    }
+});
+
 module.exports = router;

@@ -10,6 +10,22 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    firstName:{
+        type:String,
+        required:true
+    },
+    lastName:{
+        type:String,
+        required:true
+    },
+    image:{
+        type:String,
+        default:""
+    },
+    bio:{
+        type: String,
+        default:""
+    }
 });
 
 userSchema.set('toJSON', {
