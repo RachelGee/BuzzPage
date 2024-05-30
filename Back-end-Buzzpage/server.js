@@ -6,7 +6,7 @@ const app = express();
 const mongoose = require('mongoose');
 const usersRouter = require('./controllers/users');
 const profilesRouter = require('./controllers/profiles');
-
+const postRouter = require('./controllers/posts');
 
 mongoose.connect(process.env.MONGODB_URI);
 
@@ -21,6 +21,7 @@ app.use(express.json());
 
 app.use('/users', usersRouter);
 app.use('/profiles', profilesRouter);
+app.use('/posts', postRouter);
 
 
 // Routes go here
