@@ -34,7 +34,6 @@ router.get('/', async (req, res) => {
     }
 });
 
-
 // show post by id
 router.get('/:postId', async (req, res) => {
     try {
