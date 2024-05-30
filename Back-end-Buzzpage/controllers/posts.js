@@ -1,6 +1,7 @@
 const express = require('express');
 const verifyToken = require('../middleware/verify-token.js');
 const Post = require('../models/post.js');
+const User = require('../models/user.js')
 const router = express.Router();
 
 // ========== Public Routes ===========
@@ -9,12 +10,20 @@ const router = express.Router();
 
 router.use(verifyToken);
 // Need to create logic for COMMENTS
+
 // create post return created post
 router.post('/', async (req, res) => {
     try {
       req.body.author = req.user._id;
       const post = await Post.create(req.body);
       post._doc.author = req.user;
+
+      // associate the post with the user object
+      const user = await User.findById(req.user._id);
+      console.log(user);
+      user.posts.push(post);
+      user.save();
+
       res.status(201).json(post);
     } catch (error) {
       console.log(error);
@@ -48,7 +57,6 @@ router.get('/:postId', async (req, res) => {
 });
 
 // update post by ID return updated post by ID
-
 router.put('/:postId', async (req, res) => {
     try {
       // Find the post:
@@ -78,7 +86,6 @@ router.put('/:postId', async (req, res) => {
 
 
 // delete post by ID and return deleted post
-
 router.delete('/:postId', async (req, res) => {
     try {
       const post = await Post.findById(req.params.postId);
@@ -94,7 +101,7 @@ router.delete('/:postId', async (req, res) => {
     }
 });
 
-//create a commet
+// create a comment and return the the new comment
 router.post('/:postId/comments', async (req, res) => {
   try {
     req.body.author = req.user._id;
@@ -112,7 +119,7 @@ router.post('/:postId/comments', async (req, res) => {
   }
 });
 
-//update a comment
+// update a comment and return "ok"
 router.put('/:postId/comments/:commentId', async (req, res) => {
   try {
     req.body.author = req.user._id;
@@ -127,7 +134,7 @@ router.put('/:postId/comments/:commentId', async (req, res) => {
   }
 });
 
-// delete comment
+// delete comment and return "ok"
 router.delete('/:postId/comments/:commentId', async (req, res) => {
   try {
     const post = await Post.findById(req.params.postId);

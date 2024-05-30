@@ -25,7 +25,11 @@ const userSchema = new mongoose.Schema({
     bio:{
         type: String,
         default:""
-    }
+    },
+    posts:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Post',
+    }]
 });
 
 userSchema.set('toJSON', {
