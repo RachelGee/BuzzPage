@@ -113,6 +113,19 @@ router.post('/:postId/comments', async (req, res) => {
 });
 
 //update a comment
+router.put('/:postId/comments/:commentId', async (req, res) => {
+  try {
+    req.body.author = req.user._id;
+    req.body.post = req.params.postId;
+    const post = await Post.findById(req.params.postId);
+    const comment = post.comments.id(req.params.commentId);
+    comment.text = req.body.text;
+    await post.save();
+    res.status(200).json({ message: 'Ok' });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 //delete a comment
 
