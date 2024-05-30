@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.use(verifyToken);
 // Need to create logic for COMMENTS
-// create
+// create post return created post
 router.post('/', async (req, res) => {
     try {
       req.body.author = req.user._id;
@@ -22,7 +22,7 @@ router.post('/', async (req, res) => {
     }
 });
 
-// index to show all post "Hive Feed"
+// index to show all post "Hive Feed" return all posts
 router.get('/', async (req, res) => {
     try {
       const posts = await Post.find({})
@@ -34,7 +34,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-// show post by id
+// show post by id and return post by id
 router.get('/:postId', async (req, res) => {
     try {
       const post = await Post.findById(req.params.postId).populate([
@@ -47,7 +47,7 @@ router.get('/:postId', async (req, res) => {
     }
 });
 
-// update 
+// update post by ID return updated post by ID
 
 router.put('/:postId', async (req, res) => {
     try {
@@ -77,6 +77,21 @@ router.put('/:postId', async (req, res) => {
 });
 
 
-// delete
+// delete post by ID and return deleted post
+
+router.delete('/:postId', async (req, res) => {
+    try {
+      const post = await Post.findById(req.params.postId);
+  
+      if (!post.author.equals(req.user._id)) {
+        return res.status(403).send("You're not allowed to do that!");
+      }
+  
+      const deletedPost = await Post.findByIdAndDelete(req.params.postId);
+      res.status(200).json(deletedPost);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+});
 
 module.exports = router;
