@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { signup } from '../services/authService';
+import { signup } from '../../services/authService';
 
 const SignUpForm = (props) => {
     const [formData, setFormData] = useState({

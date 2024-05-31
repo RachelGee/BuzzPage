@@ -28,7 +28,7 @@ const signup = async (formData) => {
     throw new Error(err);
   }
 };
-//Gets the signin royte rfom the backend
+//Gets the signin route from the backend and return user object
 const signin = async (user) => {
   try {
     //fetch the signin post route
@@ -37,10 +37,12 @@ const signin = async (user) => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(user),
     });
+    //creating a json object from response
     const json = await res.json();
     if (json.error) {
       throw new Error(json.error);
     }
+    //if their is a token return, store in local token
     if (json.token) {
       localStorage.setItem('token', json.token);
       const user = JSON.parse(atob(json.token.split('.')[1]));
