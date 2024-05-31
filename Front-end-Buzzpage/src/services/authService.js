@@ -1,12 +1,16 @@
 const BACKEND_URL = import.meta.env.VITE_BACK_END_SERVER_URL;
 
 
+// return the user
 const getUser = () => {
+  // if there is no token, then no user, then return null
   const token = localStorage.getItem('token');
   if (!token) return null;
   const user = JSON.parse(atob(token.split('.')[1]));
   return user;
 };
+
+
 //gets the signup route from the backend
 const signup = async (formData) => {
   try {
