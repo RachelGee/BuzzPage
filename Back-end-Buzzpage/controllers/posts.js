@@ -20,8 +20,7 @@ router.post('/', async (req, res) => {
 
       // associate the post with the user object
       const user = await User.findById(req.user._id);
-      console.log(user);
-      user.posts.push(post);
+      user.posts.push(post._id);
       user.save();
 
       res.status(201).json(post);
@@ -93,6 +92,11 @@ router.delete('/:postId', async (req, res) => {
       if (!post.author.equals(req.user._id)) {
         return res.status(403).send("You're not allowed to do that!");
       }
+
+      // remove the post with the user object
+      const user = await User.findById(req.user._id);
+      user.posts = user.posts.filter(postId => !postId.equals(req.params.postId));
+      user.save();
   
       const deletedPost = await Post.findByIdAndDelete(req.params.postId);
       res.status(200).json(deletedPost);
