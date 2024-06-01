@@ -2,7 +2,6 @@ import Logo from '../../assets/images/logo.png'
 import { Link } from 'react-router-dom';
 const NavBar = (props) => {
     return (
-        // assume the user is not login
         <>
             {props.user ? (
                 <nav>
