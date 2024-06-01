@@ -6,6 +6,9 @@ import HiveFeed from './components/HiveFeed/HiveFeed';
 import NavBar from './components/NavBar/NavBar';
 import { Routes, Route, useNavigate } from 'react-router-dom'
 
+/*----------------User components-------------------- */
+import UserPage from './components/UserPage/UserPage';
+
 /*--------------------services--------------- */
 import * as authService from './services/authService';
 import * as postService from './services/postService';
@@ -29,6 +32,7 @@ const App = () => {
         <Route path="/" element={<HiveFeed />} />
         <Route path="/users/signup" element={<SignUpForm />} />
         <Route path="/users/signin" element={<SignInForm />} />
+        <Route path="/users/profile/:userId" element={<UserPage />} />
       </Routes>
     </>
 
