@@ -32,8 +32,8 @@ const App = () => {
       <Routes>
         <Route path="/" element={<HiveFeed />} />
         <Route path="/news" element={<NewsSlider />} />
-        <Route path="/users/signup" element={<SignUpForm />} />
-        <Route path="/users/signin" element={<SignInForm />} />
+        <Route path="/users/signup" element={<SignUpForm setUser={setUser} />} />
+        <Route path="/users/signin" element={<SignInForm setUser={setUser} />} />
         <Route path="/users/profile/:userId" element={<UserPage />} />
       </Routes>
     </>

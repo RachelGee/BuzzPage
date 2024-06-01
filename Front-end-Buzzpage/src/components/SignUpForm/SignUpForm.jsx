@@ -20,14 +20,8 @@ const SignUpForm = (props) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const newUser = await signup(formData);
-        setFormData({
-            firstName: '',
-            lastName: '',
-            username: '',
-            password: '',
-            passwordConf: '',
-        })
-        navigate('/users/signin');
+        props.setUser(newUser);
+        navigate('/');
     };
 
     const isFormInvalid = () => {
