@@ -12,6 +12,7 @@ import UserPage from './components/UserPage/UserPage';
 /*--------------------services--------------- */
 import * as authService from './services/authService';
 import * as postService from './services/postService';
+import NewsSlider from './components/NewsSlider/NewsSlider';
 
 
 const App = () => {
@@ -30,6 +31,7 @@ const App = () => {
       <NavBar user={user} handleSignout={handleSignout} />
       <Routes>
         <Route path="/" element={<HiveFeed />} />
+        <Route path="/news" element={<NewsSlider />} />
         <Route path="/users/signup" element={<SignUpForm />} />
         <Route path="/users/signin" element={<SignInForm />} />
         <Route path="/users/profile/:userId" element={<UserPage />} />
