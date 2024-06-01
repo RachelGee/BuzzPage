@@ -17,10 +17,7 @@ const SignInForm = (props) => {
     
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(formData)
-
         const user = await signin(formData);
-        console.log(user)
         navigate('/')
     };
 
