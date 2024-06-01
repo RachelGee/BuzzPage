@@ -52,4 +52,31 @@ router.put('/:userId', verifyToken, async (req, res) => {
     }
 });
 
+// deletes the user 
+router.delete('/:userId', verifyToken, async (req, res) => {
+    try {
+        // checks to see if current user is authorized 
+        if (req.user._id !== req.params.userId){
+            return res.status(401).json({ error: "Unauthorized"})
+        }
+        //checks to see if th user exists
+        const user = await User.findById(req.user._id);
+        if (!user) {
+            res.status(404)
+            throw new Error('Profile not found.');
+        }
+        //deletes the current user
+        const deleteUser = await User.findByIdAndDelete(
+            req.params.userId
+        )
+        res.status(200).json(deleteUser);
+    } catch (error) {
+        if (res.statusCode === 404) {
+            res.status(404).json({ error: error.message });
+        } else {
+            res.status(500).json({ error: error.message });
+        }
+    }
+});
+
 module.exports = router;
