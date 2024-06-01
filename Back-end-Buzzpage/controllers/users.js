@@ -46,4 +46,15 @@ router.post('/signin', async (req, res) => {
     }
 });
 
+//gets and returns the user info
+router.get('/profile/:userId', async (req,res) =>{
+    try { 
+        //find the user and populate there posts
+        const user = await User.findById(req.params.userId).populate('posts')
+        res.status(200).json(user)
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+})
+
 module.exports = router;
