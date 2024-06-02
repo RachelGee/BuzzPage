@@ -5,7 +5,7 @@ import { show } from '../../services/profileService';
 const UserPage = () => {
     //gets users id
     const { userId } = useParams()
-    const [user, setUser] = useState({})
+    const [user, setUser] = useState(null)
 
     //gets the current users data 
     useEffect(() =>{
@@ -17,7 +17,7 @@ const UserPage = () => {
     },[userId]);
     
     //show loading until its gets user
-    if (!user) return <h1>Loading</h1>;
+    if (!user) return <h1>Loading User</h1>;
 
     return (  
         <>
@@ -29,6 +29,17 @@ const UserPage = () => {
             </section>
             <section>
                 <h1>Users posts</h1>
+                {user.posts.length === 0 ? 'no posts': user.posts.map((post) =>(
+                    <header key={post._id}>
+                        <div>
+                            {post.title}
+                            <h6>{post.category}</h6>
+                        </div>
+                        <p>{post.text}</p>
+                        <img src={post.image} alt='...'/>
+                    </header>
+                ))}
+                
             </section>
         </>
      );
