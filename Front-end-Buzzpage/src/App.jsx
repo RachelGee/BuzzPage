@@ -8,10 +8,13 @@ import { Routes, Route, useNavigate } from 'react-router-dom'
 
 /*----------------User components-------------------- */
 import UserPage from './components/UserPage/UserPage';
+import UserForm from './components/UserForm/UserForm';
 
 /*--------------------services--------------- */
 import * as authService from './services/authService';
 import * as postService from './services/postService';
+import * as profileService from './services/profileService'
+
 import NewsSlider from './components/NewsSlider/NewsSlider';
 
 const App = () => {
@@ -21,7 +24,11 @@ const App = () => {
     authService.signout();
     setUser(null);
   }
-
+  
+  const handleUpdateUser = async (userId,formData) =>{
+    const updateProfile = await profileService.update(userId,formData)
+    setUser(updateProfile)
+}
 
   return (
     <>
@@ -32,6 +39,7 @@ const App = () => {
         <Route path="/users/signup" element={<SignUpForm setUser={setUser} />} />
         <Route path="/users/signin" element={<SignInForm setUser={setUser} />} />
         <Route path="/users/profile/:userId" element={<UserPage />} />
+        <Route path="/users/profile/:userId/edit" element={<UserForm handleUpdateUser={handleUpdateUser}/>} />
       </Routes>
     </>
 

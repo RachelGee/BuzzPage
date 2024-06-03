@@ -1,5 +1,5 @@
 import { useEffect, useState  } from 'react';
-import {  useParams } from 'react-router-dom';
+import {  useParams, Link } from 'react-router-dom';
 import { show } from '../../services/profileService';
 
 const UserPage = () => {
@@ -26,6 +26,7 @@ const UserPage = () => {
                 <h4>username: {user.username}</h4>
                 <h5>name: {user.firstName} {user.lastName}</h5>
                 <p>bio: {user.bio}</p>
+                <Link to={`/users/profile/${userId}/edit`}>Edit</Link>
             </section>
             <section>
                 <h1>Users posts</h1>
@@ -37,6 +38,7 @@ const UserPage = () => {
                         </div>
                         <p>{post.text}</p>
                         <img src={post.image} alt='...'/>
+                        {post.like}
                     </header>
                 ))}
                 
