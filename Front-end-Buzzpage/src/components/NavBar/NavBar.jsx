@@ -12,7 +12,7 @@ const NavBar = (props) => {
                     </Link>
 
                     <div className={styles.links}>
-                        <Link to={`/users/profile/${props.user._id}`} onClick={props.handleSignout}>Hello {props.user.username}</Link>
+                        <Link to={`/users/profile/${props.user._id}`}>Hello {props.user.username}</Link>
                         <Link to='' onClick={props.handleSignout}>Sign Out</Link>
                     </div>
                 </nav>
