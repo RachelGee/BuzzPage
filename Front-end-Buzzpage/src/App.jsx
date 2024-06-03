@@ -19,16 +19,26 @@ import NewsSlider from './components/NewsSlider/NewsSlider';
 
 const App = () => {
   const [user, setUser] = useState(authService.getUser());
+  const navigate = useNavigate()
 
   const handleSignout = () => {
     authService.signout();
     setUser(null);
   }
   
-  const handleUpdateUser = async (userId,formData) =>{
-    const updateProfile = await profileService.update(userId,formData)
-    setUser(updateProfile)
+//handle update the user info
+const handleUpdateUser = async (userId,formData) =>{
+    const updateProfile = await profileService.update(userId,formData);
+    setUser(updateProfile);
+    navigate(`/users/profile/${user._id}`)
 }
+
+//deletes the user account
+const handleDeleteUser = async (userId) => {
+  const deletedUser = await profileService.deleteUser(userId);
+  setUser(null);
+  navigate('/')
+};
 
   return (
     <>
@@ -38,7 +48,7 @@ const App = () => {
         <Route path="/news" element={<NewsSlider />} />
         <Route path="/users/signup" element={<SignUpForm setUser={setUser} />} />
         <Route path="/users/signin" element={<SignInForm setUser={setUser} />} />
-        <Route path="/users/profile/:userId" element={<UserPage />} />
+        <Route path="/users/profile/:userId" element={<UserPage handleDeleteUser={handleDeleteUser}/>} />
         <Route path="/users/profile/:userId/edit" element={<UserForm handleUpdateUser={handleUpdateUser}/>} />
       </Routes>
     </>

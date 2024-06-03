@@ -2,7 +2,7 @@ import { useEffect, useState  } from 'react';
 import {  useParams, Link } from 'react-router-dom';
 import { show } from '../../services/profileService';
 
-const UserPage = () => {
+const UserPage = (props) => {
     //gets users id
     const { userId } = useParams()
     const [user, setUser] = useState(null)
@@ -23,10 +23,12 @@ const UserPage = () => {
         <>
             <section>
                 <h1>usres profile</h1>
+                <img src={user.image} alt='...'/>
                 <h4>username: {user.username}</h4>
                 <h5>name: {user.firstName} {user.lastName}</h5>
                 <p>bio: {user.bio}</p>
                 <Link to={`/users/profile/${userId}/edit`}>Edit</Link>
+                <button onClick={() => props.handleDeleteUser(userId)}>Delete</button>
             </section>
             <section>
                 <h1>Users posts</h1>

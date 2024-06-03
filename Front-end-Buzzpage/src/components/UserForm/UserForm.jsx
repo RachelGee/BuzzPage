@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { show, update } from '../../services/profileService';
 
 
@@ -7,7 +7,6 @@ const UserForm = (props) => {
     //gets current user id
     const { userId } = useParams();
 
-    const navigate = useNavigate()
 
     //default form state variable
     const [formData, setFormData] = useState({
@@ -34,7 +33,6 @@ const UserForm = (props) => {
     const handleSubmit = (evt) =>{
         evt.preventDefault()
         props.handleUpdateUser(userId,formData)
-        navigate(`/users/profile/${userId}`)
     }
 
     return ( 
@@ -42,13 +40,31 @@ const UserForm = (props) => {
             <h1>form</h1>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="firstName">First Name:</label>
-                <input  type="text" name="firstName" id="firstName" value={formData.firstName} onChange={handleChange}/>
+                <input  
+                    type="text"
+                    name="firstName" 
+                    id="firstName"
+                    value={formData.firstName} 
+                    onChange={handleChange}
+                />
 
                 <label htmlFor="lastName">Last Name:</label>
-                <input  type="text" name="lastName" id="lastName" value={formData.lastName} onChange={handleChange}/>
+                <input  
+                    type="text" 
+                    name="lastName" 
+                    id="lastName" 
+                    value={formData.lastName} 
+                    onChange={handleChange}
+                />
 
-                <label htmlFor="bio">BIO:</label>
-                <textarea  type="text" name="bio" id="bio" value={formData.bio} onChange={handleChange}/>
+                <label htmlFor="bio">Bio:</label>
+                <textarea  
+                    type="text" 
+                    name="bio" 
+                    id="bio" 
+                    value={formData.bio} 
+                    onChange={handleChange}
+                />
 
                 <button type='submit'>Submit info</button>
             </form>
