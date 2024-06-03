@@ -1,9 +1,13 @@
 const BACKEND_URL = import.meta.env.VITE_BACK_END_SERVER_URL;
 
+
 // index to show all post "Hive Feed"
 const index = async () => {
     try {
-      
+      const res = await fetch(`${BACKEND_URL}/posts`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+      });
+      return res.json();
     } catch (error) {
       console.log(error);
     }
@@ -12,7 +16,10 @@ const index = async () => {
 //show a selected post
 const show = async (postId) => {
     try {
-      
+      const res = await fetch(`${BACKEND_URL}/${postId}`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+      });
+      return res.json();
     } catch (error) {
       console.log(error);
     }
@@ -21,7 +28,15 @@ const show = async (postId) => {
 //create a new post 
 const create = async (postFormData) => {
     try {
-     
+      const res = await fetch(`${BACKEND_URL}/posts`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(postFormData),
+      });
+      return res.json();
     } catch (error) {
       console.log(error);
     }
@@ -30,7 +45,14 @@ const create = async (postFormData) => {
 //update a users post
 const update = async (postId, postFormData) => {
     try {
-      
+      const res = await fetch(`${BACKEND_URL}/${postId}`, {
+        method: 'PUT',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(postFormData),
+      });
     } catch (error) {
       console.log(error);
     }
@@ -39,7 +61,13 @@ const update = async (postId, postFormData) => {
 //delete the users post
 const deletePost = async (postId) => {
     try {
-  
+      const res = await fetch(`${BACKEND_URL}/${postId}`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
+      return res.json();
     } catch (error) {
       console.log(error);
     }

@@ -21,7 +21,7 @@ const SignUpForm = (props) => {
         e.preventDefault();
         const newUser = await signup(formData);
         props.setUser(newUser);
-        navigate('/');
+        navigate('/users/signin');
     };
 
     const isFormInvalid = () => {
