@@ -19,7 +19,7 @@ const UserForm = (props) => {
     useEffect(() =>{
         const fetchUser = async () =>{
             const userData = await show(userId)
-            setFormData(userData);
+            setFormData(userData.user);
         }
         fetchUser();
     },[userId]);
@@ -47,7 +47,7 @@ const UserForm = (props) => {
                     value={formData.firstName} 
                     onChange={handleChange}
                 />
-
+                <br />
                 <label htmlFor="lastName">Last Name:</label>
                 <input  
                     type="text" 
@@ -56,7 +56,7 @@ const UserForm = (props) => {
                     value={formData.lastName} 
                     onChange={handleChange}
                 />
-
+                <br />
                 <label htmlFor="bio">Bio:</label>
                 <textarea  
                     type="text" 
