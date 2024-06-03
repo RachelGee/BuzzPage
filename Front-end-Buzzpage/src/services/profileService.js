@@ -31,4 +31,19 @@ const update = async (userId, userFormData) =>{
   }
 }
 
-export { show, update };
+//gets user id from backend to delete
+const deleteUser = async (userId) => {
+  try {
+    const res = await fetch(`${BACKEND_URL}/${userId}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+    return res.json();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export { show, update, deleteUser };

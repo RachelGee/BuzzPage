@@ -9,10 +9,13 @@ import { Routes, Route, useNavigate } from 'react-router-dom'
 
 /*----------------User components-------------------- */
 import UserPage from './components/UserPage/UserPage';
+import UserForm from './components/UserForm/UserForm';
 
 /*--------------------services--------------- */
 import * as authService from './services/authService';
 import * as postService from './services/postService';
+import * as profileService from './services/profileService'
+
 import NewsSlider from './components/NewsSlider/NewsSlider';
 
 const App = () => {
@@ -24,10 +27,8 @@ const App = () => {
     setUser(null);
   }
   const handleAddPost = async (postData) => {
-    console.log('adding a post')
     const newPost = await postService.create(postData)
     setPosts([...posts, newPost])
-    console.log(newPost)
   }
  
 
