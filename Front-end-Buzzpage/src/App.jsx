@@ -14,10 +14,7 @@ import * as authService from './services/authService';
 import * as postService from './services/postService';
 import NewsSlider from './components/NewsSlider/NewsSlider';
 
-
 const App = () => {
-
-  // need to store user object when they are signed
   const [user, setUser] = useState(authService.getUser());
 
   const handleSignout = () => {
