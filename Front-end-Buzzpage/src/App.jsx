@@ -5,7 +5,11 @@ import SignInForm from './components/SignInForm/SignInForm';
 import HiveFeed from './components/HiveFeed/HiveFeed';
 import NavBar from './components/NavBar/NavBar';
 import PostForm from './components/PostForm/PostForm';
-import { Routes, Route, useNavigate } from 'react-router-dom'
+
+import { Routes, Route, useNavigate} from 'react-router-dom'
+import PageTransition from './components/PageTransition/PageTransition';
+
+
 /*----------------User components-------------------- */
 import UserPage from './components/UserPage/UserPage';
 import UserForm from './components/UserForm/UserForm';

@@ -1,6 +1,7 @@
-import { useEffect, useState  } from 'react';
-import {  useParams, Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useParams, Link } from 'react-router-dom';
 import { show } from '../../services/profileService';
+
 import styles from './UserPage.module.css'
 import SideBar from '../SideBar/SideBar';
 
@@ -43,6 +44,7 @@ const dummyData = [
     }
 ];
 
+
 const UserPage = (props) => {
     //gets users id
     const { userId } = useParams()
@@ -51,16 +53,17 @@ const UserPage = (props) => {
     const [dummyPost, setDummyPost] = useState(dummyData);
 
     //gets the current users data 
-    useEffect(() =>{
-        const fetchUser = async () =>{
+    useEffect(() => {
+        const fetchUser = async () => {
             const userData = await show(userId)
             setUser(userData.user);
         }
-        fetchUser();  
-    },[]);
-    
+        fetchUser();
+    }, []);
+
     //show loading until its gets user
     if (!user) return <h1>Loading User</h1>;
+
 
     return (  
         <main className={styles.container}>
@@ -100,6 +103,7 @@ const UserPage = (props) => {
                 </div>
         </main>
      );
+
 }
- 
+
 export default UserPage;

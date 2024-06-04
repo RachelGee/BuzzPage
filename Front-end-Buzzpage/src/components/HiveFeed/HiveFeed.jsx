@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import SideBar from '../SideBar/SideBar';
 import styles from './HiveFeed.module.css'
+import PageTransition from '../PageTransition/PageTransition';
 
 const dummyData = [
     {
@@ -36,6 +37,7 @@ const HiveFeed = () => {
 
     return (
         <>
+            <PageTransition />
             <main className={styles.container}>
                 <div className={styles.sidebar}>
                     <SideBar dummyPost={dummyPost} />
