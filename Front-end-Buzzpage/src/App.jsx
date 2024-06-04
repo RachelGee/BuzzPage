@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, createContext } from 'react'
 import './App.css'
 import SignUpForm from './components/SignUpForm/SignUpForm';
 import SignInForm from './components/SignInForm/SignInForm';
@@ -6,7 +6,7 @@ import HiveFeed from './components/HiveFeed/HiveFeed';
 import NavBar from './components/NavBar/NavBar';
 import PostForm from './components/PostForm/PostForm';
 
-import { Routes, Route, useNavigate} from 'react-router-dom'
+import { Routes, Route, useNavigate } from 'react-router-dom'
 import PageTransition from './components/PageTransition/PageTransition';
 
 
@@ -24,18 +24,20 @@ import * as profileService from './services/profileService'
 
 import NewsSlider from './components/NewsSlider/NewsSlider';
 
+export const AuthedUserContext = createContext(null);
+
 const App = () => {
   const [user, setUser] = useState(authService.getUser());
   const [posts, setPosts] = useState([]);
 
-  useEffect( () => {
+  useEffect(() => {
     const fetchAllPosts = async () => {
       const postsData = await postService.index();
       setPosts(postsData)
     }
     if (user) fetchAllPosts();
-  }, [user]); 
-  
+  }, [user]);
+
   const navigate = useNavigate();
 
   const handleSignout = () => {
@@ -49,7 +51,7 @@ const App = () => {
     navigate('/')
   }
 
-  const handleUpdateUser = async (userId,formData) => {
+  const handleUpdateUser = async (userId, formData) => {
     const updatedUser = await profileService.update(userId, formData);
     setUser(updatedUser);
     navigate(`/users/profile/${userId}`);
@@ -59,9 +61,9 @@ const App = () => {
     const deletedUser = await profileService.deleteUser(userId);
     handleSignout()
   }
- 
+
   return (
-    <>
+    <AuthedUserContext.Provider value={user}>
       <NavBar user={user} handleSignout={handleSignout} />
       <Routes>
         <Route path="/" element={<HiveFeed AllPosts={posts} />} />
@@ -71,9 +73,9 @@ const App = () => {
         <Route path="/users/profile/:userId" element={<UserPage posts={posts} user={user}/>} />
         <Route path="/users/:userId/posts/new" element={<PostForm handleAddPost={handleAddPost} />} />
         <Route path="/posts/:postId" element={<PostDetails />} />
-        <Route path="/users/profile/:userId/edit" element={<UserForm handleUpdateUser={handleUpdateUser}/>} />
+        <Route path="/users/profile/:userId/edit" element={<UserForm handleUpdateUser={handleUpdateUser} />} />
       </Routes>
-    </>
+    </AuthedUserContext.Provider>
 
   )
 };

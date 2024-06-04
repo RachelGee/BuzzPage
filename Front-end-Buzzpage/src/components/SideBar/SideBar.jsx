@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { AuthedUserContext } from '../../App';
 import { useNavigate } from "react-router-dom";
 
 
 const SideBar = (props) => {
+    const user = useContext(AuthedUserContext);
     const [searchQuery, setSearchQuery] = useState('');
     const navigate = useNavigate();
 
@@ -11,7 +13,7 @@ const SideBar = (props) => {
     }
 
     const handleClick = (e) => {
-        navigate('/users/:userId/posts/new')
+        navigate(`/users/${user._id}/posts/new`)
     }
 
     // Filter the posts based on the search query

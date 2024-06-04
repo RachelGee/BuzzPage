@@ -13,6 +13,7 @@ router.use(verifyToken);
 
 // create post return created post
 router.post('/', async (req, res) => {
+    console.log("inside backend create post")
     try {
       req.body.author = req.user._id;
       const post = await Post.create(req.body);
