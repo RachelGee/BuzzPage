@@ -46,7 +46,7 @@ const App = () => {
   const handleAddPost = async (postData) => {
     const newPost = await postService.create(postData)
     setPosts([...posts, newPost])
-    navigate('/allposts')
+    navigate('/')
   }
 
   const handleUpdateUser = async (userId,formData) => {
@@ -64,15 +64,13 @@ const App = () => {
     <>
       <NavBar user={user} handleSignout={handleSignout} />
       <Routes>
-        <Route path="/" element={<HiveFeed />} />
+        <Route path="/" element={<HiveFeed AllPosts={posts} />} />
         <Route path="/news" element={<NewsSlider />} />
         <Route path="/users/signup" element={<SignUpForm setUser={setUser} />} />
         <Route path="/users/signin" element={<SignInForm setUser={setUser} />} />
         <Route path="/users/profile/:userId" element={<UserPage />} />
         <Route path="/users/:userId/posts/new" element={<PostForm handleAddPost={handleAddPost} />} />
         <Route path="/posts/:postId" element={<PostDetails />} />
-        <Route path="/allposts" element={<AllPosts AllPosts={posts} />} />
-
         <Route path="/users/profile/:userId/edit" element={<UserForm handleUpdateUser={handleUpdateUser}/>} />
       </Routes>
     </>

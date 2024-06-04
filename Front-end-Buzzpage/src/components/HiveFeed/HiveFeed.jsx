@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { Link } from "react-router-dom";
 import SideBar from '../SideBar/SideBar';
 import styles from './HiveFeed.module.css'
+import AllPosts from '../AllPosts/AllPosts';
 import PageTransition from '../PageTransition/PageTransition';
 
 const dummyData = [
@@ -31,10 +33,12 @@ const dummyData = [
 
 ];
 
-const HiveFeed = () => {
+
+const HiveFeed = (props) => {
     // dummy post data
     const [dummyPost, setDummyPost] = useState(dummyData);
 
+         console.log(props.AllPosts)
     return (
         <>
             <PageTransition />
@@ -42,10 +46,13 @@ const HiveFeed = () => {
                 <div className={styles.sidebar}>
                     <SideBar dummyPost={dummyPost} />
                 </div>
-                <h1>Your Hive Feed</h1>
+                <AllPosts AllPosts={props.AllPosts}/>
+                <div>
+                    
+                </div>
             </main>
         </>
-    );
-}
+    )}
 
+        
 export default HiveFeed;
