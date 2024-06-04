@@ -9,7 +9,8 @@ const AllPosts = (props) => {
                 return (
                     <>
                     <Link to={`/posts/${post._id}`}>{post.title}</Link>
-                    <h1>Description: {post.text}</h1>
+                    <h2>{post.author.username} says: {post.text}</h2>
+                    <h2>{post.image}</h2>
                     <hr />
                     </>
                 )
