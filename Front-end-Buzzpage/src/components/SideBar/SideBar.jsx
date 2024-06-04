@@ -36,11 +36,11 @@ const SideBar = (props) => {
             <br />
             {filteredData.length > 0 ? filteredData.map((post, index) => {
                 return (
-                    <>
-                        <p key={index}>Title: {post.title}</p>
+                    <div key={index}>
+                        <p>Title: {post.title}</p>
                         <p>Description: {post.text}</p>
                         <hr />
-                    </>
+                    </div>
                 )
             }
             ) : <p>No Matching Posts</p>}

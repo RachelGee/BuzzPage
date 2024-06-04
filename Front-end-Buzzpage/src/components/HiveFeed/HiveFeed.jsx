@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import SideBar from '../SideBar/SideBar';
 import styles from './HiveFeed.module.css'
 import AllPosts from '../AllPosts/AllPosts';
+import PageTransition from '../PageTransition/PageTransition';
 
 const dummyData = [
     {
@@ -40,6 +41,7 @@ const HiveFeed = (props) => {
          console.log(props.AllPosts)
     return (
         <>
+            <PageTransition />
             <main className={styles.container}>
                 <div className={styles.sidebar}>
                     <SideBar dummyPost={dummyPost} />

@@ -4,7 +4,7 @@ import styles from './AllPosts.module.css';
 
 // all user posts
 const AllPosts = (props) => {
-    console.log(props.AllPosts)
+    
     return ( 
         <div className={styles.container}>
             <h1>All Posts</h1>
