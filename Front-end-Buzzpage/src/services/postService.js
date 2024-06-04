@@ -74,8 +74,53 @@ const deletePost = async (postId) => {
 };
 
 //create comment service
+const createComment = async (postId, commentFormData) => {
+  try {
+    const res = await fetch(`${BASE_URL}/${postId}/comments`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(commentFormData),
+    });
+    return res.json();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 //update comment service
+const updateComment = async (postId,commentId, commentFormData) => {
+  try {
+    const res = await fetch(`${BASE_URL}/${postId}/comments/${commentId}`, {
+      method: 'Put',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(commentFormData),
+    });
+    return res.json();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 //delete comment service
+const deleteComment = async (postId, commentId,) => {
+  try {
+    const res = await fetch(`${BASE_URL}/${postId}/comments/${commentId}`, {
+      method: 'Delete',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+    return res.json();
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 
-export { index, show, create, update , deletePost }; 
+export { index, show, create, update , deletePost, createComment, updateComment, deleteComment }; 
