@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { Link } from "react-router-dom";
 import SideBar from '../SideBar/SideBar';
 import styles from './HiveFeed.module.css'
+import AllPosts from '../AllPosts/AllPosts';
 
 const dummyData = [
     {
@@ -30,10 +32,13 @@ const dummyData = [
 
 ];
 
+
 const HiveFeed = () => {
     // dummy post data
     const [dummyPost, setDummyPost] = useState(dummyData);
-
+    const [hiveFeedPost, setHiveFeedPost] = useState(AllPosts);
+    
+            
     return (
         <>
             <main className={styles.container}>
@@ -41,9 +46,12 @@ const HiveFeed = () => {
                     <SideBar dummyPost={dummyPost} />
                 </div>
                 <h1>Your Hive Feed</h1>
+                <div>
+                    
+                </div>
             </main>
         </>
-    );
-}
+    )}
 
+        
 export default HiveFeed;
