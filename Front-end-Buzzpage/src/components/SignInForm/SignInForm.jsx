@@ -38,7 +38,8 @@ const SignInForm = (props) => {
         <>
             <div className={styles.container}>
                 <div className={styles.logoImage}>
-                    <h1>Title and Images</h1>
+                    <h1>What's all the BUZZ about?</h1>
+
                 </div>
                 <div className={styles.form}>
                     <form className='border container-lg p-5 h-75' onSubmit={handleSubmit}>

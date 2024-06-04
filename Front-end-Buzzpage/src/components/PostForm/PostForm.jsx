@@ -62,6 +62,7 @@ const postForm = (props) => {
                         onChange={handleChange}
                     />
                     <br />
+                    <br />
                     <label htmlFor="category-input">Category</label>
                     <select
                         required

@@ -11,7 +11,7 @@ const SideBar = (props) => {
     }
 
     const handleClick = (e) => {
-        navigate('/users/:userId/posts/new')
+        navigate('/users/${}/posts/new')
     }
 
     // Filter the posts based on the search query
