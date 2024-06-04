@@ -1,0 +1,58 @@
+* {
+    margin: 0;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+.boxContainer {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    animation: collapse 2s linear;
+    animation-fill-mode: forwards;
+    z-index: 1;
+}
+
+.boxes {
+    position: relative;
+}
+
+.box1,
+.box2,
+.box3 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+}
+
+.box1 {
+    background-color: yellow;
+    width: 100%;
+    z-index: 2;
+}
+
+.box2 {
+    background-color: black;
+    width: 150%;
+    z-index: 1;
+}
+
+.box3 {
+    background-color: red;
+    width: 200%;
+}
+
+
+@keyframes collapse {
+    0% {
+        width: 100%;
+    }
+
+    100% {
+        width: 0%;
+        display: none;
+    }
+}
