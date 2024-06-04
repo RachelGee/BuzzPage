@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { signin } from '../../services/authService';
 import { useNavigate } from 'react-router-dom';
+import styles from './SignInForm.module.css';
 
 
 const SignInForm = (props) => {
@@ -9,45 +10,52 @@ const SignInForm = (props) => {
         username: '',
         password: ''
     });
+    const [message, setMessage] = useState(['']);
+    const updateMessage = (msg) => {
+        setMessage(msg);
+    };
+
+
     const { username, password } = formData;
 
     const handleChange = (e) => {
+        updateMessage('');
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const user = await signin(formData);
-        props.setUser(user);
-        navigate('/')
-    };
+        try {
+            const user = await signin(formData);
+            props.setUser(user);
+            navigate('/')
+        } catch (err) {
+            updateMessage(err.message);
+        }
 
+    };
     return (
         <>
-            <form onSubmit={handleSubmit}>
-                <h1>Sign In</h1>
-                <div>
-                    <label htmlFor="username">Username:</label>
-                    <input
-                        type="text"
-                        id="username"
-                        value={username}
-                        name="username"
-                        onChange={handleChange}
-                    />
+            <div className={styles.container}>
+                <div className={styles.logoImage}>
+                    <h1>Hello</h1>
                 </div>
-                <div>
-                    <label htmlFor="password">Password:</label>
-                    <input
-                        type="password"
-                        id="password"
-                        value={password}
-                        name="password"
-                        onChange={handleChange}
-                    />
+                <div className={styles.form}>
+                    <form className='border container-lg p-5 h-75' onSubmit={handleSubmit}>
+                        <p>{message}</p>
+                        <div className="mb-3">
+                            <label for="username" className="form-label">Username</label>
+                            <input type="text" className="form-control" id="username" name="username" value={username} onChange={handleChange} />
+                        </div>
+                        <div className="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" name="password" className="form-control" id="password" value={password} onChange={handleChange} />
+                            <div className="form-text">We'll never share your password with anyone else.</div>
+                        </div>
+                        <button type="submit" className="btn btn-primary">Login</button>
+                    </form>
                 </div>
-                <button type="submit">Submit</button>
-            </form>
+            </div>
         </>
     );
 }
