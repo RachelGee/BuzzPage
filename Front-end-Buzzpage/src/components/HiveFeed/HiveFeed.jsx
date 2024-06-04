@@ -37,8 +37,6 @@ const dummyData = [
 const HiveFeed = (props) => {
     // dummy post data
     const [dummyPost, setDummyPost] = useState(dummyData);
-
-         console.log(props.AllPosts)
     return (
         <>
             <PageTransition />
@@ -46,13 +44,11 @@ const HiveFeed = (props) => {
                 <div className={styles.sidebar}>
                     <SideBar dummyPost={dummyPost} />
                 </div>
-                <AllPosts AllPosts={props.AllPosts}/>
-                <div>
-                    
-                </div>
+                {props.AllPosts.length > 0 ? <AllPosts AllPosts={props.AllPosts} /> : "No Post"}
             </main>
         </>
-    )}
+    )
+}
 
-        
+
 export default HiveFeed;
