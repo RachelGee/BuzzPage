@@ -76,25 +76,25 @@ const UserPage = (props) => {
                     <div className={styles.userBio}>
                         <h5>name: {user.firstName} {user.lastName}</h5>
                         <p>bio: {user.bio}</p>
-                        <button><Link to={`/users/profile/${userId}/edit`}>Edit</Link></button>
+                        <button><Link to={`/users/profile/${userId}/edit`} style={{ textDecoration: 'none' }}>Edit</Link></button>
                         <button onClick={() => props.handleDeleteUser(userId)}>Delete</button>
                     </div>
              
 
                 <div className={styles.userPost}>
-                    <div className={styles.post}>
                     {user.posts.length === 0 ? 'no posts': user.posts.map((post) =>(
-                        <header key={post._id}>
-                            <div>
-                                {post.title}
-                                <h6>{post.category}</h6>
-                            </div>
-                            <p>{post.text}</p>
-                            <img src={post.image} alt='...'/>
-                            {post.like}
-                        </header>
+                        <div className={styles.post} key={post._id}>
+                            <header >
+                                <div>
+                                    <h4>{post.title}</h4>
+                                    <h6>{post.category}</h6>
+                                </div>
+                                <p>{post.text}</p>
+                                <img src={post.image} alt='...'/>
+                                <h6>{post.like}</h6>
+                            </header>
+                        </div>
                     ))}
-                    </div>
                 </div>
         </main>
      );

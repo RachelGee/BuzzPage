@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { show, update } from '../../services/profileService';
-
+import styles from './UserForm.module.css'
 
 const UserForm = (props) => {
     //gets current user id
@@ -37,34 +37,43 @@ const UserForm = (props) => {
 
     return ( 
         <>
-            <h1>form</h1>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="firstName">First Name:</label>
-                <input  
-                    type="text"
-                    name="firstName" 
-                    id="firstName"
-                    value={formData.firstName} 
-                    onChange={handleChange}
-                />
+            <form onSubmit={handleSubmit} className={styles.container} class="card col-6">
+                <div class="row">
+                    <div class="col">
+                        <input  
+                            type="text"
+                            class="form-control me-2"
+                            name="firstName" 
+                            id="firstName"
+                            value={formData.firstName} 
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <br />
+                    <div class="col" >
+                        <input  
+                            type="text" 
+                            class="form-control me-2"
+                            name="lastName" 
+                            id="lastName" 
+                            value={formData.lastName} 
+                            onChange={handleChange}
+                        />
+                    </div>
+                </div>
                 <br />
-                <label htmlFor="lastName">Last Name:</label>
-                <input  
-                    type="text" 
-                    name="lastName" 
-                    id="lastName" 
-                    value={formData.lastName} 
-                    onChange={handleChange}
-                />
-                <br />
-                <label htmlFor="bio">Bio:</label>
-                <textarea  
-                    type="text" 
-                    name="bio" 
-                    id="bio" 
-                    value={formData.bio} 
-                    onChange={handleChange}
-                />
+                <div class="mb-3">
+                    <label htmlFor="bio" class="form-label">Bio:</label>
+                    <textarea  
+                        type="text" 
+                        class="form-control "
+                        name="bio" 
+                        id="bio" 
+                        rows="3"
+                        value={formData.bio} 
+                        onChange={handleChange}
+                    />
+                </div>
 
                 <button type='submit'>Submit info</button>
             </form>

@@ -38,10 +38,13 @@
 .userPost{
     grid-column: 2 / 6;
     grid-row: 2;
-    
+    display: flex;
+    padding: 5px;
+    gap: 2%;
     > .post{
         display: flex;
-        gap: 2%
+        flex-direction: column;
+        border: 1px solid black;
     } 
 }
 
