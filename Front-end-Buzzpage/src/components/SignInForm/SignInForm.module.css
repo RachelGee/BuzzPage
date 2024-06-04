@@ -1,0 +1,17 @@
+.container {
+    display: flex;
+}
+
+.logoImage{
+    flex: 1;
+}
+
+.form{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    min-height: 100vh;
+}
+
