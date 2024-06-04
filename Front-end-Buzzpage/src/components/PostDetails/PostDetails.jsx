@@ -28,7 +28,7 @@ const PostDetails = (props) => {
     }, [postId]);
 
     const handleClick = () => {
-        navigate(`/allposts`);
+        navigate(`/`);
     }
     
    console.log(post)
@@ -45,7 +45,7 @@ const PostDetails = (props) => {
                 <button>Submit</button>
             </form>
             <hr />
-            <button onClick={handleClick}>Back to Your Posts</button>
+            <button onClick={handleClick}>Back to the Hive</button>
         
         </>
      );

@@ -33,18 +33,18 @@ const dummyData = [
 ];
 
 
-const HiveFeed = () => {
+const HiveFeed = (props) => {
     // dummy post data
     const [dummyPost, setDummyPost] = useState(dummyData);
 
-         
+         console.log(props.AllPosts)
     return (
         <>
             <main className={styles.container}>
                 <div className={styles.sidebar}>
                     <SideBar dummyPost={dummyPost} />
                 </div>
-                <h1>Your Hive Feed</h1>
+                <AllPosts AllPosts={props.AllPosts}/>
                 <div>
                     
                 </div>
