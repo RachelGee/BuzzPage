@@ -8,3 +8,27 @@
     align-items: center;
     min-height: 100vh;
 }
+
+.picture{
+    background-size: cover;
+    background-position: center;
+    width: 30%;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    border: 1px solid black ;
+}
+
+.picture:has(.d1:checked){
+    background-image: url('/src/assets/images/default%20icon%201.png');
+    content-visibility: hidden;
+}
+
+.picture:has(.d2:checked){
+    background-image: url('/src/assets/images/default%20icon%202.png');
+    content-visibility: hidden;
+}
+
+.picture:has(.d3:checked){
+    background-image: url('/src/assets/images/default%20icon%203.png');
+    content-visibility: hidden;
+}
