@@ -37,14 +37,25 @@ const App = () => {
   const handleSignout = () => {
     authService.signout();
     setUser(null);
+    navigate('/users/signin');
   }
   const handleAddPost = async (postData) => {
     const newPost = await postService.create(postData)
     setPosts([...posts, newPost])
     navigate('/allposts')
   }
- 
 
+  const handleUpdateUser = async (userId,formData) => {
+    const updatedUser = await profileService.update(userId, formData);
+    setUser(updatedUser);
+    navigate(`/users/profile/${userId}`);
+  }
+
+  const handleDeleteUser = async (userId) => {
+    const deletedUser = await profileService.deleteUser(userId);
+    handleSignout()
+  }
+ 
   return (
     <>
       <NavBar user={user} handleSignout={handleSignout} />

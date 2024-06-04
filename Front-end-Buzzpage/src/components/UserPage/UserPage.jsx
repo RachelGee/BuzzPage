@@ -11,10 +11,10 @@ const UserPage = (props) => {
     useEffect(() =>{
         const fetchUser = async () =>{
             const userData = await show(userId)
-            setUser(userData);
+            setUser(userData.user);
         }
-        fetchUser();
-    },[userId]);
+        fetchUser();  
+    },[]);
     
     //show loading until its gets user
     if (!user) return <h1>Loading User</h1>;
@@ -35,6 +35,7 @@ const UserPage = (props) => {
                 {user.posts.length === 0 ? 'no posts': user.posts.map((post) =>(
                     <header key={post._id}>
                         <div>
+                            { console.log(post.image)}
                             {post.title}
                             <h6>{post.category}</h6>
                         </div>
