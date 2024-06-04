@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import styles from './SignInForm.module.css';
 import { Link } from 'react-router-dom';
 import LoginSignup from '../../assets/images/LoginSignup.png';
+import Logo from '../../assets/images/logo.png'
 
 
 const SignInForm = (props) => {
@@ -40,16 +41,18 @@ const SignInForm = (props) => {
         <>
             <div className={styles.container}>
                 <div className={styles.logoImage}>
-                    <h1>What's all the BUZZ about?</h1>
+                    <p className='display-3'>What's all the BUZZ about?</p>
+                    <img src={Logo} alt="" />
 
                 </div>
-                <div className={styles.form}>
-                    <form className='border container-m p-5 h-75' onSubmit={handleSubmit}>
+                <div className={styles.formContainer}>
+                    <form className={`border container-m p-5 h-75 ${styles.form}`} onSubmit={handleSubmit}>
+                        <img src={LoginSignup} className={styles.img} alt="" />
                         <h1>Login</h1>
-                        <p>
-                            Doesn't have an account yet?                             
-                            <Link to='users/signup'>Sign Up</Link>
-                        </p>
+                        <div className={styles.signup}>
+                            <p>Doesn't have an account yet?</p>
+                            <a href='' onClick={() => navigate('/users/signup')}>Sign Up</a>
+                        </div>
                         <p>{message}</p>
                         <div className="mb-3">
                             <label htmlFor="username" className="form-label">Username</label>
