@@ -20,7 +20,6 @@ const SignUpForm = (props) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const newUser = await signup(formData);
-        props.setUser(newUser);
         navigate('/users/signin');
     };
 
