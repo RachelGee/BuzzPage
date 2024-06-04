@@ -36,9 +36,8 @@ const dummyData = [
 const HiveFeed = () => {
     // dummy post data
     const [dummyPost, setDummyPost] = useState(dummyData);
-    const [hiveFeedPost, setHiveFeedPost] = useState(AllPosts);
-    
-            
+
+         
     return (
         <>
             <main className={styles.container}>
