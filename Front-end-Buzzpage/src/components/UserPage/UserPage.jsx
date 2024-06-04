@@ -1,6 +1,7 @@
-import { useEffect, useState  } from 'react';
-import {  useParams, Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useParams, Link } from 'react-router-dom';
 import { show } from '../../services/profileService';
+import PageTransition from '../PageTransition/PageTransition';
 
 const UserPage = (props) => {
     //gets users id
@@ -8,22 +9,23 @@ const UserPage = (props) => {
     const [user, setUser] = useState(null)
 
     //gets the current users data 
-    useEffect(() =>{
-        const fetchUser = async () =>{
+    useEffect(() => {
+        const fetchUser = async () => {
             const userData = await show(userId)
             setUser(userData.user);
         }
-        fetchUser();  
-    },[]);
-    
+        fetchUser();
+    }, []);
+
     //show loading until its gets user
     if (!user) return <h1>Loading User</h1>;
 
-    return (  
+    return (
         <>
+            <PageTransition />
             <section>
                 <h1>usres profile</h1>
-                <img src={user.image} alt='...'/>
+                <img src={user.image} alt='...' />
                 <h4>username: {user.username}</h4>
                 <h5>name: {user.firstName} {user.lastName}</h5>
                 <p>bio: {user.bio}</p>
@@ -32,22 +34,22 @@ const UserPage = (props) => {
             </section>
             <section>
                 <h1>Users posts</h1>
-                {user.posts.length === 0 ? 'no posts': user.posts.map((post) =>(
+                {user.posts.length === 0 ? 'no posts' : user.posts.map((post) => (
                     <header key={post._id}>
                         <div>
-                            { console.log(post.image)}
+                            {console.log(post.image)}
                             {post.title}
                             <h6>{post.category}</h6>
                         </div>
                         <p>{post.text}</p>
-                        <img src={post.image} alt='...'/>
+                        <img src={post.image} alt='...' />
                         {post.like}
                     </header>
                 ))}
-                
+
             </section>
         </>
-     );
+    );
 }
- 
+
 export default UserPage;
