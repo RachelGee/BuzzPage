@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 import SignUpForm from './components/SignUpForm/SignUpForm';
 import SignInForm from './components/SignInForm/SignInForm';
@@ -10,6 +10,8 @@ import { Routes, Route, useNavigate } from 'react-router-dom'
 /*----------------User components-------------------- */
 import UserPage from './components/UserPage/UserPage';
 import UserForm from './components/UserForm/UserForm';
+import PostDetails from './components/PostDetails/PostDetails';
+import AllPosts from './components/AllPosts/AllPosts';
 
 /*--------------------services--------------- */
 import * as authService from './services/authService';
@@ -20,7 +22,17 @@ import NewsSlider from './components/NewsSlider/NewsSlider';
 
 const App = () => {
   const [user, setUser] = useState(authService.getUser());
-  const [posts, setPosts] = useState([postService.index()]);
+  const [posts, setPosts] = useState([]);
+
+  useEffect( () => {
+    const fetchAllPosts = async () => {
+      const postsData = await postService.index();
+      setPosts(postsData)
+    }
+    if (user) fetchAllPosts();
+  }, [user]); 
+  
+  const navigate = useNavigate();
 
   const handleSignout = () => {
     authService.signout();
@@ -29,6 +41,7 @@ const App = () => {
   const handleAddPost = async (postData) => {
     const newPost = await postService.create(postData)
     setPosts([...posts, newPost])
+    navigate('/allposts')
   }
  
 
@@ -41,7 +54,9 @@ const App = () => {
         <Route path="/users/signup" element={<SignUpForm setUser={setUser} />} />
         <Route path="/users/signin" element={<SignInForm setUser={setUser} />} />
         <Route path="/users/profile/:userId" element={<UserPage />} />
-        <Route path="/posts" element={<PostForm handleAddPost={handleAddPost} />} />
+        <Route path="/users/:userId/posts/new" element={<PostForm handleAddPost={handleAddPost} />} />
+        <Route path="/posts/:postId" element={<PostDetails />} />
+        <Route path="/allposts" element={<AllPosts AllPosts={posts} />} />
       </Routes>
     </>
 
