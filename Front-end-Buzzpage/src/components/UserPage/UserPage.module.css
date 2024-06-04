@@ -1,0 +1,56 @@
+* {
+    box-sizing: border-box;
+}
+
+.container {
+    max-height: 100vh;
+    width: 100%;
+    display: grid;
+    gap: 24px;
+    grid-template-columns: repeat(5, 1fr);
+    grid-auto-rows: minmax(100px, auto);
+    > div{
+        border: 1px solid black;
+    }
+}
+
+/* contains profile picture and username */
+.userInfo{
+    grid-column: 2 / 4;
+    grid-row: 1;
+    margin: auto;
+    text-align: center;
+}
+
+.container img {
+    margin: auto;
+    width: 50%;
+    height: 50%;
+} 
+
+/* name bio with edit and delete buttons */
+.userBio{
+    grid-column: 4 / 6;
+    grid-row: 1;
+}
+
+/* contains all user post if any */
+.userPost{
+    grid-column: 2 / 6;
+    grid-row: 2;
+    
+    > .post{
+        display: flex;
+        gap: 2%
+    } 
+}
+
+.sidebar{
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    min-height: 100vh;
+    grid-column: 1;
+    grid-row: 1 / 3;
+    background-color: rgba(255, 255, 255, 0.8);
+}
