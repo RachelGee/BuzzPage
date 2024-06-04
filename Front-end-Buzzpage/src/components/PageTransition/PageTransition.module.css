@@ -29,7 +29,7 @@ body {
 }
 
 .box1 {
-    background-color: yellow;
+    background-color: #F4BE1E;
     width: 100%;
     z-index: 2;
 }
@@ -41,7 +41,7 @@ body {
 }
 
 .box3 {
-    background-color: red;
+    background-color: #F16943;
     width: 200%;
 }
 

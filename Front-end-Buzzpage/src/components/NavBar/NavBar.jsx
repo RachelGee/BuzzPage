@@ -7,7 +7,7 @@ const NavBar = (props) => {
             {props.user ? (
                 <nav className={styles.container}>
                     <Link className="logo-brandname" to='/'>
-                        <img src={Logo} width={50} alt="" />
+                        <img src={Logo} width={65} alt="" />
                         <div className="logo-title">BuzzPage</div>
                     </Link>
 
