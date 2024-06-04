@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { signin } from '../../services/authService';
 import { useNavigate } from 'react-router-dom';
 import styles from './SignInForm.module.css';
+import { Link } from 'react-router-dom';
+import LoginSignup from '../../assets/images/LoginSignup.png';
 
 
 const SignInForm = (props) => {
@@ -41,7 +43,12 @@ const SignInForm = (props) => {
                     <h1>Title and Images</h1>
                 </div>
                 <div className={styles.form}>
-                    <form className='border container-lg p-5 h-75' onSubmit={handleSubmit}>
+                    <form className='border container-m p-5 h-75' onSubmit={handleSubmit}>
+                        <h1>Login</h1>
+                        <p>
+                            Doesn't have an account yet?                             
+                            <Link to='users/signup'>Sign Up</Link>
+                        </p>
                         <p>{message}</p>
                         <div className="mb-3">
                             <label htmlFor="username" className="form-label">Username</label>
@@ -52,7 +59,7 @@ const SignInForm = (props) => {
                             <input type="password" name="password" className="form-control" id="password" value={password} onChange={handleChange} autoComplete='off' />
                             <div className="form-text">We'll never share your password with anyone else.</div>
                         </div>
-                        <button type="submit" className="btn btn-primary">Login</button>
+                        <button type="submit" className="btn btn-primary w-100">Login</button>
                     </form>
                 </div>
             </div>
