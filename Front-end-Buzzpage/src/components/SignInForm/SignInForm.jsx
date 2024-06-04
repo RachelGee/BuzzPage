@@ -38,18 +38,18 @@ const SignInForm = (props) => {
         <>
             <div className={styles.container}>
                 <div className={styles.logoImage}>
-                    <h1>Hello</h1>
+                    <h1>Title and Images</h1>
                 </div>
                 <div className={styles.form}>
                     <form className='border container-lg p-5 h-75' onSubmit={handleSubmit}>
                         <p>{message}</p>
                         <div className="mb-3">
-                            <label for="username" className="form-label">Username</label>
+                            <label htmlFor="username" className="form-label">Username</label>
                             <input type="text" className="form-control" id="username" name="username" value={username} onChange={handleChange} />
                         </div>
                         <div className="mb-3">
-                            <label for="password" class="form-label">Password</label>
-                            <input type="password" name="password" className="form-control" id="password" value={password} onChange={handleChange} />
+                            <label htmlFor="password" className="form-label">Password</label>
+                            <input type="password" name="password" className="form-control" id="password" value={password} onChange={handleChange} autoComplete='off' />
                             <div className="form-text">We'll never share your password with anyone else.</div>
                         </div>
                         <button type="submit" className="btn btn-primary">Login</button>
