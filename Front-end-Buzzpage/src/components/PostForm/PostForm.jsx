@@ -20,7 +20,6 @@ const postForm = (props) => {
         evt.preventDefault();
         if (postId) {
             // props.handleUpdatePost(postId, formData);
-            console.log("update post");
         } else {
             props.handleAddPost(formData);
         }
@@ -31,7 +30,7 @@ const postForm = (props) => {
     
         <>
            <form onSubmit={handleSubmit}>
-                    <h1>{postId ? 'Edit Post' : 'New Post'}</h1>
+                    <h1>{postId ? 'New Post' : 'New Post'}</h1>
 
 
                     <label htmlFor="title">Title</label>
@@ -56,7 +55,6 @@ const postForm = (props) => {
                     <br />
                     <label htmlFor="image">Image</label>
                     <input
-                        required
                         type="text"
                         name="image"
                         id="image"

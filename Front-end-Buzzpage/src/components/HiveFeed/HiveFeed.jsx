@@ -40,7 +40,7 @@ const HiveFeed = () => {
                 <div className={styles.sidebar}>
                     <SideBar dummyPost={dummyPost} />
                 </div>
-                <h1>HiveFeed</h1>
+                <h1>Your Hive Feed</h1>
             </main>
         </>
     );
