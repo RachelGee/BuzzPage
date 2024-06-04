@@ -37,46 +37,50 @@ const UserForm = (props) => {
 
     return ( 
         <>
-            <form onSubmit={handleSubmit} className={styles.container} class="card col-6">
-                <div class="row">
-                    <div class="col">
-                        <input  
-                            type="text"
-                            class="form-control me-2"
-                            name="firstName" 
-                            id="firstName"
-                            value={formData.firstName} 
-                            onChange={handleChange}
-                        />
+            <div className={styles.container} >
+                <div className={styles.form}>
+                <form onSubmit={handleSubmit} className="border  p-5">
+                    <div className="row">
+                        <div className="col">
+                            <input  
+                                type="text"
+                                className="form-control me-2"
+                                name="firstName" 
+                                id="firstName"
+                                value={formData.firstName} 
+                                onChange={handleChange}
+                            />
+                        </div>
+                        <br />
+                        <div className="col" >
+                            <input  
+                                type="text" 
+                                className="form-control me-2"
+                                name="lastName" 
+                                id="lastName" 
+                                value={formData.lastName} 
+                                onChange={handleChange}
+                            />
+                        </div>
                     </div>
                     <br />
-                    <div class="col" >
-                        <input  
+                    <div className="mb-3">
+                        <label htmlFor="bio" className="form-label">Bio:</label>
+                        <textarea  
                             type="text" 
-                            class="form-control me-2"
-                            name="lastName" 
-                            id="lastName" 
-                            value={formData.lastName} 
+                            className="form-control "
+                            name="bio" 
+                            id="bio" 
+                            rows="3"
+                            value={formData.bio} 
                             onChange={handleChange}
                         />
                     </div>
-                </div>
-                <br />
-                <div class="mb-3">
-                    <label htmlFor="bio" class="form-label">Bio:</label>
-                    <textarea  
-                        type="text" 
-                        class="form-control "
-                        name="bio" 
-                        id="bio" 
-                        rows="3"
-                        value={formData.bio} 
-                        onChange={handleChange}
-                    />
-                </div>
 
-                <button type='submit'>Submit info</button>
-            </form>
+                    <button type='submit' className="btn btn-primary">Submit info</button>
+                </form>
+                </div>
+            </div>
         </>
     );
 }

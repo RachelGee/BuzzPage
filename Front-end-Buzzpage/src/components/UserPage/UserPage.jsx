@@ -74,25 +74,27 @@ const UserPage = (props) => {
                         <h4 >{user.username}</h4>
                     </div>
                     <div className={styles.userBio}>
-                        <h5>name: {user.firstName} {user.lastName}</h5>
-                        <p>bio: {user.bio}</p>
-                        <button><Link to={`/users/profile/${userId}/edit`} style={{ textDecoration: 'none' }}>Edit</Link></button>
-                        <button onClick={() => props.handleDeleteUser(userId)}>Delete</button>
+                        <div className="card">
+                            <h5>name: {user.firstName} {user.lastName}</h5>
+                            <p className="card-text">bio: {user.bio}</p>
+                            <button><Link to={`/users/profile/${userId}/edit`} style={{ textDecoration: 'none', color: 'black' }}>Edit</Link></button>
+                            <button onClick={() => props.handleDeleteUser(userId)}>Delete</button>
+                        </div>
                     </div>
              
 
                 <div className={styles.userPost}>
                     {user.posts.length === 0 ? 'no posts': user.posts.map((post) =>(
                         <div className={styles.post} key={post._id}>
-                            <header >
+                            <div className="card" >
                                 <div>
-                                    <h4>{post.title}</h4>
+                                <Link to={`/posts/${post._id}`} style={{ textDecoration: 'none' }}><h4>{post.title}</h4></Link>
                                     <h6>{post.category}</h6>
                                 </div>
                                 <p>{post.text}</p>
-                                <img src={post.image} alt='...'/>
-                                <h6>{post.like}</h6>
-                            </header>
+                                {!post.image ? '': <img src={post.image} className="card-img" alt='...'/>}
+                                {!post.like ? '' : <h6>likes: {post.like}</h6>}
+                            </div>
                         </div>
                     ))}
                 </div>

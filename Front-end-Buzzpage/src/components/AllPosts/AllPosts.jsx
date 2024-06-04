@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 // all user posts
 const AllPosts = (props) => {
-    console.log(props.AllPosts)
+    
     return ( 
         <>
             <h1>All Posts</h1>

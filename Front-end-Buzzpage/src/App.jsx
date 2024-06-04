@@ -6,10 +6,10 @@ import HiveFeed from './components/HiveFeed/HiveFeed';
 import NavBar from './components/NavBar/NavBar';
 import PostForm from './components/PostForm/PostForm';
 import { Routes, Route, useNavigate } from 'react-router-dom'
-
 /*----------------User components-------------------- */
 import UserPage from './components/UserPage/UserPage';
 import UserForm from './components/UserForm/UserForm';
+/*----------------Post components-------------------- */
 import PostDetails from './components/PostDetails/PostDetails';
 import AllPosts from './components/AllPosts/AllPosts';
 
@@ -68,6 +68,8 @@ const App = () => {
         <Route path="/users/:userId/posts/new" element={<PostForm handleAddPost={handleAddPost} />} />
         <Route path="/posts/:postId" element={<PostDetails />} />
         <Route path="/allposts" element={<AllPosts AllPosts={posts} />} />
+
+        <Route path="/users/profile/:userId/edit" element={<UserForm handleUpdateUser={handleUpdateUser}/>} />
       </Routes>
     </>
 
