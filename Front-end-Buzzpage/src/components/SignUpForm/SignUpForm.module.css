@@ -1,0 +1,42 @@
+.container {
+    display: flex;
+    margin-top: 50px;
+}
+
+.logoImage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+}
+
+.formContainer {
+    flex: 1;
+    min-height: 100vh;
+    margin: 30px;
+}
+
+.signup {
+    display: flex;
+    gap: 5px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    min-height: 50%;
+    width: 50%;
+    border-radius: 5px;
+}
+
+.img {
+    width: 100px;
+    margin: 0 auto;
+    margin-top: -100px;
+}
+
+.button{
+    margin-bottom: -50px;
+}
