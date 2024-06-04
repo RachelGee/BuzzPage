@@ -16,7 +16,7 @@ const index = async () => {
 //show a selected post
 const show = async (postId) => {
     try {
-      const res = await fetch(`${BACKEND_URL}/${postId}`, {
+      const res = await fetch(`${BACKEND_URL}/posts/${postId}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       });
       return res.json();
@@ -72,5 +72,10 @@ const deletePost = async (postId) => {
       console.log(error);
     }
 };
+
+//create comment service
+//update comment service
+//delete comment service
+
 
 export { index, show, create, update , deletePost }; 

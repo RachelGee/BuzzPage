@@ -1,9 +1,17 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+
 const SideBar = (props) => {
     const [searchQuery, setSearchQuery] = useState('');
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         setSearchQuery(e.target.value);
+    }
+
+    const handleClick = (e) => {
+        navigate('/users/:userId/posts/new')
     }
 
     // Filter the posts based on the search query
@@ -13,6 +21,11 @@ const SideBar = (props) => {
     return (
         <>
             <h1>SideBar</h1>
+            <button onClick={handleClick}>
+                Create New Post
+            </button>
+            <br />
+            <br />
             <input
                 type="text"
                 placeholder="Search..."
