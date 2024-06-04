@@ -73,4 +73,9 @@ const deletePost = async (postId) => {
     }
 };
 
+//create comment service
+//update comment service
+//delete comment service
+
+
 export { index, show, create, update , deletePost }; 
