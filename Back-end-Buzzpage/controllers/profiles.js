@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
+const Post = require('../models/post.js');
 const verifyToken = require('../middleware/verify-token');
 
 // return the user object if authorized else throw an error
@@ -48,6 +49,18 @@ router.put('/:userId', verifyToken, async (req, res) => {
     }
 });
 
+router.get('/:userId/hi', async (req, res) => {
+    try {
+      const posts = await Post.find({}).populate('author')
+
+      const del = await posts.filter((po) => po.author._id == req.params.userId)
+      console.log(del.comments)
+      res.status(200).json(posts);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  });
+
 // deletes the user 
 router.delete('/:userId', verifyToken, async (req, res) => {
     try {
@@ -61,6 +74,10 @@ router.delete('/:userId', verifyToken, async (req, res) => {
             res.status(404)
             throw new Error('Profile not found.');
         }
+        const posts = await Post.find({}).populate('author').populate('comments')
+
+        const delpost = await posts.filter((po) => po.author._id == req.params.userId)
+
         //deletes the current user
         const deleteUser = await User.findByIdAndDelete(
             req.params.userId

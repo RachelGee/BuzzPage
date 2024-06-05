@@ -9,6 +9,7 @@ const UserPage = (props) => {
     //gets users id
     const { userId } = useParams()
     const [user, setUser] = useState(null)
+    const [isOpen, setIsOpen] = useState(false);
     const navigate = useNavigate()
 
     //gets the current users data 
@@ -19,6 +20,14 @@ const UserPage = (props) => {
         }
         fetchUser();
     }, []);
+
+   
+
+    const deleteMenu = (event) =>{
+        setIsOpen(!isOpen);
+    }
+
+   
 
     //show loading until its gets user
     if (!user) return (
@@ -34,7 +43,7 @@ const UserPage = (props) => {
 
     return (  
         <main className={styles.container}>
-            {/* <PageTransition /> */}
+            <PageTransition />
             <div className={styles.sidebar}> 
                 <SideBar posts={props.posts}/>
             </div>
@@ -52,14 +61,24 @@ const UserPage = (props) => {
                             ''
                         ) : (
                         <>
-                            <div className="row">
-                                <div className="col">
-                                    <button className="btn btn-warning"><Link to={`/users/profile/${userId}/edit`} style={{ textDecoration: 'none', color: 'black' }}>Edit</Link></button>
-                                </div>
-                                <div className="col">
-                                    <button className="btn btn-warning" onClick={() => props.handleDeleteUser(userId)}>Delete</button>
-                                </div>
-                            </div>
+                            
+                            {!isOpen && (
+                                       <div className="row">
+                                       <div className="col">
+                                           <button className="btn btn-warning"><Link to={`/users/profile/${userId}/edit`} style={{ textDecoration: 'none', color: 'black' }}>Edit</Link></button>
+                                       </div>
+                                       <div className="col">
+                                           <button className={`btn btn-warning ${styles.delete}`} onClick={deleteMenu}>Delete</button>  
+                                       </div>
+                                   </div>  
+                                    )}
+
+                            {isOpen && (
+                                            <div className={`border container-m h-75 w-75 text-warning d-flex flex-column `} >are you sure
+                                                <button className="btn btn-warning" onClick={() => props.handleDeleteUser(userId)}>Delete</button>
+                                                <button  className={`btn-close ${styles.cancel}`} onClick={deleteMenu}/>
+                                        </div> 
+                                    )}
                         </>
                         )}
                      </div>
