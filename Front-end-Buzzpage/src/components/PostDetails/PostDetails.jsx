@@ -48,7 +48,7 @@ const PostDetails = (props) => {
             <h2>{post.image}</h2>
             <>
                 <button><Link to={`/posts/${postId}/edit`} style={{ textDecoration: 'none', color: 'black' }}>Edit</Link></button>
-                <button onClick={() => props.PostService.handleDeletePost(`${postId}`)}>Delete</button>
+                <button onClick={() => props.postService.handleDeletePost(`${postId}`)}>Delete</button>
             </>
             <hr />
             <h1>Comments</h1>
