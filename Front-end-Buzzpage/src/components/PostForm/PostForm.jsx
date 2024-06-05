@@ -8,22 +8,35 @@ const postForm = (props) => {
     const { postId } = useParams();
     const currentUser = useContext(AuthedUserContext);
     const [formData, setFormData] = useState({
-        author: userId,
+        author: currentUser ? currentUser._id :"",
         title: '',
         text: '',
         image: '',
         category: 'News',
     });
-console.log(postId);
-console.log(userId);
+
+
 // //fetch the users post and store in post form
-//     useEffect(() =>{
-//     const fetchUserPost = async () =>{
-//         const post = await postService.show(props.post._id)
-//         setPost(post.user);
-//     }
-//         fetchUserPost();
-//     },[]);
+    useEffect(() =>{
+        if (postId) {
+            const fetchPost = async () => {
+                try{
+                    const post = await postService.show(postId);
+                    setFormData({
+                        author: post.author._id,
+                        title: post.title,
+                        text: post.text,
+                        image: post.image,
+                        category: post.category,
+                    });
+                } catch (error) {
+                    console.error('failed to fetch post', error);
+                }
+            };
+            fetchPost();
+        }
+    }, [postId]);
+
 
     // create POST
     const handleChange = (evt) => {
@@ -44,7 +57,7 @@ console.log(userId);
 
         <>
             <form onSubmit={handleSubmit}>
-                <h1>{postId ? 'New Post' : 'New Post'}</h1>
+                <h1>{postId ? 'Edit Post' : 'New Post'}</h1>
 
 
                 <label htmlFor="title">Title</label>
@@ -84,6 +97,7 @@ console.log(userId);
                     value={formData.category}
                     onChange={handleChange}
                 >
+                    <option value="Lifestyle">Lifestyle</option>
                     <option value="News">News</option>
                     <option value="Sports">Sports</option>
                     <option value="Games">Games</option>

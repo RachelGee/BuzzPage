@@ -33,6 +33,7 @@ const App = () => {
   const [userPost, setUserPost] = useState([]);
 
 
+
   
   useEffect(() => {
     const fetchAllPosts = async () => {
@@ -50,16 +51,34 @@ const App = () => {
     setUser(null);
     navigate('/users/signin');
   }
+
+
   const handleAddPost = async (postData) => {
-    const newPost = await postService.create(postData)
-    setPosts([...posts, newPost])
-    navigate('/')
-  }
+    try{
+      const newPost = await postService.create(postData);
+      setPosts([...posts, newPost])
+      navigate('/')
+      console.log('created new post', newPost)
+    } catch (error) {
+      console.error('error creating post:', error);
+    }
+  };
 
   const handleUpdateUser = async (userId, formData) => {
     const updatedUser = await profileService.update(userId, formData);
     setUser(updatedUser);
     navigate(`/users/profile/${userId}`);
+  }
+
+  const handleUpdatePost = async (postId, formData) => {
+    try {
+    const updatedPost = await postService.update(postId, formData);
+      setPosts(updatedPost);
+      console.log('post updated sucessfully', updatedPost);
+      navigate(`/`);
+    } catch (error){
+      console.error('Failed to update post', error);
+    }
   }
 
   const handleDeleteUser = async (userId) => {
@@ -78,29 +97,27 @@ const App = () => {
         navigate(`/`)
   }
 
-  const handleUpdatePost = async (postId, postFormData) => {
-    try {
-    const updatedPost = await postService.update(postId, postFormData);
-      setPosts(updatedPost);
-      navigate(`/`);
-    } catch (error){
-      console.error('Failed to update post', error);
-    }
-    }
-
 
   return (
     <AuthedUserContext.Provider value={user}>
       <NavBar user={user} handleSignout={handleSignout} posts={posts} />
       <Routes>
         <Route path="/" element={<HiveFeed AllPosts={posts} />} />
+
         <Route path="/comment" element={<Comment />} />
+
         <Route path="/users/signup" element={<SignUpForm setUser={setUser} />} />
+
         <Route path="/users/signin" element={<SignInForm setUser={setUser} />} />
+
         <Route path="/users/profile/:userId" element={<UserPage posts={posts} user={user} handleDeleteUser={handleDeleteUser} />} />
+
         <Route path="/users/:userId/posts/new" element={<PostForm handleAddPost={handleAddPost} />} />
+
         <Route path="/users/:userId/posts/:postId/edit" element={<PostForm handleUpdatePost={handleUpdatePost} posts={posts} userPost={userPost} />} />
-        <Route path="/posts/:postId" element={<PostDetails handleUpdatePost={handleUpdatePost} handleDeletePost={handleDeletePost} />} />
+
+        <Route path="/posts/:postId" element={<PostDetails handleUpdatePost={handleUpdatePost} handleDeletePost={handleDeletePost} posts={posts} userPost={userPost} />} />
+
         <Route path="/users/profile/:userId/edit" element={<UserForm handleUpdateUser={handleUpdateUser} user={user} />} />
       </Routes>
     </AuthedUserContext.Provider>
