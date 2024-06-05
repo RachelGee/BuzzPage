@@ -8,6 +8,7 @@ import PostForm from './components/PostForm/PostForm';
 
 import { Routes, Route, useNavigate } from 'react-router-dom'
 import PageTransition from './components/PageTransition/PageTransition';
+import Comment from './components/Comment/Comment';
 
 
 /*----------------User components-------------------- */
@@ -78,12 +79,13 @@ const App = () => {
       <NavBar user={user} handleSignout={handleSignout} posts={posts} />
       <Routes>
         <Route path="/" element={<HiveFeed AllPosts={posts} />} />
+        <Route path="/comment" element={<Comment />} />
         <Route path="/users/signup" element={<SignUpForm setUser={setUser} />} />
         <Route path="/users/signin" element={<SignInForm setUser={setUser} />} />
         <Route path="/users/profile/:userId" element={<UserPage posts={posts} user={user} handleDeleteUser={handleDeleteUser} />} />
         <Route path="/users/:userId/posts/new" element={<PostForm handleAddPost={handleAddPost} />} />
         <Route path="/posts/:postId" element={<PostDetails handleDeletePost={handleDeletePost} />} />
-        <Route path="/users/profile/:userId/edit" element={<UserForm handleUpdateUser={handleUpdateUser} user={user}/>} />
+        <Route path="/users/profile/:userId/edit" element={<UserForm handleUpdateUser={handleUpdateUser} user={user} />} />
       </Routes>
     </AuthedUserContext.Provider>
 
