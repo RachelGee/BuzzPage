@@ -67,7 +67,6 @@ const App = () => {
       <NavBar user={user} handleSignout={handleSignout} posts={posts} />
       <Routes>
         <Route path="/" element={<HiveFeed AllPosts={posts} />} />
-        <Route path="/news" element={<NewsSlider />} />
         <Route path="/users/signup" element={<SignUpForm setUser={setUser} />} />
         <Route path="/users/signin" element={<SignInForm setUser={setUser} />} />
         <Route path="/users/profile/:userId" element={<UserPage posts={posts} user={user} handleDeleteUser={handleDeleteUser} />} />
