@@ -31,6 +31,8 @@ const App = () => {
   const [user, setUser] = useState(authService.getUser());
   const [posts, setPosts] = useState([]);
 
+
+  
   useEffect(() => {
     const fetchAllPosts = async () => {
       const postsData = await postService.index();
