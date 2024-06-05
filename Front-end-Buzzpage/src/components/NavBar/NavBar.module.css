@@ -48,3 +48,8 @@
     background-color: #F4BE1E;
     transform: scale(1.01);
 }
+
+.postTitle{
+    display: flex;
+    gap: 5px;
+}

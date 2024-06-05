@@ -29,8 +29,8 @@ const NavBar = (props) => {
                 <nav className={styles.container}>
                     <Link className="logo-brandname" to='/'>
                         <button className={`btn ${styles.btn}`} type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-list" viewBox="0 0 16 16">
+                                <path fillRule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
                             </svg>
                         </button>
                         <img src={Logo} width={75} alt="" />
@@ -38,7 +38,7 @@ const NavBar = (props) => {
                     </Link>
 
                     <div className={styles.links}>
-                        <Link className='h2' reloadDocument  to={`/users/profile/${props.user._id}`}>Hello {props.user.username}</Link>
+                        <Link className='h2' reloadDocument to={`/users/profile/${props.user._id}`}>Hello {props.user.username}</Link>
                         <Link className='h2' to='users/signin' onClick={props.handleSignout}>Sign Out</Link>
                     </div>
                 </nav>
@@ -60,7 +60,7 @@ const NavBar = (props) => {
 
             {/* Side bar */}
 
-            <div className="offcanvas offcanvas-start text-bg-dark" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+            <div className="offcanvas offcanvas-start text-bg-dark" data-bs-scroll="true" tabIndex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
                 <div className="offcanvas-header">
                     <img src={Logo} width={100} alt="" />
                     <h5 className="offcanvas-title h2" id="offcanvasWithBothOptionsLabel">BuzzPage</h5>
@@ -81,10 +81,12 @@ const NavBar = (props) => {
                     <h1 className='text-md-center mb-3'>All Posts</h1>
                     {filteredData.length > 0 ? filteredData.map((post, index) => {
                         return (
-                            <div key={index}>
-                                <p>Title: {post.title}</p>
-                                <p>Description: {post.text}</p>
-                                <hr />
+                            <div key={index} className='p-3'>
+                                <div className={styles.postTitle}>
+                                    <h5>Title:</h5>
+                                    <Link className='h5 text-light' to={`/posts/${post._id}`}> {post.title}</Link>
+                                </div>
+                                <h5 className='border-bottom pb-2'>Description: {post.text}</h5>
                             </div>
                         )
                     }

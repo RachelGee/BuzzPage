@@ -23,7 +23,7 @@ const UserPage = (props) => {
     //show loading until its gets user
     if (!user) return (
         <>
-            <div class="d-flex justify-content-center">
+            <div className="d-flex justify-content-center">
                 <div className="spinner-border text-warning" style={{width: '30rem', height: '30rem', marginTop: '10rem'}} role="status">
                     <span className="visually-hidden">Loading...</span>
                 </div>
@@ -36,7 +36,7 @@ const UserPage = (props) => {
         <main className={styles.container}>
             {/* <PageTransition /> */}
             <div className={styles.sidebar}> 
-                <SideBar dummyPost={props.posts}/>
+                <SideBar posts={props.posts}/>
             </div>
                 <div className={styles.userInfo}>
                 <div className="card" >
