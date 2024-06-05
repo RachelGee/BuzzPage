@@ -22,3 +22,29 @@
     gap: 10px;
     margin-right: 10px;
 }
+
+.btn {
+    background-color: #F4BE1E;
+    border: none;
+}
+
+.btn:hover {
+    background-color: #F16943;
+    transform: scale(1.2);
+}
+
+.title {
+    font-weight: bold;
+    font-size: larger;
+}
+
+.createPostBtn {
+    background-color: #F4BE1E;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.createPostBtn:hover {
+    background-color: #F4BE1E;
+    transform: scale(1.01);
+}

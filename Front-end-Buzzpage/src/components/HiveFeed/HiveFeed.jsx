@@ -41,9 +41,6 @@ const HiveFeed = (props) => {
         <>
             <PageTransition />
             <main className={styles.container}>
-                <div className={styles.sidebar}>
-                    <SideBar dummyPost={dummyPost} />
-                </div>
                 {props.AllPosts.length > 0 ? <AllPosts AllPosts={props.AllPosts} /> : "No Post"}
             </main>
         </>
