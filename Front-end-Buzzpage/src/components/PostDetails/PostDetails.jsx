@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import * as postService from '../../services/postService';
 import { show } from '../../services/postService';
 import { Link } from "react-router-dom";
+import Comment from '../Comment/Comment';
 
 const PostDetails = (props) => {
     //gets user post
@@ -27,12 +28,12 @@ const PostDetails = (props) => {
         fetchPost();
     }, [postId]);
 
-    
+
     const handleClick = () => {
         navigate(`/`);
     }
 
-   
+
     return (
         <>
             <h1>{post.title}</h1>
@@ -44,11 +45,7 @@ const PostDetails = (props) => {
             </>
             <hr />
             <h1>Comments</h1>
-            <form>
-                <label></label>
-                <input></input>
-                <button>Submit</button>
-            </form>
+            <Comment postId={post._id} />
             <hr />
             <button onClick={handleClick}>Back to the Hive</button>
 
