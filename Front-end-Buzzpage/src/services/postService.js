@@ -53,6 +53,8 @@ const update = async (postId, postFormData) => {
         },
         body: JSON.stringify(postFormData),
       });
+      return res.json();
+      
     } catch (error) {
       console.log(error);
     }

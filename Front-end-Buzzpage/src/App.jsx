@@ -73,7 +73,8 @@ const App = () => {
   const handleUpdatePost = async (postId, formData) => {
     try {
     const updatedPost = await postService.update(postId, formData);
-      setPosts(updatedPost);
+      const filteredPosts = posts.filter((post) => post._id !== updatedPost._id ) 
+      setPosts([updatedPost, ...filteredPosts]);
       console.log('post updated sucessfully', updatedPost);
       navigate(`/`);
     } catch (error){
