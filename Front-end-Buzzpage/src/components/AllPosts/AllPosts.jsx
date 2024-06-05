@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import styles from './AllPosts.module.css'
 
 
-// all user posts
+// all user posts HiveFeed
 const AllPosts = (props) => {
     return (
         <div className={styles.container}>
