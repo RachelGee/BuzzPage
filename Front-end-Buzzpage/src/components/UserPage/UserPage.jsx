@@ -41,7 +41,7 @@ const UserPage = (props) => {
                 <div className={styles.userInfo}>
                 <div className="card" >
                     <img src={user.image} className="card-img-top" alt="..." />
-                        <div class="card-body">
+                        <div className="card-body">
                             <h4 className="card-text">{user.username}</h4>
                         </div>
                     </div> 

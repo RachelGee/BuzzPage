@@ -56,8 +56,8 @@ const SignUpForm = (props) => {
                             <a href='' onClick={() => navigate('/users/signin')}>Login here</a>
                         </div>
                         <p>{message}</p>
-                        <div class="row">
-                            <div class="col">
+                        <div className="row">
+                            <div className="col">
                                 <label
                                     htmlFor="firstName"
                                     className="form-label"
@@ -67,14 +67,14 @@ const SignUpForm = (props) => {
 
                                 <input
                                     type="text"
-                                    class="form-control"
+                                    className="form-control"
                                     id="firstName"
                                     name="firstName"
                                     value={firstName}
                                     onChange={handleChange}
                                 />
                             </div>
-                            <div class="col">
+                            <div className="col">
                                 <label
                                     htmlFor="lastName"
                                     className="form-label"
@@ -84,7 +84,7 @@ const SignUpForm = (props) => {
 
                                 <input
                                     type="text"
-                                    class="form-control"
+                                    className="form-control"
                                     id="lastName"
                                     name="lastName"
                                     value={lastName}
@@ -141,7 +141,7 @@ const SignUpForm = (props) => {
                                 type="password"
                                 name="passwordConf"
                                 className="form-control"
-                                id="password"
+                                id="passwordConf"
                                 value={passwordConf}
                                 onChange={handleChange}
                                 autoComplete='off'
