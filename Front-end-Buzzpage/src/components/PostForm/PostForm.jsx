@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import * as postService from '../../services/postService'
+import PageTransition from '../PageTransition/PageTransition';
+
 
 const postForm = (props) => {
     const { userId } = useParams();
@@ -30,6 +32,7 @@ const postForm = (props) => {
     return (
 
         <>
+            <PageTransition />
             <form onSubmit={handleSubmit}>
                 <h1>{postId ? 'New Post' : 'New Post'}</h1>
 
