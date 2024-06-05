@@ -67,10 +67,10 @@ const UserPage = (props) => {
                         )}
                      </div>
                  </div>
-            <div className={styles.userPost}>
+            <div className={`d-flex  flex-wrap ${styles.userPost}`}>
                 {user.posts.length === 0 ? 'no posts': user.posts.map((post) =>(
-                    <div className={styles.post} key={post._id}>
-                        <div className="card bg-dark" >
+                    <div key={post._id}>
+                        <div className={`card p-2 m-2 bg-dark  ${styles.postContainer} `}>
                             <div>
                                 <Link className="card-title text-warning" to={`/posts/${post._id}`} style={{ textDecoration: 'none' }}><h4>{post.title}</h4></Link>
                                   <h6 className="card-header text-warning">{post.category}</h6>
