@@ -29,7 +29,7 @@ const postSchema = new mongoose.Schema(
       category: {
         type: String,
         required: true,
-        enum: ['News', 'Sports', 'Games', 'Movies', 'Music', 'Television'],
+        enum: ['Lifestyle', 'News', 'Sports', 'Games', 'Movies', 'Music', 'Television'],
       },
       author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
       comments: [commentSchema],
