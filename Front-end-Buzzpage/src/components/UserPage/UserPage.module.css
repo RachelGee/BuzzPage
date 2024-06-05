@@ -1,17 +1,15 @@
 * {
     box-sizing: border-box;
-    
 }
 
 .container {
-    max-height: 100vh;
-    width: 100%;
     display: grid;
     gap: 24px;
     grid-template-columns: repeat(5, 1fr);
     grid-auto-rows: minmax(100px, auto);
     
 }
+
 /* ----------------sideBar------------------ */
 .sidebar{
     display: flex;
@@ -31,7 +29,6 @@
 .userInfo{
     grid-column: 2 / 4;
     grid-row: 1;
-    margin: auto;
     text-align: center;
 }
 
@@ -45,13 +42,9 @@
 .userBio{
     grid-column: 4 / 6;
     grid-row: 1;
-    margin: auto 0;
-    min-width: 70vh;
-    > div{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+    min-width: 40vw;
+    max-width: 50vw;
+    min-height: 322px;
 }
 
 /* ----------------Bottom pfofile------------------ */
@@ -60,15 +53,14 @@
 .userPost{  /* userPost is the post section*/
     grid-column: 2 / 6;
     grid-row: 2;
-    border: 2px solid black;
+    border-top: 2px solid black;
     max-height: 62vh;
     overflow-y: scroll;
 }
 
 .postContainer{
-    min-height: 250px;
-    max-height: 400px;
-    overflow: hidden;
+    min-height: 300px;
+    max-height: 360px;    
     aspect-ratio: 1/1;
 }
 
@@ -79,5 +71,5 @@
 .image{
     max-width: 40%;
     max-height: 40%;
-    border: 2px solid black;
+    border: 2px solid #F4BE1E;
 }

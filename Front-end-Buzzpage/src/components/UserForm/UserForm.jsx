@@ -47,7 +47,7 @@ const UserForm = (props) => {
         <>
             <div className={styles.container} >
                 <div className={styles.form}>
-                    <form onSubmit={handleSubmit} className="border  p-5">   
+                    <form onSubmit={handleSubmit} className="card bg-dark p-5">   
                         <div>
                             <label htmlFor="picture" ></label>
                             <select className={styles.picture} name="image" id="picture" defaultValue={formData.image} onChange={handleChange}>
@@ -94,7 +94,7 @@ const UserForm = (props) => {
                             />
                         </div>
 
-                        <button type='submit' className="btn btn-dark">Submit info</button>
+                        <button type='submit' className="btn btn-warning">Submit info</button>
                     </form>
                         <button onClick={handleBack} className="btn-close" />
                 </div>
