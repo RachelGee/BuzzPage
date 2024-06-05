@@ -1,13 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import * as postService from '../../services/postService';
-import { show } from '../../services/postService';
+import { show, update, deletePost } from '../../services/postService';
 import { Link } from "react-router-dom";
+import { AuthedUserContext } from '../../App';
+
 
 const PostDetails = (props) => {
     //gets user post
     const { postId } = useParams();
     const navigate = useNavigate();
+    const currentUser = useContext(AuthedUserContext);
+
 
     // set post state
     const [post, setPost] = useState({
@@ -35,26 +39,30 @@ const PostDetails = (props) => {
    
     return (
         <>
-            <h1>{post.title}</h1>
-            <h2>{post.author.username} says: {post.text}</h2>
-            <h2>{post.image}</h2>
+          <h1>{post.title}</h1>
+          <h2>{post.author.username} says: {post.text}</h2>
+          <h2>{post.image}</h2>
+          {currentUser && currentUser._id === post.author._id && (
             <>
-                <button><Link to={`/posts/${postId}/edit`} style={{ textDecoration: 'none', color: 'black' }}>Edit</Link></button>
-                <button onClick={() => props.handleDeletePost(post._id)}>Delete</button>
+              <button>
+                <Link to={`/posts/${postId}/edit`} style={{ textDecoration: 'none', color: 'black' }}>Edit</Link>
+              </button>
+              <button onClick={() => props.handleDeletePost(post._id)}>Delete</button>
             </>
-            <hr />
-            <h1>Comments</h1>
-            <form>
-                <label></label>
-                <input></input>
-                <button>Submit</button>
-            </form>
-            <hr />
-            <button onClick={handleClick}>Back to the Hive</button>
-
+          )}
+          <hr />
+          <h1>Comments</h1>
+          <form>
+            <label></label>
+            <input></input>
+            <button>Submit</button>
+          </form>
+          <hr />
+          <button onClick={handleClick}>Back to the Hive</button>
         </>
-    );
-};
+      );
+    };
+    
 
 
 export default PostDetails;
