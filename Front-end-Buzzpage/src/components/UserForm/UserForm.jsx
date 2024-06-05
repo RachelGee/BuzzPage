@@ -96,7 +96,7 @@ const UserForm = (props) => {
 
                         <button type='submit' className="btn btn-dark">Submit info</button>
                     </form>
-                        <button onClick={handleBack} className="btn btn-warning">Cancel</button>
+                        <button onClick={handleBack} className="btn-close" />
                 </div>
             </div>
         </>

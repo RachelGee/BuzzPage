@@ -21,7 +21,15 @@ const UserPage = (props) => {
     }, []);
 
     //show loading until its gets user
-    if (!user) return <h1>Loading User</h1>;
+    if (!user) return (
+        <>
+            <div class="d-flex justify-content-center">
+                <div className="spinner-border text-warning" style={{width: '30rem', height: '30rem', marginTop: '10rem'}} role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        </>
+    );
 
 
     return (  
@@ -31,8 +39,12 @@ const UserPage = (props) => {
                 <SideBar dummyPost={props.posts}/>
             </div>
                 <div className={styles.userInfo}>
-                     <img src={user.image}  alt='...'/>
-                    <h4 >{user.username}</h4>
+                <div className="card" >
+                    <img src={user.image} className="card-img-top" alt="..." />
+                        <div class="card-body">
+                            <h4 className="card-text">{user.username}</h4>
+                        </div>
+                    </div> 
                 </div>
                  <div className={styles.userBio}>
                      <div className="card">
@@ -43,8 +55,14 @@ const UserPage = (props) => {
                             ''
                         ) : (
                         <>
-                            <button><Link to={`/users/profile/${userId}/edit`} style={{ textDecoration: 'none', color: 'black' }}>Edit</Link></button>
-                            <button onClick={() => props.handleDeleteUser(userId)}>Delete</button>
+                            <div className="row">
+                                <div className="col">
+                                    <button className="btn btn-warning"><Link to={`/users/profile/${userId}/edit`} style={{ textDecoration: 'none', color: 'black' }}>Edit</Link></button>
+                                </div>
+                                <div className="col">
+                                    <button className="btn btn-warning" onClick={() => props.handleDeleteUser(userId)}>Delete</button>
+                                </div>
+                            </div>
                         </>
                         )}
                      </div>
