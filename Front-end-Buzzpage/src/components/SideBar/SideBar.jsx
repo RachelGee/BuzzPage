@@ -17,7 +17,7 @@ const SideBar = (props) => {
     }
 
     // Filter the posts based on the search query
-    const filteredData = props.dummyPost.filter(post =>
+    const filteredData = props.posts.filter(post =>
         post.title.toLowerCase().includes(searchQuery.toLowerCase())
     );
     return (

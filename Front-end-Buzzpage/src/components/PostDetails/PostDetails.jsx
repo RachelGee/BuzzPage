@@ -32,15 +32,7 @@ const PostDetails = (props) => {
         navigate(`/`);
     }
 
-    // const handleDeletePost = async (postId) => {
-    //     try {
-    //         await postService.deletePost(postId);
-    //         navigate('/'); // Navigate to the home page after deleting
-    //     } catch (error) {
-    //         console.error('Failed to delete post', error);
-    //     }
-    // }; 
-
+   
     return (
         <>
             <h1>{post.title}</h1>
@@ -48,7 +40,7 @@ const PostDetails = (props) => {
             <h2>{post.image}</h2>
             <>
                 <button><Link to={`/posts/${postId}/edit`} style={{ textDecoration: 'none', color: 'black' }}>Edit</Link></button>
-                <button onClick={() => props.postService.handleDeletePost(`${postId}`)}>Delete</button>
+                <button onClick={() => props.handleDeletePost(post._id)}>Delete</button>
             </>
             <hr />
             <h1>Comments</h1>

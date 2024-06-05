@@ -62,8 +62,14 @@ const App = () => {
     handleSignout()
   }
   const handleDeletePost = async (postId) => {
-    const deletePost = await postService.deletePost(postId);
-    navigate(`/posts`)
+    try {
+      const deletedPost = await postService.deletePost(postId);
+      setPosts(posts.filter(post => post._id !== deletedPost._id))
+      navigate('/'); // Navigate to the home page after deleting
+    } catch (error) {
+      console.error('Failed to delete post', error);
+    }
+    navigate(`/`)
   }
 
 
@@ -72,14 +78,12 @@ const App = () => {
       <NavBar user={user} handleSignout={handleSignout} posts={posts} />
       <Routes>
         <Route path="/" element={<HiveFeed AllPosts={posts} />} />
-        <Route path="/news" element={<NewsSlider />} />
         <Route path="/users/signup" element={<SignUpForm setUser={setUser} />} />
         <Route path="/users/signin" element={<SignInForm setUser={setUser} />} />
         <Route path="/users/profile/:userId" element={<UserPage posts={posts} user={user} handleDeleteUser={handleDeleteUser} />} />
         <Route path="/users/:userId/posts/new" element={<PostForm handleAddPost={handleAddPost} />} />
-        <Route path="/users/profile/:userId/edit" element={<UserForm handleUpdateUser={handleUpdateUser} />} />
         <Route path="/posts/:postId" element={<PostDetails handleDeletePost={handleDeletePost} />} />
-        {/* <Route path="/posts/:postId/edit" element={<PostDetails handleUpdatePost={handleUpdatePost} />} /> */}
+        <Route path="/users/profile/:userId/edit" element={<UserForm handleUpdateUser={handleUpdateUser} user={user}/>} />
       </Routes>
     </AuthedUserContext.Provider>
 

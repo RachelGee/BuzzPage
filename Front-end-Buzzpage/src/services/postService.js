@@ -58,10 +58,10 @@ const update = async (postId, postFormData) => {
     }
 }
 
-//delete the users post
+//delete the users post and return deleted post
 const deletePost = async (postId) => {
     try {
-      const res = await fetch(`${BACKEND_URL}/${postId}`, {
+      const res = await fetch(`${BACKEND_URL}/posts/${postId}`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
