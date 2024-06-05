@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate  } from 'react-router-dom';
 import { show } from '../../services/profileService';
 import PageTransition from '../PageTransition/PageTransition';
 import styles from './UserPage.module.css'
@@ -9,6 +9,7 @@ const UserPage = (props) => {
     //gets users id
     const { userId } = useParams()
     const [user, setUser] = useState(null)
+    const navigate = useNavigate()
 
     //gets the current users data 
     useEffect(() => {
@@ -22,9 +23,10 @@ const UserPage = (props) => {
     //show loading until its gets user
     if (!user) return <h1>Loading User</h1>;
 
+
     return (  
         <main className={styles.container}>
-            <PageTransition />
+            {/* <PageTransition /> */}
             <div className={styles.sidebar}> 
                 <SideBar dummyPost={props.posts}/>
             </div>
@@ -36,6 +38,7 @@ const UserPage = (props) => {
                      <div className="card">
                          <h5>name: {user.firstName} {user.lastName}</h5>
                          <p className="card-text">bio: {user.bio}</p>
+                         {/* for later development/ only allow user to edit or delete their own page */}
                          {props.user._id !== userId ? (
                             ''
                         ) : (
@@ -49,14 +52,14 @@ const UserPage = (props) => {
             <div className={styles.userPost}>
                 {user.posts.length === 0 ? 'no posts': user.posts.map((post) =>(
                     <div className={styles.post} key={post._id}>
-                        <div className="card bg-secondary-subtle" >
+                        <div className="card bg-dark" >
                             <div>
-                                <Link to={`/posts/${post._id}`} style={{ textDecoration: 'none' }}><h4>{post.title}</h4></Link>
-                                  <h6>{post.category}</h6>
+                                <Link className="card-title text-warning" to={`/posts/${post._id}`} style={{ textDecoration: 'none' }}><h4>{post.title}</h4></Link>
+                                  <h6 className="card-header text-warning">{post.category}</h6>
                             </div>
-                            <p>{post.text}</p>
+                            <p className="card-text text-warning ">{post.text}</p>
                             {!post.image ? '': <img src={post.image} className={styles.image} alt='...'/>}
-                            {!post.like ? '' : <h6>likes: {post.like}</h6>}
+                            {!post.like ? '' : <button type="button" className="btn btn-outline-warning" > {post.like}</button>}
                             </div>
                         </div>
                     ))}

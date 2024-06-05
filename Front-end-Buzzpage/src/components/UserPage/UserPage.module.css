@@ -55,7 +55,7 @@
 /* ----------------Bottom pfofile------------------ */
 
 /* contains all user post if any */
-.userPost{
+.userPost{  /* userPost is the post section*/
     grid-column: 2 / 6;
     grid-row: 2;
     display: flex;
@@ -64,10 +64,13 @@
     gap: 2%;
     border-top: 2px solid black;
     padding-top: 30px;
-    > .post{
+
+    > .post{/* post is each individual post*/
         display: flex;
         flex-wrap: wrap;
         flex-direction: column;
+        
+        min-width: 250px;
         max-width: 300px;
         padding: 10px;;
     } 
