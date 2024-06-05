@@ -51,7 +51,7 @@ const UserForm = (props) => {
                         <div>
                             <label htmlFor="picture" ></label>
                             <select className={styles.picture} name="image" id="picture" defaultValue={formData.image} onChange={handleChange}>
-                                <option className={styles.d1}  value={default1}>yellow</option>
+                                <option className={styles.d1} value={default1}>yellow</option>
                                 <option className={styles.d2} value={default2}>red</option>
                                 <option className={styles.d3} value={default3}>black</option>
                             </select>

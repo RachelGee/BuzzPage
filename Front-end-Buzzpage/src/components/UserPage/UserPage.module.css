@@ -61,20 +61,28 @@
     grid-column: 2 / 6;
     grid-row: 2;
     display: flex;
-    flex-wrap: wrap;
-    gap: 2%;
+    flex-flow: row  wrap;
+    align-items: flex-start;
+    align-content: flex-start;
     border: 2px solid black;
-    max-height: 52vh;
-    padding-top: 30px;
+    max-height: 62vh;
+    width: 166vh;
+    padding-top: 10px;
     overflow-y: scroll;
     > .post{/* post is each individual post*/
+        order: 1;
         display: flex;
         flex-wrap: wrap;
         flex-direction: column;
-        
+        height: fit-content;
         min-width: 250px;
         max-width: 300px;
+        min-height: fit-content;
     } 
+}
+
+.userPost>*{
+    flex: 1 1 80px;
 }
 
 .image{
