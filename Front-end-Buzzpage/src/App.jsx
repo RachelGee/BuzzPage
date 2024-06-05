@@ -64,7 +64,7 @@ const App = () => {
 
   return (
     <AuthedUserContext.Provider value={user}>
-      <NavBar user={user} handleSignout={handleSignout} />
+      <NavBar user={user} handleSignout={handleSignout} posts={posts} />
       <Routes>
         <Route path="/" element={<HiveFeed AllPosts={posts} />} />
         <Route path="/news" element={<NewsSlider />} />
