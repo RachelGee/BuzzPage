@@ -7,12 +7,11 @@ const Comment = (props) => {
     const handleChange = (evt) => {
         setFormData({ ...formData, [evt.target.name]: evt.target.value });
     };
+
     const handleSubmit = async (evt) => {
         evt.preventDefault();
-        console.log("submitting")
-        console.log(formData)
-        console.log(props.postId)
-        await postService.createComment(props.postId, formData);
+        const newComment = await postService.createComment(props.postId, formData);
+        props.handleAddComment(newComment);
         setFormData({ text: '' });
     };
 

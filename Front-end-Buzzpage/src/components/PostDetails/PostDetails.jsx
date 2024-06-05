@@ -16,17 +16,25 @@ const PostDetails = (props) => {
         text: '',
         image: '',
         category: 'News',
-        author: ""
+        author: "",
+        comments: []
     });
 
     //gets the current users post 
     useEffect(() => {
-        const fetchPost = async () => {
+        const fetchPostComment = async () => {
             const postData = await postService.show(postId);
             setPost(postData);
         };
-        fetchPost();
-    }, [postId]);
+        fetchPostComment();
+    }, [postId, post.comments]);
+
+    const [comments, setComments] = useState(post.comments)
+
+
+    const handleAddComment = async (comment) => {
+        post.comments.push(comment);
+    }
 
 
     const handleClick = () => {
@@ -44,8 +52,21 @@ const PostDetails = (props) => {
                 <button onClick={() => props.handleDeletePost(post._id)}>Delete</button>
             </>
             <hr />
-            <h1>Comments</h1>
-            <Comment postId={post._id} />
+            <div className="comment-section">
+                <h1>Comments</h1>
+                <div className="comments">
+                    <ol>
+                        {post.comments && post.comments.map((comment, index) => {
+                            return (
+                                <li key={index}>
+                                    {comment.text}
+                                </li>
+                            )
+                        })}
+                    </ol>
+                </div>
+                <Comment handleAddComment={handleAddComment} postId={post._id} />
+            </div>
             <hr />
             <button onClick={handleClick}>Back to the Hive</button>
 
