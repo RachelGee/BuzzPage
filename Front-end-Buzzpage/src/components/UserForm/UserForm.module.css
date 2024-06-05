@@ -11,14 +11,13 @@
 
 .picture{
     background-size: cover;
-    background-position: center;
     width: 30%;
     aspect-ratio: 1/1;
     margin: auto;
     border-radius: 50%;
-    border: 1px solid black ;
 }
 
+/* set backgroud as you select image */
 .picture:has(.d1:checked){
     background-image: url('/src/assets/images/default%20icon%201.png');
     content-visibility: hidden;
