@@ -27,16 +27,29 @@ const PostDetails = (props) => {
         fetchPost();
     }, [postId]);
 
+    
     const handleClick = () => {
         navigate(`/`);
     }
 
-    console.log(post)
+    // const handleDeletePost = async (postId) => {
+    //     try {
+    //         await postService.deletePost(postId);
+    //         navigate('/'); // Navigate to the home page after deleting
+    //     } catch (error) {
+    //         console.error('Failed to delete post', error);
+    //     }
+    // }; 
+
     return (
         <>
             <h1>{post.title}</h1>
             <h2>{post.author.username} says: {post.text}</h2>
             <h2>{post.image}</h2>
+            <>
+                <button><Link to={`/posts/${postId}/edit`} style={{ textDecoration: 'none', color: 'black' }}>Edit</Link></button>
+                <button onClick={() => props.PostService.handleDeletePost(`${postId}`)}>Delete</button>
+            </>
             <hr />
             <h1>Comments</h1>
             <form>
@@ -49,6 +62,7 @@ const PostDetails = (props) => {
 
         </>
     );
-}
+};
+
 
 export default PostDetails;

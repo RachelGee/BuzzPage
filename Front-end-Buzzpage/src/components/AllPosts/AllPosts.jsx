@@ -6,7 +6,7 @@ import styles from './AllPosts.module.css'
 const AllPosts = (props) => {
     return (
         <div className={styles.container}>
-            <h1>All Posts</h1>
+            <h1>Welcome to the HIVE! Here's the latest BUZZ:</h1>
 
             {props.AllPosts.map((post, index) => {
                 return (

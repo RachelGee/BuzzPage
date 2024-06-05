@@ -61,6 +61,11 @@ const App = () => {
     const deletedUser = await profileService.deleteUser(userId);
     handleSignout()
   }
+  const handleDeletePost = async (postId) => {
+    const deletePost = await postService.deletePost(postIdId);
+    navigate(`/posts`)
+  }
+
 
   return (
     <AuthedUserContext.Provider value={user}>
@@ -72,8 +77,8 @@ const App = () => {
         <Route path="/users/signin" element={<SignInForm setUser={setUser} />} />
         <Route path="/users/profile/:userId" element={<UserPage posts={posts} user={user} handleDeleteUser={handleDeleteUser} />} />
         <Route path="/users/:userId/posts/new" element={<PostForm handleAddPost={handleAddPost} />} />
-        <Route path="/posts/:postId" element={<PostDetails />} />
         <Route path="/users/profile/:userId/edit" element={<UserForm handleUpdateUser={handleUpdateUser} />} />
+        <Route path="/posts/:postId" element={<PostDetails handleDeletePost={handleDeletePost} />} />
       </Routes>
     </AuthedUserContext.Provider>
 
