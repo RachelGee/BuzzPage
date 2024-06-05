@@ -1,9 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import * as postService from '../../services/postService'
+import { AuthedUserContext } from '../../App';
 
 const postForm = (props) => {
     const { userId } = useParams();
+    const { postId } = useParams();
+    const currentUser = useContext(AuthedUserContext);
     const [formData, setFormData] = useState({
         author: userId,
         title: '',
@@ -11,6 +14,16 @@ const postForm = (props) => {
         image: '',
         category: 'News',
     });
+console.log(postId);
+console.log(userId);
+// //fetch the users post and store in post form
+//     useEffect(() =>{
+//     const fetchUserPost = async () =>{
+//         const post = await postService.show(props.post._id)
+//         setPost(post.user);
+//     }
+//         fetchUserPost();
+//     },[]);
 
     // create POST
     const handleChange = (evt) => {
@@ -21,12 +34,12 @@ const postForm = (props) => {
     const handleSubmit = (evt) => {
         evt.preventDefault();
         if (postId) {
-            // props.handleUpdatePost(postId, formData);
+            props.handleUpdatePost(postId, formData);
         } else {
             props.handleAddPost(formData);
         }
     };
-    const postId = null
+   
     return (
 
         <>

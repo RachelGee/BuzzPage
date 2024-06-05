@@ -45,7 +45,7 @@ const create = async (postFormData) => {
 //update a users post
 const update = async (postId, postFormData) => {
     try {
-      const res = await fetch(`${BACKEND_URL}/${postId}`, {
+      const res = await fetch(`${BACKEND_URL}/posts/${postId}`, {
         method: 'PUT',
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
