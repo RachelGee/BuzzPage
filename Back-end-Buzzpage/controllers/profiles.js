@@ -6,16 +6,12 @@ const verifyToken = require('../middleware/verify-token');
 // return the user object if authorized else throw an error
 router.get('/:userId', verifyToken, async (req, res) => {
     try {
-        // req.user is set using verifyToken
-        if (req.user._id !== req.params.userId){
-            return res.status(401).json({ error: "Unauthorized"})
-        }
-        const user = await User.findById(req.user._id);
+        const user = await User.findById(req.params.userId).populate('posts');
         if (!user) {
             res.status(404)
             throw new Error('Profile not found.');
         }
-        res.json({ user });
+        res.json({user});
     } catch (error) {
         if (res.statusCode === 404) {
             res.status(404).json({ error: error.message });
@@ -42,7 +38,7 @@ router.put('/:userId', verifyToken, async (req, res) => {
             req.body,
             {new:true}
         )
-        res.json({ updatedUser });
+        res.json(updatedUser);
     } catch (error) {
         if (res.statusCode === 404) {
             res.status(404).json({ error: error.message });

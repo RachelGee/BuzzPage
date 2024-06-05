@@ -38,7 +38,7 @@ const NavBar = (props) => {
                     </Link>
 
                     <div className={styles.links}>
-                        <Link className='h2' to={`/users/profile/${props.user._id}`}>Hello {props.user.username}</Link>
+                        <Link className='h2' reloadDocument  to={`/users/profile/${props.user._id}`}>Hello {props.user.username}</Link>
                         <Link className='h2' to='users/signin' onClick={props.handleSignout}>Sign Out</Link>
                     </div>
                 </nav>

@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema({
     },
     image:{
         type:String,
-        default:""
+        default:"/src/assets/images/default%20icon%201.png"
     },
     bio:{
         type: String,

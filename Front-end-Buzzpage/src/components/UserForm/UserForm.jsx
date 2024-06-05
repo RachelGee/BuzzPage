@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import {  Link, useNavigate } from 'react-router-dom';
 import { show, update } from '../../services/profileService';
 import styles from './UserForm.module.css'
 /*-----------------import default img----------------- */ 
@@ -8,8 +8,6 @@ import default2 from '../../assets/images/default icon 2.png'
 import default3 from '../../assets/images/default icon 3.png'
 
 const UserForm = (props) => {
-    //gets current user id
-    const { userId } = useParams()
     const navigate = useNavigate()
 
     //default form state variable
@@ -22,11 +20,11 @@ const UserForm = (props) => {
     //fetch to the users data and store it in form
     useEffect(() =>{
         const fetchUser = async () =>{
-            const userData = await show(userId)
+            const userData = await show(props.user._id)
             setFormData(userData.user);
         }
         fetchUser();
-    },[userId]);
+    },[]);
 
     //handles any change to the form data
     const handleChange = (evt) => {
@@ -36,12 +34,14 @@ const UserForm = (props) => {
     //submits the form and navigate back to user page
     const handleSubmit = (evt) =>{
         evt.preventDefault()
-        props.handleUpdateUser(userId,formData)
+        props.handleUpdateUser(props.user._id,formData)
     }
 
+    //cancel the form and return to userPage
     const handleBack = () =>{
-        navigate(`/users/profile/${userId}`)
+        navigate(`/users/profile/${props.user._id}`)
     }
+
 
     return ( 
         <>
@@ -96,7 +96,7 @@ const UserForm = (props) => {
 
                         <button type='submit' className="btn btn-dark">Submit info</button>
                     </form>
-                        <button onClick={handleBack} className="btn btn-warning">Cancel</button>
+                        <button onClick={handleBack} className="btn-close" />
                 </div>
             </div>
         </>

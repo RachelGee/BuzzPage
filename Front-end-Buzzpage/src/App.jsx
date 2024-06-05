@@ -73,7 +73,7 @@ const App = () => {
         <Route path="/users/profile/:userId" element={<UserPage posts={posts} user={user} handleDeleteUser={handleDeleteUser} />} />
         <Route path="/users/:userId/posts/new" element={<PostForm handleAddPost={handleAddPost} />} />
         <Route path="/posts/:postId" element={<PostDetails />} />
-        <Route path="/users/profile/:userId/edit" element={<UserForm handleUpdateUser={handleUpdateUser} />} />
+        <Route path="/users/profile/:userId/edit" element={<UserForm handleUpdateUser={handleUpdateUser} user={user}/>} />
       </Routes>
     </AuthedUserContext.Provider>
 
