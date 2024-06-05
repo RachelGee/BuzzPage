@@ -73,10 +73,10 @@ const deletePost = async (postId) => {
     }
 };
 
-//create comment service
+// create comment and return the comment
 const createComment = async (postId, commentFormData) => {
   try {
-    const res = await fetch(`${BASE_URL}/${postId}/comments`, {
+    const res = await fetch(`${BACKEND_URL}/posts/${postId}/comments`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
