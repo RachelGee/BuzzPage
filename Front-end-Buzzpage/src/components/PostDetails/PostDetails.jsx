@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import * as postService from '../../services/postService';
-import { show, update, deletePost } from '../../services/postService';
+// import { show, update, deletePost } from '../../services/postService';
 import { Link } from "react-router-dom";
 import { AuthedUserContext } from '../../App';
 
@@ -24,7 +24,8 @@ const PostDetails = (props) => {
         comments: []
     });
 
-    //gets the current users post 
+
+    //gets the current users post comment
     useEffect(() => {
         const fetchPostComment = async () => {
             const postData = await postService.show(postId);
@@ -45,7 +46,6 @@ const PostDetails = (props) => {
         navigate(`/`);
     }
 
-
     return (
         <>
           <h1>{post.title}</h1>
@@ -54,7 +54,7 @@ const PostDetails = (props) => {
           {currentUser && currentUser._id === post.author._id && (
             <>
               <button>
-                <Link to={`/posts/${postId}/edit`} style={{ textDecoration: 'none', color: 'black' }}>Edit</Link>
+                <Link to={`/users/${currentUser._id}/posts/${postId}/edit`} style={{ textDecoration: 'none', color: 'black' }}>Edit</Link>
               </button>
               <button onClick={() => props.handleDeletePost(post._id)}>Delete</button>
             </>
