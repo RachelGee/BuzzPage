@@ -3,32 +3,61 @@ const verifyToken = require('../middleware/verify-token.js');
 const Post = require('../models/post.js');
 const User = require('../models/user.js')
 const router = express.Router();
+const uploadFile = require('../middleware/upload-file.js');
+
+
+const upload  = require('multer')();
 
 // ========== Public Routes ===========
 
 // ========= Protected Routes =========
 
 router.use(verifyToken);
-// Need to create logic for COMMENTS
+
+// create post return created post
+router.post('/photoUpload',upload.single('photo'), async (req, res) => {
+  console.log("req",req);
+    try {
+      if (req.file) {
+          // updating the filename?
+          console.log("filename: ", req.file.originalname);
+          const regex = new RegExp(/[^a-zA-Z0-9\:]*/g);   
+          const updatedName = req.file.originalname.replaceAll(regex, "");
+          console.log("updatename: ", updatedName);
+          req.file.originalname = updatedName;
+
+          // uploading to aws
+          const uploadedPhoto = await uploadFile(req.file);
+
+          // returning the link to aws photo link
+          console.log('aws link',uploadedPhoto);
+          res.json(uploadedPhoto);
+      } else {
+          throw new Error('Must select a file');
+      }
+  } catch (err) {
+      console.log(err)
+      res.status(400).json(err.message);
+  }
+});
 
 // create post return created post
 router.post('/', async (req, res) => {
-    console.log("inside backend create post")
-    try {
-      req.body.author = req.user._id;
-      const post = await Post.create(req.body);
-      post._doc.author = req.user;
+  try {
+    req.body.author = req.user._id;
+    const post = await Post.create(req.body);
+    post._doc.author = req.user;
 
-      // associate the post with the user object
-      const user = await User.findById(req.user._id);
-      user.posts.push(post._id);
-      user.save();
+    // associate the post with the user object
+    const user = await User.findById(req.user._id);
+    user.posts.push(post._id);
+    user.save();
 
-      res.status(201).json(post);
-    } catch (error) {
-      console.log(error);
-      res.status(500).json(error);
-    }
+    res.status(201).json(post);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }
 });
 
 // index to show all post "Hive Feed" return all posts

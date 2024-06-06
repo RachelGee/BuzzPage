@@ -1,26 +1,29 @@
-import { useState, useContext, useEffect } from 'react';
+import { useState, useRef, useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import * as postService from '../../services/postService'
+import PageTransition from '../PageTransition/PageTransition';
 import { AuthedUserContext } from '../../App';
 
 const postForm = (props) => {
+    const fileInputRef = useRef();
     const { userId } = useParams();
     const { postId } = useParams();
     const currentUser = useContext(AuthedUserContext);
     const [formData, setFormData] = useState({
-        author: currentUser ? currentUser._id :"",
+        author: currentUser ? currentUser._id : "",
         title: '',
         text: '',
-        image: '',
+        photo: '',
+        imageTitle: "",
         category: 'News',
     });
 
 
-// //fetch the users post and store in post form
-    useEffect(() =>{
+    // //fetch the users post and store in post form
+    useEffect(() => {
         if (postId) {
             const fetchPost = async () => {
-                try{
+                try {
                     const post = await postService.show(postId);
                     setFormData({
                         author: post.author._id,
@@ -43,19 +46,35 @@ const postForm = (props) => {
         setFormData({ ...formData, [evt.target.name]: evt.target.value });
     };
 
+    const handleChangeImage = (evt) => {
+        const newFormData = { ...formData, [evt.target.name]: URL.createObjectURL(evt.target.files[0]) };
+        setFormData(newFormData);
+        console.log(newFormData);
+    }
+
     //Handle create post & submit to DB
     const handleSubmit = (evt) => {
         evt.preventDefault();
+        console.log(formData);
         if (postId) {
             props.handleUpdatePost(postId, formData);
         } else {
-            props.handleAddPost(formData);
+            let photoData;
+            formData.photo = '';
+            if (fileInputRef.current.value !== '') {
+                photoData = new FormData()
+                photoData.append('title', formData.title)
+                photoData.append('photo', fileInputRef.current.files[0]);
+            }
+            console.log("formdata: ", formData)
+            props.handleAddPost(photoData, formData);
         }
     };
-   
-    return (
 
+    return (
         <>
+            {/* <PageTransition /> */}
+            <img src={formData.image} alt="profilePic" />
             <form onSubmit={handleSubmit}>
                 <h1>{postId ? 'Edit Post' : 'New Post'}</h1>
 
@@ -80,13 +99,21 @@ const postForm = (props) => {
                     onChange={handleChange}
                 />
                 <br />
-                <label htmlFor="image">Image</label>
+                <label htmlFor="imageTitle">Image Title</label>
                 <input
                     type="text"
-                    name="image"
-                    id="image"
-                    value={formData.image}
+                    name="imageTitle"
+                    id="imageTitle"
+                    value={formData.imageTitle}
                     onChange={handleChange}
+                />
+                <label htmlFor="image">Image</label>
+                <input
+                    type="file"
+                    ref={fileInputRef}
+                    id="image"
+                    name="photo"
+                    onChange={handleChangeImage}
                 />
                 <br />
                 <label htmlFor="category-input">Category</label>

@@ -51,18 +51,11 @@ const App = () => {
     setUser(null);
     navigate('/users/signin');
   }
-
-
-  const handleAddPost = async (postData) => {
-    try{
-      const newPost = await postService.create(postData);
-      setPosts([...posts, newPost])
-      navigate('/')
-      console.log('created new post', newPost)
-    } catch (error) {
-      console.error('error creating post:', error);
-    }
-  };
+  const handleAddPost = async (photoData,postData) => {
+    const newPost = await postService.create(photoData,postData);
+    setPosts([...posts, newPost])
+    navigate('/')
+  }
 
   const handleUpdateUser = async (userId, formData) => {
     const updatedUser = await profileService.update(userId, formData);
