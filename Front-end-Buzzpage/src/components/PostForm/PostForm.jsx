@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import * as postService from '../../services/postService'
 import PageTransition from '../PageTransition/PageTransition';
 import { AuthedUserContext } from '../../App';
+import styles from './PostForm.module.css'
 
 const postForm = (props) => {
     const fileInputRef = useRef();
@@ -14,7 +15,6 @@ const postForm = (props) => {
         title: '',
         text: '',
         photo: '',
-        imageTitle: "",
         category: 'News',
     });
 
@@ -48,13 +48,11 @@ const postForm = (props) => {
     const handleChangeImage = (evt) => {
         const newFormData = { ...formData, [evt.target.name]: URL.createObjectURL(evt.target.files[0]) };
         setFormData(newFormData);
-        console.log(newFormData);
     }
 
     //Handle create post & submit to DB
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        console.log(formData);
         if (postId) {
             props.handleUpdatePost(postId, formData);
         } else {
@@ -65,7 +63,6 @@ const postForm = (props) => {
                 photoData.append('title', formData.title)
                 photoData.append('photo', fileInputRef.current.files[0]);
             }
-            console.log("formdata: ", formData)
             props.handleAddPost(photoData, formData);
         }
     };
@@ -73,67 +70,88 @@ const postForm = (props) => {
     return (
         <>
             {/* <PageTransition /> */}
-            <img src={formData.image} alt="profilePic" />
-            <form onSubmit={handleSubmit}>
-                <h1>{postId ? 'Edit Post' : 'New Post'}</h1>
 
 
-                <label htmlFor="title">Title</label>
-                <input
-                    required
-                    type="text"
-                    name="title"
-                    id="title"
-                    value={formData.title}
-                    onChange={handleChange}
-                />
-                <br />
-                <label htmlFor="text">Text</label>
-                <textarea
-                    required
-                    type="text"
-                    name="text"
-                    id="text"
-                    value={formData.text}
-                    onChange={handleChange}
-                />
-                <br />
-                <label htmlFor="imageTitle">Image Title</label>
-                <input
-                    type="text"
-                    name="imageTitle"
-                    id="imageTitle"
-                    value={formData.imageTitle}
-                    onChange={handleChange}
-                />
-                <label htmlFor="image">Image</label>
-                <input
-                    type="file"
-                    ref={fileInputRef}
-                    id="image"
-                    name="photo"
-                    onChange={handleChangeImage}
-                />
-                <br />
-                <label htmlFor="category-input">Category</label>
-                <select
-                    required
-                    name="category"
-                    id="category"
-                    value={formData.category}
-                    onChange={handleChange}
-                >
-                    <option value="Lifestyle">Lifestyle</option>
-                    <option value="News">News</option>
-                    <option value="Sports">Sports</option>
-                    <option value="Games">Games</option>
-                    <option value="Movies">Movies</option>
-                    <option value="Music">Music</option>
-                    <option value="Television">Television</option>
-                </select>
-                <br />
-                <button type="submit">SUBMIT</button>
+            <form className={`border container-m p-5 h-75 w-50 mx-auto mt-5 bg-dark text-light ${styles.form}`} onSubmit={handleSubmit}>
+                <div className="display-3 text-center">Create a Post</div>
+
+
+                {formData.photo ? (
+                    <div className="text-center">
+                        <img className="img-fluid mb-3 w-25 mx-auto" src={formData.photo} alt="profilePic" />
+                    </div>
+                ) : ""}
+
+                <div className="mb-2">
+                    <label
+                        htmlFor="title"
+                        className="form-label"
+                    >
+                        Title
+                    </label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        id="title"
+                        name="title"
+                        value={formData.title}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+                <div className="mb-2">
+                    <label
+                        htmlFor="text"
+                        className="form-label"
+                    >
+                        Description
+                    </label>
+                    <textarea
+                        type="text"
+                        className="form-control mb-3"
+                        id="text"
+                        name="text"
+                        value={formData.text}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+                <div className="input-group mb-3">
+                    <input
+                        onChange={handleChangeImage}
+                        type="file"
+                        className="form-control"
+                        name='photo'
+                        id="image"
+                        ref={fileInputRef}
+                    />
+                    <label className="input-group-text" hmtlfor="image">Upload Image</label>
+                </div>
+
+                <div className="form-group">
+                    <label className='form-label' hmtlfor="category">Category</label>
+                    <select
+                        className="form-control mb-3"
+                        required
+                        name="category"
+                        id="category"
+                        value={formData.category}
+                        onChange={handleChange}
+                    >
+                        <option value="Lifestyle">Lifestyle</option>
+                        <option value="News">News</option>
+                        <option value="Sports">Sports</option>
+                        <option value="Games">Games</option>
+                        <option value="Movies">Movies</option>
+                        <option value="Music">Music</option>
+                        <option value="Television">Television</option>
+                    </select>
+                </div>
+
+                <button type="submit" disabled={""} className={`btn btn-primary w-100 ${styles.button}`}>Create Post</button>
             </form>
+
+
 
         </>
     );
