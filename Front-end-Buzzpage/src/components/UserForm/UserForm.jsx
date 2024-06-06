@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import {  Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { show, update } from '../../services/profileService';
 import styles from './UserForm.module.css'
-/*-----------------import default img----------------- */ 
+/*-----------------import default img----------------- */
 import default1 from '../../assets/images/default icon 1.png'
 import default2 from '../../assets/images/default icon 2.png'
 import default3 from '../../assets/images/default icon 3.png'
@@ -18,13 +18,13 @@ const UserForm = (props) => {
     });
 
     //fetch to the users data and store it in form
-    useEffect(() =>{
-        const fetchUser = async () =>{
+    useEffect(() => {
+        const fetchUser = async () => {
             const userData = await show(props.user._id)
             setFormData(userData.user);
         }
         fetchUser();
-    },[]);
+    }, []);
 
     //handles any change to the form data
     const handleChange = (evt) => {
@@ -32,22 +32,22 @@ const UserForm = (props) => {
     };
 
     //submits the form and navigate back to user page
-    const handleSubmit = (evt) =>{
+    const handleSubmit = (evt) => {
         evt.preventDefault()
-        props.handleUpdateUser(props.user._id,formData)
+        props.handleUpdateUser(props.user._id, formData)
     }
 
     //cancel the form and return to userPage
-    const handleBack = () =>{
+    const handleBack = () => {
         navigate(`/users/profile/${props.user._id}`)
     }
 
 
-    return ( 
+    return (
         <>
             <div className={styles.container} >
                 <div className={styles.form}>
-                    <form onSubmit={handleSubmit} className="card bg-dark p-5">   
+                    <form onSubmit={handleSubmit} className="card bg-dark p-5">
                         <div>
                             <label htmlFor="picture" ></label>
                             <select className={styles.picture} name="image" id="picture" defaultValue={formData.image} onChange={handleChange}>
@@ -59,23 +59,23 @@ const UserForm = (props) => {
 
                         <div className="row">
                             <div className="col">
-                                <input  
+                                <input
                                     type="text"
                                     className="form-control me-2"
-                                    name="firstName" 
+                                    name="firstName"
                                     id="firstName"
-                                    value={formData.firstName} 
+                                    value={formData.firstName}
                                     onChange={handleChange}
                                 />
                             </div>
                             <br />
                             <div className="col" >
-                                <input  
-                                    type="text" 
+                                <input
+                                    type="text"
                                     className="form-control me-2"
-                                    name="lastName" 
-                                    id="lastName" 
-                                    value={formData.lastName} 
+                                    name="lastName"
+                                    id="lastName"
+                                    value={formData.lastName}
                                     onChange={handleChange}
                                 />
                             </div>
@@ -83,24 +83,24 @@ const UserForm = (props) => {
                         <br />
                         <div className="mb-3">
                             <label htmlFor="bio" className="form-label">Bio:</label>
-                            <textarea  
-                                type="text" 
+                            <textarea
+                                type="text"
                                 className="form-control "
-                                name="bio" 
-                                id="bio" 
+                                name="bio"
+                                id="bio"
                                 rows="3"
-                                value={formData.bio} 
+                                value={formData.bio}
                                 onChange={handleChange}
                             />
                         </div>
 
                         <button type='submit' className="btn btn-warning">Submit info</button>
                     </form>
-                        <button onClick={handleBack} className="btn-close" />
+                    <button onClick={handleBack} className="btn-close" />
                 </div>
             </div>
         </>
     );
 }
- 
+
 export default UserForm;

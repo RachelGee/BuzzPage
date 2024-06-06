@@ -9,7 +9,6 @@ const HiveFeed = (props) => {
     return (
         <>
             <PageTransition />
-            <NewsSlider />
             <main className={styles.container}>
                 {props.AllPosts.length > 0 ? <AllPosts AllPosts={props.AllPosts} /> : "No Post"}
             </main>

@@ -69,12 +69,11 @@ const postForm = (props) => {
 
     return (
         <>
-            {/* <PageTransition /> */}
-
+            <PageTransition />
 
             <form className={`border container-m p-5 h-75 w-50 mx-auto mt-5 bg-dark text-light ${styles.form}`} onSubmit={handleSubmit}>
-                <div className="display-3 text-center">Create a Post</div>
-
+                {postId ? <div className="display-3 text-center">Edit Post</div> : <div className="display-3 text-center">Create Post</div>
+                }
 
                 {formData.photo ? (
                     <div className="text-center">
@@ -147,8 +146,9 @@ const postForm = (props) => {
                         <option value="Television">Television</option>
                     </select>
                 </div>
-
-                <button type="submit" disabled={""} className={`btn btn-primary w-100 ${styles.button}`}>Create Post</button>
+                {postId ? <button type="submit" disabled={""} className={`btn btn-primary w-100 ${styles.button}`}>Edit Post</button>
+                    : <button type="submit" disabled={""} className={`btn btn-primary w-100 ${styles.button}`}>Create Post</button>
+                }
             </form>
 
 
