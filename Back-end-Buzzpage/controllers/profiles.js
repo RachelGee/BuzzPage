@@ -49,33 +49,42 @@ router.put('/:userId', verifyToken, async (req, res) => {
     }
 });
 
-router.delete('/:userId/hi', async (req, res) => {
-    try {
-        const posts = await Post.find({})
+// test on deleting all users comments
+router.delete('/:userId/test', async (req, res) => {
+    const posts = await Post.find({}).populate(['comments'])
         
-        //loops through comments in every post and delete all user comments
-        const test = []
-
-        posts.forEach(post => {
-            post.comments.forEach( (com,x) => {
-                if(com.author._id == req.params.userId){
-                    console.log(x)
-                    console.log(com._id)
-                     post.comments.remove(com._id)
-                }
-            })    
-        })
+    //loops through comments in every post and delete all user comments
+    const test = [];
+    const test2 = [{}];
 
 
+
+    posts.forEach( async (post,x) => {
+        post.comments.forEach((com) => {
+            if(com.author._id == req.params.userId){
+                test.push(com._id)
+                // if(!test2.includes(com.post)){
+                    
+                //     
+                // }
+                !test2.includes(com.post) ? test2.push(com.post) : ''
+            } 
+        })       
+    })
+
+    console.log(test2)
+
+    // test2.forEach( async () => {
+    //     // let pos = await Post.findById(test2);
         
-        res.json(posts);
-    } catch (error) {
-        if (res.statusCode === 404) {
-            res.status(404).json({ error: error.message });
-        } else {
-            res.status(500).json({ error: error.message });
-        }
-    }
+    //     // test.forEach(() => {
+    //     //     console.log(pos)
+    //     //     // post.comments.remove({ _id: test });
+    //     // })
+    // })
+    // await post.save();  
+    
+    res.json(test);
 });
 
 // deletes the user 

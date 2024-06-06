@@ -45,7 +45,7 @@ const UserPage = (props) => {
         <main className={styles.container}>
             <PageTransition />
             <div className={styles.sidebar}> 
-                <SideBar posts={props.posts}/>
+                <SideBar posts={user.posts}/>
             </div>
                 <div className={`card bg-dark m-auto mt-2 ${styles.userInfo}`}>
                     <img src={user.image} className="card-img-top" alt="..." />
