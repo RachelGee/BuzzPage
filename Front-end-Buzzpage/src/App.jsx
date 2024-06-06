@@ -32,9 +32,6 @@ const App = () => {
   const [posts, setPosts] = useState([]);
   const [userPost, setUserPost] = useState([]);
 
-
-
-  
   useEffect(() => {
     const fetchAllPosts = async () => {
       const postsData = await postService.index();
@@ -88,7 +85,7 @@ const App = () => {
     } catch (error) {
       console.error('Failed to delete post', error);
     }
-        navigate(`/`)
+    navigate(`/`)
   }
 
 
