@@ -19,7 +19,7 @@ const postForm = (props) => {
     });
 
 
-    // //fetch the users post and store in post form
+    // fetch the users post and store in post form
     useEffect(() => {
         if (postId) {
             const fetchPost = async () => {
@@ -39,7 +39,6 @@ const postForm = (props) => {
             fetchPost();
         }
     }, [postId]);
-
 
     // create POST
     const handleChange = (evt) => {
