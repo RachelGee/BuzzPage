@@ -9,6 +9,7 @@ const UserPage = (props) => {
     //gets users id
     const { userId } = useParams()
     const [user, setUser] = useState(null)
+    const [isOpen, setIsOpen] = useState(false);
     const navigate = useNavigate()
 
     //gets the current users data 
@@ -19,6 +20,14 @@ const UserPage = (props) => {
         }
         fetchUser();
     }, []);
+
+   
+
+    const deleteMenu = (event) =>{
+        setIsOpen(!isOpen);
+    }
+
+   
 
     //show loading until its gets user
     if (!user) return (
@@ -34,52 +43,57 @@ const UserPage = (props) => {
 
     return (  
         <main className={styles.container}>
-            {/* <PageTransition /> */}
+            <PageTransition />
             <div className={styles.sidebar}> 
                 <SideBar posts={props.posts}/>
             </div>
-                <div className={styles.userInfo}>
-                <div className="card" >
+                <div className={`card bg-dark m-auto mt-2 ${styles.userInfo}`}>
                     <img src={user.image} className="card-img-top" alt="..." />
-                        <div className="card-body">
-                            <h4 className="card-text">{user.username}</h4>
-                        </div>
-                    </div> 
+                    <div className="card-body">
+                        <h1 className="card-text fw-bold fst-italic text-warning">{user.username}</h1>
+                    </div>
                 </div>
-                 <div className={styles.userBio}>
-                     <div className="card">
-                         <h5>name: {user.firstName} {user.lastName}</h5>
-                         <p className="card-text">bio: {user.bio}</p>
+                     <div className={`card  bg-dark m-auto text-warning mt-2 me-5 d-flex ${styles.userBio}`}>
+                         <h5 className="card-text">BEE: {user.firstName} {user.lastName}</h5>
+                         <p className="card-body">bio: {user.bio}</p>
                          {/* for later development/ only allow user to edit or delete their own page */}
                          {props.user._id !== userId ? (
                             ''
                         ) : (
                         <>
-                            <div className="row">
-                                <div className="col">
-                                    <button className="btn btn-warning"><Link to={`/users/profile/${userId}/edit`} style={{ textDecoration: 'none', color: 'black' }}>Edit</Link></button>
-                                </div>
-                                <div className="col">
-                                    <button className="btn btn-warning" onClick={() => props.handleDeleteUser(userId)}>Delete</button>
-                                </div>
-                            </div>
+                            
+                            {!isOpen && (
+                                       <div className="row">
+                                       <div className="col">
+                                           <button className="btn btn-warning"><Link to={`/users/profile/${userId}/edit`} style={{ textDecoration: 'none', color: 'black' }}>Edit</Link></button>
+                                       </div>
+                                       <div className="col">
+                                           <button className={`btn btn-warning ${styles.delete}`} onClick={deleteMenu}>Delete</button>  
+                                       </div>
+                                   </div>  
+                                    )}
+
+                            {isOpen && (
+                                            <div className={`border container-m h-75 w-75 text-warning d-flex flex-column `} >are you sure
+                                                <button className="btn btn-warning" onClick={() => props.handleDeleteUser(userId)}>Delete</button>
+                                                <button  className={`btn-close ${styles.cancel}`} onClick={deleteMenu}/>
+                                        </div> 
+                                    )}
                         </>
                         )}
                      </div>
-                 </div>
-            <div className={styles.userPost}>
+            <div className={`d-flex  flex-wrap ${styles.userPost}`}>
                 {user.posts.length === 0 ? 'no posts': user.posts.map((post) =>(
-                    <div className={styles.post} key={post._id}>
-                        <div className="card bg-dark" >
+                    <Link to={`/posts/${post._id}`} style={{ textDecoration: 'none' }} key={post._id}><div >
+                        <div className={`card p-2 m-2 bg-dark  ${styles.postContainer} `}>
                             <div>
-                                <Link className="card-title text-warning" to={`/posts/${post._id}`} style={{ textDecoration: 'none' }}><h4>{post.title}</h4></Link>
-                                  <h6 className="card-header text-warning">{post.category}</h6>
+                                <h4 className="card-title text-warning">{post.title}</h4>
+                                <h6 className="card-header text-warning">{post.category}</h6>
                             </div>
                             <p className="card-text text-warning ">{post.text}</p>
                             {!post.image ? '': <img src={post.image} className={styles.image} alt='...'/>}
-                            {!post.like ? '' : <button type="button" className="btn btn-outline-warning" > {post.like}</button>}
-                            </div>
                         </div>
+                    </div></Link>
                     ))}
                 </div>
         </main>

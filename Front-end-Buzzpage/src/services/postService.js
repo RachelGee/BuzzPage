@@ -63,7 +63,7 @@ const create = async (photoData=null,postFormData) => {
 //update a users post
 const update = async (postId, postFormData) => {
     try {
-      const res = await fetch(`${BACKEND_URL}/${postId}`, {
+      const res = await fetch(`${BACKEND_URL}/posts/${postId}`, {
         method: 'PUT',
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -71,6 +71,8 @@ const update = async (postId, postFormData) => {
         },
         body: JSON.stringify(postFormData),
       });
+      return res.json();
+      
     } catch (error) {
       console.log(error);
     }

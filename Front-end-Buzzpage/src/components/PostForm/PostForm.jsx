@@ -1,20 +1,45 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import * as postService from '../../services/postService'
 import PageTransition from '../PageTransition/PageTransition';
-
+import { AuthedUserContext } from '../../App';
 
 const postForm = (props) => {
     const fileInputRef = useRef();
     const { userId } = useParams();
+    const { postId } = useParams();
+    const currentUser = useContext(AuthedUserContext);
     const [formData, setFormData] = useState({
-        author: userId,
+        author: currentUser ? currentUser._id : "",
         title: '',
         text: '',
         photo: '',
         imageTitle: "",
         category: 'News',
     });
+
+
+    // //fetch the users post and store in post form
+    useEffect(() => {
+        if (postId) {
+            const fetchPost = async () => {
+                try {
+                    const post = await postService.show(postId);
+                    setFormData({
+                        author: post.author._id,
+                        title: post.title,
+                        text: post.text,
+                        image: post.image,
+                        category: post.category,
+                    });
+                } catch (error) {
+                    console.error('failed to fetch post', error);
+                }
+            };
+            fetchPost();
+        }
+    }, [postId]);
+
 
     // create POST
     const handleChange = (evt) => {
@@ -32,7 +57,7 @@ const postForm = (props) => {
         evt.preventDefault();
         console.log(formData);
         if (postId) {
-            // props.handleUpdatePost(postId, formData);
+            props.handleUpdatePost(postId, formData);
         } else {
             let photoData;
             formData.photo = '';
@@ -45,13 +70,15 @@ const postForm = (props) => {
             props.handleAddPost(photoData, formData);
         }
     };
-    const postId = null
+
     return (
         <>
             {/* <PageTransition /> */}
             <img src={formData.image} alt="profilePic" />
             <form onSubmit={handleSubmit}>
-                <h1>{postId ? 'New Post' : 'New Post'}</h1>
+                <h1>{postId ? 'Edit Post' : 'New Post'}</h1>
+
+
                 <label htmlFor="title">Title</label>
                 <input
                     required
@@ -97,6 +124,7 @@ const postForm = (props) => {
                     value={formData.category}
                     onChange={handleChange}
                 >
+                    <option value="Lifestyle">Lifestyle</option>
                     <option value="News">News</option>
                     <option value="Sports">Sports</option>
                     <option value="Games">Games</option>
