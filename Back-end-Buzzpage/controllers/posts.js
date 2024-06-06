@@ -19,24 +19,20 @@ router.post('/photoUpload',upload.single('photo'), async (req, res) => {
   console.log("req",req);
     try {
       if (req.file) {
-          // updating the filename?
-          console.log("filename: ", req.file.originalname);
+          // updating the filename
           const regex = new RegExp(/[^a-zA-Z0-9\:]*/g);   
           const updatedName = req.file.originalname.replaceAll(regex, "");
-          console.log("updatename: ", updatedName);
           req.file.originalname = updatedName;
 
           // uploading to aws
           const uploadedPhoto = await uploadFile(req.file);
 
           // returning the link to aws photo link
-          console.log('aws link',uploadedPhoto);
           res.json(uploadedPhoto);
       } else {
           throw new Error('Must select a file');
       }
   } catch (err) {
-      console.log(err)
       res.status(400).json(err.message);
   }
 });
