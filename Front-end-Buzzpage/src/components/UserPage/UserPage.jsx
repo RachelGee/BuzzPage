@@ -27,7 +27,9 @@ const UserPage = (props) => {
         setIsOpen(!isOpen);
     }
 
-   
+    const handleEdit = (e) => {
+        navigate(`/users/${user._id}/posts/new`)
+    }
 
     //show loading until its gets user
     if (!user) return (
@@ -81,11 +83,17 @@ const UserPage = (props) => {
                 )}
             </div>
             <div className={`d-flex  flex-wrap ${styles.userPost}`}>
-                {user.posts.length === 0 ? 'no posts'
-                
-                : 
-                
-                (user.posts.map((post) =>(
+                {user.posts.length === 0 ? (
+                    <div className="card justify-content-center" >
+                            <div className="card-body">
+                            <h5 className="card-title">NO POST</h5>
+                            <h6 className="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
+                            <p className="card-text">You need to get buzzing little bee</p>
+                            <button className="btn btn-warning" onClick={handleEdit}>New Post</button>
+                        </div>
+                    </div>
+                ) : (
+                    user.posts.map((post) =>(
                     <Link to={`/posts/${post._id}`} style={{ textDecoration: 'none' }} key={post._id}><div >
                         <div className={`card p-2 m-2 bg-dark border-warning  ${styles.postContainer} `}>
                             <div>
@@ -93,7 +101,7 @@ const UserPage = (props) => {
                                 <h6 className="card-header text-warning">{post.category}</h6>
                             </div>
                             <p className="card-text text-warning ">{post.text}</p>
-                            {!post.image ? '': <img src={post.image} className={styles.image} alt='...'/>}
+                            {post.photo ? <img src={post.photo} className={styles.image} alt='...'/> : ""}
                         </div>
                     </div></Link>
                     )))}
