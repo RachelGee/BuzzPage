@@ -113,8 +113,8 @@ const createComment = async (postId, commentFormData) => {
 //update comment service
 const updateComment = async (postId,commentId, commentFormData) => {
   try {
-    const res = await fetch(`${BASE_URL}/${postId}/comments/${commentId}`, {
-      method: 'Put',
+    const res = await fetch(`${BACKEND_URL}/posts/${postId}/comments/${commentId}`, {
+      method: 'PUT',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
         'Content-Type': 'application/json',
@@ -130,7 +130,7 @@ const updateComment = async (postId,commentId, commentFormData) => {
 //delete comment service
 const deleteComment = async (postId, commentId,) => {
   try {
-    const res = await fetch(`${BASE_URL}/${postId}/comments/${commentId}`, {
+    const res = await fetch(`${BACKEND_URL}/posts/${postId}/comments/${commentId}`, {
       method: 'Delete',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
