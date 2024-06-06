@@ -18,7 +18,7 @@
 .links {
     display: flex;
     justify-content: center;
-    align-items: baseline;
+    align-items: center;
     gap: 10px;
     margin-right: 10px;
 }
@@ -52,4 +52,9 @@
 .postTitle{
     display: flex;
     gap: 5px;
+}
+
+.profile{
+    width: 75px;
+    height: 75px;
 }

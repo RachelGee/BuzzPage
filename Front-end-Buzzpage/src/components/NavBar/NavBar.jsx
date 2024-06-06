@@ -1,8 +1,11 @@
 import Logo from '../../assets/images/logo.png'
 import { Link, useNavigate } from 'react-router-dom';
 import styles from "./NavBar.module.css"
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { AuthedUserContext } from '../../App';
+import NewsSlider from '../NewsSlider/NewsSlider';
+import { show } from '../../services/profileService';
+
 
 
 
@@ -23,6 +26,21 @@ const NavBar = (props) => {
     const filteredData = props.posts.filter(post =>
         post.title.toLowerCase().includes(searchQuery.toLowerCase())
     );
+
+
+    //gets users id
+    const [image, setImage] = useState(null)
+
+    //gets the current users data 
+    useEffect(() => {
+        const fetchUser = async () => {
+            const userData = await show(props.user._id)
+            setImage(userData.user.image);
+        }
+        fetchUser();
+    }, []);
+
+
     return (
         <>
             {props.user ? (
@@ -36,9 +54,8 @@ const NavBar = (props) => {
                         <img src={Logo} width={75} alt="" />
                         <div className="display-4">BuzzPage</div>
                     </Link>
-
                     <div className={styles.links}>
-                        <Link className='h2' reloadDocument to={`/users/profile/${props.user._id}`}>Hello {props.user.username}</Link>
+                        <Link className='h2' reloadDocument to={`/users/profile/${props.user._id}`}><img src={image} alt="" className={`img-fluid ${styles.profile}`} />Hello {props.user.username}</Link>
                         <Link className='h2' to='users/signin' onClick={props.handleSignout}>Sign Out</Link>
                     </div>
                 </nav>
@@ -61,12 +78,15 @@ const NavBar = (props) => {
             {/* Side bar */}
 
             <div className="offcanvas offcanvas-start text-bg-dark" data-bs-scroll="true" tabIndex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
-                <div className="offcanvas-header">
+                <div className="offcanvas-header border-bottom mx-2">
                     <img src={Logo} width={100} alt="" />
                     <h5 className="offcanvas-title h2" id="offcanvasWithBothOptionsLabel">BuzzPage</h5>
                     <button type="button" className="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div className="offcanvas-body">
+                    <p className='text-center h3 mb-3'>Daily News</p>
+
+                    <NewsSlider />
                     <button data-bs-dismiss="offcanvas" className={`btn mb-3 ${styles.createPostBtn}`} onClick={handleClick}>
                         Create New Post
                     </button>
@@ -78,7 +98,7 @@ const NavBar = (props) => {
                         value={searchQuery}
                         onChange={handleChange}
                     />
-                    <h1 className='text-md-center mb-3'>All Posts</h1>
+                    <p className='text-center h3 mb-3'>All Posts</p>
                     {filteredData.length > 0 ? filteredData.map((post, index) => {
                         return (
                             <div key={index} className='p-3'>

@@ -4,6 +4,7 @@
 
 .button {
     background-color: #F4BE1E;
+    border: none;
 }
 
 .button:hover {
