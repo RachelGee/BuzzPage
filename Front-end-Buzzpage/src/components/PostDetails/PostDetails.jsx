@@ -61,8 +61,8 @@ const PostDetails = (props) => {
 
     return (
         <>
-            
-            <div className="card" style={{width: "18rem"}}>
+            <div className={styles.container}>
+            <div className="card" style={{width: "30rem"}}>
                 <img src={post.photo} className="card-img-top" alt="..."/>
                 <div className="card-body">
                     <h5 className="card-title">{post.title}</h5>
@@ -130,6 +130,7 @@ const PostDetails = (props) => {
                     <button className="btn btn-secondary" onClick={handleClick}>Back to the Hive</button>
                 </div>
             </div>
+        </div>
         </>
     );
 };
