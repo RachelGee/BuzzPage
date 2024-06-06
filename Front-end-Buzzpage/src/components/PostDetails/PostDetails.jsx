@@ -62,7 +62,34 @@ const PostDetails = (props) => {
     return (
         <>
             
-            <hr />
+            <div className="card" style={{width: "18rem"}}>
+                <img src={post.photo} className="card-img-top" alt="..."/>
+                <div className="card-body">
+                    <h5 className="card-title">{post.title}</h5>
+                    <h6 className="card-subtitle mb-2 text-body-secondary">{post.author.username} says:</h6>
+                    <p className="card-text">{post.text}</p>
+
+                    {currentUser && currentUser._id === post.author._id && (
+                        <>
+                            <button className= "btn btn-secondary">
+                                <Link className={styles.link} to={`/users/${currentUser._id}/posts/${postId}/edit`} style={{ textDecoration: 'none', color: 'white' }}>Edit</Link>
+                            </button>
+                            <button className="btn btn-secondary" onClick={() => props.handleDeletePost(post._id)}>Delete</button>
+                        </>
+                    )}
+
+
+                    <p class="d-inline-flex gap-1">
+                        
+                        <button className="btn btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                            Comments
+                        </button>
+                        </p>
+
+                        <div class="collapse" id="collapseExample">
+                        <div class="card card-body">
+                            
+
             <div className="comment-section">
                 <h1>Comments</h1>
                 <div className="comments">
@@ -96,29 +123,9 @@ const PostDetails = (props) => {
                 <Comment handleAddComment={handleAddComment} postId={post._id} />
             </div>
             <hr />
-
-
-
-            <div className="card" style={{width: "18rem"}}>
-                <img src={post.photo} className="card-img-top" alt="..."/>
-                <div className="card-body">
-                    <h5 className="card-title">{post.title}</h5>
-                    <h6 className="card-subtitle mb-2 text-body-secondary">{post.author.username} says:</h6>
-                    <p className="card-text">{post.text}</p>
-
-                    {currentUser && currentUser._id === post.author._id && (
-                        <>
-                            <button className= "btn btn-secondary">
-                                <Link className={styles.link} to={`/users/${currentUser._id}/posts/${postId}/edit`} style={{ textDecoration: 'none', color: 'white' }}>Edit</Link>
-                            </button>
-                            <button className="btn btn-secondary" onClick={() => props.handleDeletePost(post._id)}>Delete</button>
-                        </>
-                    )}
-                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">An item</li>
-                        <li class="list-group-item">A second item</li>
-                        <li class="list-group-item">A third item</li>
-                    </ul>
+                        </div>
+                        </div>
+                        <hr />
 
                     <button className="btn btn-secondary" onClick={handleClick}>Back to the Hive</button>
                 </div>
