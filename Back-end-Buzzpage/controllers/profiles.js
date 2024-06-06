@@ -50,6 +50,27 @@ router.put('/:userId', verifyToken, async (req, res) => {
 });
 
 
+/*----------------------test route--------------------- */
+
+// test on deleting all users comments
+router.delete('/:userId/test', async (req, res) => {
+    const posts = await Post.find({}).populate('comments')
+        
+    //loops through comments in every post and delete all user comments
+
+    posts.forEach( async (post,x) => {
+        post.comments.forEach((com) => {
+            if(com.author._id == req.params.userId){
+                post.comments.remove({ _id: com._id });
+            } 
+        })   
+        await post.save();      
+    })
+    
+    res.json(test);
+});
+
+/*--------------------------------------------------------- */
 
 // deletes the user 
 router.delete('/:userId', verifyToken, async (req, res) => {
@@ -66,9 +87,11 @@ router.delete('/:userId', verifyToken, async (req, res) => {
         }
 
         //gets all users posts
-        const posts = await Post.find({}).populate('author').populate('comments')
+        const posts = await Post.find({})
         //filter all users posts to geet current user posts
         const delPost = await posts.filter((po) => po.author._id == req.params.userId)
+
+        
 
         //deletes all posts from current user
         delPost.forEach( async (post) => {
