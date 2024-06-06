@@ -49,12 +49,8 @@
 
 .popup {
     position: absolute;
-    grid-column: 4 / 6;
-    grid-row: 1;
     background-color: #f9f9f9;
     min-width: 120px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
 } 
 
 /* ----------------Bottom pfofile------------------ */
@@ -65,17 +61,16 @@
     grid-row: 2;
     border-top: 2px solid black;
     max-height: 62vh;
+    min-width: 600px;
     overflow-y: scroll;
 }
 
 .postContainer{
     min-height: 300px;
-    max-height: 360px;    
+    max-height: 360px;
+    min-width: 350px;   
+    max-width: 350px;  
     aspect-ratio: 1/1;
-}
-
-.userPost>*{
-    flex: 1 1;
 }
 
 .image{
