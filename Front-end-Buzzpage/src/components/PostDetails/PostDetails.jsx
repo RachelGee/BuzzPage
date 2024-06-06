@@ -59,80 +59,131 @@ const PostDetails = (props) => {
         navigate(`/`);
     }
 
+    const handleLikeClick = async (arg) => {
+        let likes;
+        if (arg === "like") {
+            likes = post.like + 1;
+        } else {
+            likes = post.like - 1;
+        }
+        setPost({ ...post, like: likes });
+        const updatedPost = await postService.update(post._id, { like: likes });
+        setPost(updatedPost);
+    };
+
     return (
         <>
-            <div className={styles.container}>
-            <div className="card" style={{width: "30rem"}}>
-                <img src={post.photo} className="card-img-top" alt="..."/>
-                <div className="card-body">
-                    <h5 className="card-title">{post.title}</h5>
-                    <h6 className="card-subtitle mb-2 text-body-secondary">{post.author.username} says:</h6>
-                    <p className="card-text">{post.text}</p>
-
-                    {currentUser && currentUser._id === post.author._id && (
-                        <>
-                            <button className= "btn btn-secondary">
-                                <Link className={styles.link} to={`/users/${currentUser._id}/posts/${postId}/edit`} style={{ textDecoration: 'none', color: 'white' }}>Edit</Link>
-                            </button>
-                            <button className="btn btn-secondary" onClick={() => props.handleDeletePost(post._id)}>Delete</button>
-                        </>
-                    )}
-
-
-                    <p class="d-inline-flex gap-1">
-                        
-                        <button className="btn btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                            Comments
-                        </button>
-                        </p>
-
-                        <div class="collapse" id="collapseExample">
-                        <div class="card card-body">
-                            
-
-            <div className="comment-section">
-                <h1>Comments</h1>
-                <div className="comments">
-                    <ol>
-                        {post.comments && post.comments.map((comment, index) => (
-                            <li key={index}>
-                                {editCommentId === comment._id ? (
-                                    <>
-                                        <input
-                                            type="text"
-                                            value={editedCommentText.text}
-                                            onChange={(e) => setEditedCommentText({ text: e.target.value })}
-                                        />
-                                        <button onClick={() => handleSaveEdit(comment._id)}>Save</button>
-                                    </>
-                                ) : (
-                                    <>
-                                        {comment.text}
-                                        {currentUser && currentUser._id === post.author._id && (
-                                            <>
-                                                <button onClick={() => handleToggleEdit(comment._id, comment.text)}>Edit</button>
-                                                <button onClick={() => handleDeleteComment(comment._id)}>Delete</button>
-                                            </>
-                                        )}
-                                    </>
-                                )}
-                            </li>
-                        ))}
-                    </ol>
-                </div>
-                <Comment handleAddComment={handleAddComment} postId={post._id} />
-            </div>
+            <button onClick={() => handleLikeClick("like")}>Like</button>
+            {post.like}
+            <button onClick={() => handleLikeClick("dislike")}>Dislike</button>
             <hr />
+            <div className={styles.container}>
+                <div className="card" style={{ width: "30rem" }}>
+                    <img src={post.photo} className="card-img-top" alt="..." />
+                    <div className="card-body">
+                        <h5 className="card-title">{post.title}</h5>
+                        <h6 className="card-subtitle mb-2 text-body-secondary">
+                            {post.author.username} says:
+                        </h6>
+                        <p className="card-text">{post.text}</p>
+    
+                        {currentUser && currentUser._id === post.author._id && (
+                            <>
+                                <button className="btn btn-secondary">
+                                    <Link
+                                        className={styles.link}
+                                        to={`/users/${currentUser._id}/posts/${postId}/edit`}
+                                        style={{ textDecoration: 'none', color: 'white' }}
+                                    >
+                                        Edit
+                                    </Link>
+                                </button>
+                                <button
+                                    className="btn btn-secondary"
+                                    onClick={() => props.handleDeletePost(post._id)}
+                                >
+                                    Delete
+                                </button>
+                            </>
+                        )}
+    
+                        <div className="d-inline-flex gap-1">
+                            <button
+                                className="btn btn-secondary"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#collapseExample"
+                                aria-expanded="false"
+                                aria-controls="collapseExample"
+                            >
+                                Comments
+                            </button>
+                            <button className="btn btn-secondary" onClick={handleClick}>Back to the Hive
+                            </button>
                         </div>
+    
+                        <div className="collapse" id="collapseExample">
+                            <div className="card card-body">
+                                <div className="comment-section">
+                                    <h1>Comments</h1>
+                                    <div className="comments">
+                                        <ol>
+                                            {post.comments &&
+                                                post.comments.map((comment, index) => (
+                                                    <li key={index}>
+                                                        {editCommentId === comment._id ? (
+                                                            <>
+                                                                <input
+                                                                    type="text"
+                                                                    value={editedCommentText.text}
+                                                                    onChange={(e) =>
+                                                                        setEditedCommentText({ text: e.target.value })
+                                                                    }
+                                                                />
+                                                                <button onClick={() => handleSaveEdit(comment._id)}>
+                                                                    Save
+                                                                </button>
+                                                            </>
+                                                        ) : (
+                                                            <>
+                                                                {comment.text}
+                                                                {currentUser && currentUser._id === post.author._id && (
+                                                                    <>
+                                                                        <button
+                                                                            onClick={() =>
+                                                                                handleToggleEdit(comment._id, comment.text)
+                                                                            }
+                                                                        >
+                                                                            Edit
+                                                                        </button>
+                                                                        <button
+                                                                            onClick={() =>
+                                                                                handleDeleteComment(comment._id)
+                                                                            }
+                                                                        >
+                                                                            Delete
+                                                                        </button>
+                                                                    </>
+                                                                )}
+                                                            </>
+                                                        )}
+                                                    </li>
+                                                ))}
+                                        </ol>
+                                    </div>
+                                    <Comment handleAddComment={handleAddComment} postId={post._id} />
+                                </div>
+                                <hr />
+                            </div>
                         </div>
                         <hr />
-
-                    <button className="btn btn-secondary" onClick={handleClick}>Back to the Hive</button>
+                    </div>
                 </div>
+    
+
             </div>
-        </div>
         </>
     );
 };
 
-export default PostDetails;
+export default PostDetails; 

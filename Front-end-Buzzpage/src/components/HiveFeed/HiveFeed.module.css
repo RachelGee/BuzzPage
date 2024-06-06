@@ -1,5 +1,7 @@
-.container {
+.container{
     display: flex;
+    justify-content: center;
+    padding-block: 70px;
 }
 
 .sidebar{
