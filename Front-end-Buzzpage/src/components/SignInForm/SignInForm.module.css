@@ -3,36 +3,45 @@
     margin-top: 50px;
 }
 
-.logoImage{
+.logoImage {
     display: flex;
     flex-direction: column;
     align-items: center;
     flex: 1;
 }
 
-.formContainer{
+.formContainer {
     flex: 1;
     min-height: 100vh;
     margin: 30px;
 }
 
-.signup{
+.signup {
     display: flex;
     gap: 5px;
 }
 
-.form{
+.form {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 10px;
-    min-height: 50%;
-    width: 50%;
-    border-radius: 5px;
+    border-radius: 2rem;
+    background-color: black;
 }
 
-.img{
-    width: 100px;
+.img {
+    width: 150px;
     margin: 0 auto;
-    margin-top: -100px;
+    box-shadow: #F4BE1E;
+    box-shadow: 0 5px 10px #F4BE1E;
+    border-radius: 100%;
+
+}
+
+.button:disabled,
+.button,
+.button:hover {
+    background-color: #F4BE1E;
+    border: none;
+    color: white;
 }
