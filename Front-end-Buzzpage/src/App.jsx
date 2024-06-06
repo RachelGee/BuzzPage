@@ -48,8 +48,8 @@ const App = () => {
     setUser(null);
     navigate('/users/signin');
   }
-  const handleAddPost = async (postData) => {
-    const newPost = await postService.create(postData)
+  const handleAddPost = async (photoData,postData) => {
+    const newPost = await postService.create(photoData,postData);
     setPosts([...posts, newPost])
     navigate('/')
   }

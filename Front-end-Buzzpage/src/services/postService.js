@@ -26,15 +26,33 @@ const show = async (postId) => {
 };
 
 //create a new post 
-const create = async (postFormData) => {
+const create = async (photoData=null,postFormData) => {
     try {
+      let uploadedPhoto;
+      if(photoData){
+        const photoRes = await fetch(`${BACKEND_URL}/posts/photoUpload`, {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+          body: photoData ,
+        });
+        // actual url for the aws photo link
+        uploadedPhoto = await photoRes.json(); 
+      }
+      // console.log(postFormData);
+
+      // adding url to the post.photo if it exist or leave blank 
+      postFormData.photo = uploadedPhoto ? uploadedPhoto : "";
+
+      // saving into mongodb
       const res = await fetch(`${BACKEND_URL}/posts`, {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(postFormData),
+        body: JSON.stringify(postFormData) ,
       });
       return res.json();
     } catch (error) {

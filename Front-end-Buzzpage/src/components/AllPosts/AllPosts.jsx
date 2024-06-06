@@ -13,7 +13,7 @@ const AllPosts = (props) => {
                     <div key={index}>
                         <Link to={`/posts/${post._id}`}>{post.title}</Link>
                         <h2>{post.author.username} says: {post.text}</h2>
-                        <h2>{post.image}</h2>
+                        {post.photo !== "" ? <img src={post.photo} /> : ""}
                         <hr />
                     </div>
                 )
