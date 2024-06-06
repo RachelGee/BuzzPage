@@ -29,7 +29,7 @@ const Comment = (props) => {
                 value={formData.text}
                 onChange={handleChange}
             />
-            <button type="submit">Publish</button>
+            <button className="btn btn-secondary" type="submit">Publish</button>
         </form>
     );
 }
