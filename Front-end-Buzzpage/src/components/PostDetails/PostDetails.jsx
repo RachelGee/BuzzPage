@@ -59,9 +59,27 @@ const PostDetails = (props) => {
         navigate(`/`);
     }
 
+    const handleLikeClick = async (arg) => {
+        let likes;
+        if (arg === "like") {
+            likes = post.like + 1;
+        } else {
+            likes = post.like - 1;
+        }
+        setPost({ ...post, like: likes });
+        const updatedPost = await postService.update(post._id, { like: likes });
+        setPost(updatedPost);
+    };
+
     return (
         <>
-            
+            <button onClick={() => handleLikeClick("like")}>
+                Like
+            </button>
+            {post.like}
+            <button onClick={() => handleLikeClick("dislike")}>
+                Dislike
+            </button>
             <hr />
             <div className="comment-section">
                 <h1>Comments</h1>
@@ -99,8 +117,8 @@ const PostDetails = (props) => {
 
 
 
-            <div className="card" style={{width: "18rem"}}>
-                <img src={post.photo} className="card-img-top" alt="..."/>
+            <div className="card" style={{ width: "18rem" }}>
+                <img src={post.photo} className="card-img-top" alt="..." />
                 <div className="card-body">
                     <h5 className="card-title">{post.title}</h5>
                     <h6 className="card-subtitle mb-2 text-body-secondary">{post.author.username} says:</h6>
@@ -108,13 +126,13 @@ const PostDetails = (props) => {
 
                     {currentUser && currentUser._id === post.author._id && (
                         <>
-                            <button className= "btn btn-secondary">
+                            <button className="btn btn-secondary">
                                 <Link className={styles.link} to={`/users/${currentUser._id}/posts/${postId}/edit`} style={{ textDecoration: 'none', color: 'white' }}>Edit</Link>
                             </button>
                             <button className="btn btn-secondary" onClick={() => props.handleDeletePost(post._id)}>Delete</button>
                         </>
                     )}
-                     <ul class="list-group list-group-flush">
+                    <ul class="list-group list-group-flush">
                         <li class="list-group-item">An item</li>
                         <li class="list-group-item">A second item</li>
                         <li class="list-group-item">A third item</li>
