@@ -27,9 +27,6 @@ const postSchema = new mongoose.Schema(
         type: String,
         default:""
       },
-      imageTitle:{
-        type: String
-      },
       category: {
         type: String,
         required: true,

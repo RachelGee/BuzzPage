@@ -42,17 +42,15 @@ const SignInForm = (props) => {
                 <div className={styles.logoImage}>
                     <p className='display-3'>What's all the BUZZ about?</p>
                     <img src={Logo} alt="" />
-
                 </div>
                 <div className={styles.formContainer}>
-                    <form className={`border container-m p-5 h-75 ${styles.form}`} onSubmit={handleSubmit}>
-                        <img src={LoginSignup} className={styles.img} alt="" />
+                    <form className={`border container-m p-5 h-75 text-light w-50 ${styles.form}`} onSubmit={handleSubmit}>
+                        <img src={Logo} className={`form-control ${styles.img}`} alt="" />
                         <h1>Login</h1>
                         <div className={styles.signup}>
                             <p>Doesn't have an account yet?</p>
-                            <a href='' onClick={() => navigate('/users/signup')}>Sign Up</a>
+                            <a className='text-light' href='' onClick={() => navigate('/users/signup')}>Sign Up</a>
                         </div>
-                        <p>{message}</p>
                         <div className="mb-3">
                             <label htmlFor="username" className="form-label">Username</label>
                             <input type="text" className="form-control" id="username" name="username" value={username} onChange={handleChange} />
@@ -62,8 +60,9 @@ const SignInForm = (props) => {
                             <input type="password" name="password" className="form-control" id="password" value={password} onChange={handleChange} autoComplete='off' />
                             <div className="form-text">We'll never share your password with anyone else.</div>
                         </div>
-                        <button type="submit" className="btn btn-primary w-100">Login</button>
+                        <button type="submit" className={`btn w-100 mb-2 form-control ${styles.button}`}>Login</button>
                     </form>
+                    <p>{message}</p>
                 </div>
             </div>
         </>

@@ -48,15 +48,14 @@ const SignUpForm = (props) => {
 
                 </div>
                 <div className={styles.formContainer}>
-                    <form className={`border container-m p-5 h-75 ${styles.form}`} onSubmit={handleSubmit}>
-                        <img src={LoginSignup} className={styles.img} alt="" />
+                    <form className={`border container-m p-5 h-75 text-light w-50 ${styles.form}`} onSubmit={handleSubmit}>
+                        <img src={Logo} className={`form-control ${styles.img}`} alt="" />
                         <h1>Sign Up</h1>
                         <div className={styles.signup}>
                             <p>Have an account already?</p>
-                            <a href='' onClick={() => navigate('/users/signin')}>Login here</a>
+                            <a href='' className='text-light' onClick={() => navigate('/users/signin')}>Login here</a>
                         </div>
-                        <p>{message}</p>
-                        <div className="row">
+                        <div className="row mb-2">
                             <div className="col">
                                 <label
                                     htmlFor="firstName"
@@ -126,8 +125,6 @@ const SignUpForm = (props) => {
                                 onChange={handleChange}
                                 autoComplete='off'
                             />
-
-                            <div className="form-text">We'll never share your password with anyone else.</div>
                         </div>
 
                         <div className="mb-3">
@@ -147,8 +144,9 @@ const SignUpForm = (props) => {
                                 autoComplete='off'
                             />
                         </div>
-                        <button type="submit" disabled={isFormInvalid()} className={`btn btn-primary w-100 ${styles.button}`}>Sign Up</button>
+                        <button type="submit" disabled={isFormInvalid()} className={`btn w-100 my-3 form-control ${styles.button}`}>Sign Up</button>
                     </form>
+                    <p>{message}</p>
                 </div>
             </div>
         </>
