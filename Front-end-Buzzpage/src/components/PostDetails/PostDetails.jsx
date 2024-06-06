@@ -4,6 +4,7 @@ import * as postService from '../../services/postService';
 import { Link } from "react-router-dom";
 import { AuthedUserContext } from '../../App';
 import Comment from '../Comment/Comment';
+import styles from "./PostDetails.module.css"
 
 const PostDetails = (props) => {
     const { postId } = useParams();
@@ -60,17 +61,7 @@ const PostDetails = (props) => {
 
     return (
         <>
-            <h1>{post.title}</h1>
-            <h2>{post.author.username} says: {post.text}</h2>
-            <h2>{post.image}</h2>
-            {currentUser && currentUser._id === post.author._id && (
-                <>
-                    <button>
-                        <Link to={`/users/${currentUser._id}/posts/${postId}/edit`} style={{ textDecoration: 'none', color: 'black' }}>Edit</Link>
-                    </button>
-                    <button onClick={() => props.handleDeletePost(post._id)}>Delete</button>
-                </>
-            )}
+            
             <hr />
             <div className="comment-section">
                 <h1>Comments</h1>
@@ -105,7 +96,33 @@ const PostDetails = (props) => {
                 <Comment handleAddComment={handleAddComment} postId={post._id} />
             </div>
             <hr />
-            <button onClick={handleClick}>Back to the Hive</button>
+
+
+
+            <div className="card" style={{width: "18rem"}}>
+                <img src={post.photo} className="card-img-top" alt="..."/>
+                <div className="card-body">
+                    <h5 className="card-title">{post.title}</h5>
+                    <h6 className="card-subtitle mb-2 text-body-secondary">{post.author.username} says:</h6>
+                    <p className="card-text">{post.text}</p>
+
+                    {currentUser && currentUser._id === post.author._id && (
+                        <>
+                            <button className= "btn btn-secondary">
+                                <Link className={styles.link} to={`/users/${currentUser._id}/posts/${postId}/edit`} style={{ textDecoration: 'none', color: 'white' }}>Edit</Link>
+                            </button>
+                            <button className="btn btn-secondary" onClick={() => props.handleDeletePost(post._id)}>Delete</button>
+                        </>
+                    )}
+                     <ul class="list-group list-group-flush">
+                        <li class="list-group-item">An item</li>
+                        <li class="list-group-item">A second item</li>
+                        <li class="list-group-item">A third item</li>
+                    </ul>
+
+                    <button className="btn btn-secondary" onClick={handleClick}>Back to the Hive</button>
+                </div>
+            </div>
         </>
     );
 };
