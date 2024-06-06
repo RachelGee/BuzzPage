@@ -9,6 +9,10 @@
     min-height: 100vh;
 }
 
+.pictureFrame{
+    display: flex;
+}
+
 .picture{
     background-size: cover;
     width: 30%;

@@ -45,7 +45,7 @@ const UserPage = (props) => {
         <main className={styles.container}>
             <PageTransition />
             <div className={styles.sidebar}> 
-                <SideBar posts={user.posts}/>
+                <SideBar posts={user.posts} user={user}/>
             </div>
                 <div className={`card bg-dark m-auto mt-2 ${styles.userInfo}`}>
                     <img src={user.image} className="card-img-top" alt="..." />
@@ -61,7 +61,6 @@ const UserPage = (props) => {
                             ''
                         ) : (
                         <>
-                            
                             {!isOpen && (
                                        <div className="row">
                                        <div className="col">
@@ -72,7 +71,6 @@ const UserPage = (props) => {
                                        </div>
                                    </div>  
                                     )}
-
                             {isOpen && (
                                             <div className={`border container-m h-75 w-75 text-warning d-flex flex-column `} >are you sure
                                                 <button className="btn btn-warning" onClick={() => props.handleDeleteUser(userId)}>Delete</button>

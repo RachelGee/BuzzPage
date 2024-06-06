@@ -48,7 +48,8 @@ const UserForm = (props) => {
             <div className={styles.container} >
                 <div className={styles.form}>
                     <form onSubmit={handleSubmit} className="card bg-dark p-5">
-                        <div>
+                        <div className="form-text text-warning text-center fs-1">Your page is buzzing for a change</div>
+                        <div className={`mt-3 mb-4  ${styles.pictureFrame}`}>
                             <label htmlFor="picture" ></label>
                             <select className={styles.picture} name="image" id="picture" defaultValue={formData.image} onChange={handleChange}>
                                 <option className={styles.d1} value={default1}>yellow</option>
@@ -92,11 +93,15 @@ const UserForm = (props) => {
                                 value={formData.bio}
                                 onChange={handleChange}
                             />
+                            
                         </div>
 
-                        <button type='submit' className="btn btn-warning">Submit info</button>
+                        <button type='submit' className="btn btn-warning">Edit info</button>
+                        <div className='d-flex align-self-center mt-3'>
+                            <button onClick={handleBack} className="btn-close bg-warning " />
+                        </div>
                     </form>
-                    <button onClick={handleBack} className="btn-close" />
+                    
                 </div>
             </div>
         </>

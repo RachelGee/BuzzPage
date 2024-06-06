@@ -49,43 +49,28 @@ router.put('/:userId', verifyToken, async (req, res) => {
     }
 });
 
+
+/*----------------------test route--------------------- */
+
 // test on deleting all users comments
 router.delete('/:userId/test', async (req, res) => {
-    const posts = await Post.find({}).populate(['comments'])
+    const posts = await Post.find({}).populate('comments')
         
     //loops through comments in every post and delete all user comments
-    const test = [];
-    const test2 = [{}];
-
-
 
     posts.forEach( async (post,x) => {
         post.comments.forEach((com) => {
             if(com.author._id == req.params.userId){
-                test.push(com._id)
-                // if(!test2.includes(com.post)){
-                    
-                //     
-                // }
-                !test2.includes(com.post) ? test2.push(com.post) : ''
+                post.comments.remove({ _id: com._id });
             } 
-        })       
+        })   
+        await post.save();      
     })
-
-    console.log(test2)
-
-    // test2.forEach( async () => {
-    //     // let pos = await Post.findById(test2);
-        
-    //     // test.forEach(() => {
-    //     //     console.log(pos)
-    //     //     // post.comments.remove({ _id: test });
-    //     // })
-    // })
-    // await post.save();  
     
     res.json(test);
 });
+
+/*--------------------------------------------------------- */
 
 // deletes the user 
 router.delete('/:userId', verifyToken, async (req, res) => {
