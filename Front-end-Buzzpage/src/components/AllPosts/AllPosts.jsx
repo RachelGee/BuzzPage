@@ -5,6 +5,8 @@ import { useContext, useState, useEffect } from "react";
 import { AuthedUserContext } from "../../App";
 import Comment from '../Comment/Comment';
 import * as postService from '../../services/postService';
+import { show } from '../../services/profileService';
+
 
 
 const AllPosts = (props) => {
@@ -77,19 +79,20 @@ const AllPosts = (props) => {
                     <div className="col-md-3 mb-4" key={index}>
                         <div className="card h-100">
                             <img src={post.photo} className="card-img-top h-50" alt="..." />
-                            <div className="card-body">
+                            <div className="card-body bg-dark">
                                 <h5 className="card-title">
                                     <Link
                                         className={`${styles.link}`}
                                         to={`/posts/${post._id}`}
                                     >
-                                        <p>
+                                        <p style={{ color: "#F4BE1E" }}>
                                             {post.title} by {post.author.username}
                                         </p>
                                     </Link>
                                 </h5>
                                 <p className={`card-text ${styles.text}`}>{post.text}</p>
                                 <button
+                                    style={{ color: "#F4BE1E" }}
                                     className={`btn btn-link ${styles.btn}`}
                                     type="button"
                                     data-bs-toggle="collapse"
@@ -100,15 +103,15 @@ const AllPosts = (props) => {
                                     {post.comments.length ? <h6>{post.comments.length} comments</h6> : <h6>No Comments</h6>}
                                 </button>
 
-                                <div className="collapse" id="collapseExample">
+                                <div className="collapse h-50" id="collapseExample">
                                     <div className="card card-body">
                                         <div className="comment-section">
                                             <h1>Comments</h1>
                                             <div className="comments">
-                                                <ol>
+                                                <div>
                                                     {post.comments &&
                                                         post.comments.map((comment, index) => (
-                                                            <li key={index}>
+                                                            <div key={index}>
                                                                 {editCommentId === comment._id ? (
                                                                     <>
                                                                         <input
@@ -124,7 +127,7 @@ const AllPosts = (props) => {
                                                                     </>
                                                                 ) : (
                                                                     <>
-                                                                        {comment.text}
+                                                                        {`BeeKeeper#${comment.author.substring(0, 4)}`}: {comment.text}
                                                                         {currentUser && currentUser._id === post.author._id && (
                                                                             <>
                                                                                 <button
@@ -146,27 +149,15 @@ const AllPosts = (props) => {
                                                                     </>
                                                                 )
                                                                 }
-                                                            </li>
+                                                            </div>
                                                         ))}
-                                                </ol>
+                                                </div>
                                             </div>
                                             <Comment handleAddComment={handleAddComment} postId={post._id} />
                                         </div>
 
                                     </div>
                                 </div>
-
-
-
-
-
-
-
-
-
-
-
-
                             </div>
                         </div>
                     </div>
