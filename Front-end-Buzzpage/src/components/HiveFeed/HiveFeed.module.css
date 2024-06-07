@@ -1,12 +1,14 @@
-.container{
+.container {
     background-image: url(../../assets/images/beehive1.png);
     display: flex;
     justify-content: center;
     flex-direction: column;
+    width: 100%;
+    height: 100vh;
 
 }
 
-.sidebar{
+.sidebar {
     display: flex;
     flex-direction: column;
     padding: 10px;

@@ -3,6 +3,7 @@ import { signup } from '../../services/authService';
 import { useNavigate } from 'react-router-dom';
 import styles from './SignUpForm.module.css';
 import Logo from '../../assets/images/logo.png'
+import PageTransition from '../PageTransition/PageTransition';
 
 const SignUpForm = (props) => {
     const navigate = useNavigate();
@@ -40,6 +41,7 @@ const SignUpForm = (props) => {
 
     return (
         <>
+            <PageTransitionEvent />
             <div className={styles.container}>
                 <div className={styles.logoImage}>
                     <p className='display-3'>What's all the BUZZ about?</p>
