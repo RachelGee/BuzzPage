@@ -6,7 +6,11 @@
     overflow: hidden;
 }
 
-.user{
+.user {
     font-weight: bold;
     font-size: 20px
+}
+
+.btn {
+    padding: 0;
 }
