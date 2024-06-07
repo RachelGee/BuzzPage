@@ -61,6 +61,7 @@ router.get('/', async (req, res) => {
     try {
       const posts = await Post.find({})
         .populate('author')
+        .populate('comments').populate('author')
         .sort({ createdAt: 'desc' });
       res.status(200).json(posts);
     } catch (error) {
