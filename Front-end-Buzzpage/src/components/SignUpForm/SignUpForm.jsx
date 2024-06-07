@@ -3,6 +3,7 @@ import { signup } from '../../services/authService';
 import { useNavigate } from 'react-router-dom';
 import styles from './SignUpForm.module.css';
 import Logo from '../../assets/images/logo.png'
+import PageTransition from '../PageTransition/PageTransition';
 
 const SignUpForm = (props) => {
     const navigate = useNavigate();

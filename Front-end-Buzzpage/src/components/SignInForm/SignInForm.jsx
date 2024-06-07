@@ -3,6 +3,8 @@ import { signin } from '../../services/authService';
 import { useNavigate } from 'react-router-dom';
 import styles from './SignInForm.module.css';
 import Logo from '../../assets/images/logo.png'
+import PageTransition from '../PageTransition/PageTransition';
+
 
 
 const SignInForm = (props) => {
@@ -37,6 +39,7 @@ const SignInForm = (props) => {
     };
     return (
         <>
+            <PageTransition />
             <div className={styles.container}>
                 <div className={styles.logoImage}>
                     <p className='display-3'>What's all the BUZZ about?</p>
