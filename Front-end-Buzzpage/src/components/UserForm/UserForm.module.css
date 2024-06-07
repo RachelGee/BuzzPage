@@ -1,18 +1,26 @@
-.contianer{
-    display: flex;
+* {
+    box-sizing: border-box;
+    overflow: hidden;
 }
 
-.form{
+.container{
     display: flex;
     justify-content: center;
-    align-items: center;
     min-height: 100vh;
+    background-image: url('/src/assets/images/largeblackhoneycomb.png'); 
 }
 
+.form{ 
+    display: flex;
+    align-items: center;
+}
+
+/* div that contains the select box */
 .pictureFrame{
     display: flex;
 }
 
+/* the select box */
 .picture{
     background-size: cover;
     width: 30%;

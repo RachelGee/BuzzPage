@@ -44,6 +44,7 @@ const SideBar = (props) => {
                     </div>
                 
                     <input
+                        className="form-control me-2 text-warning border-warning"
                         type="text"
                         placeholder="Search..."
                         value={searchQuery}

@@ -4,8 +4,6 @@
 
 .container {
     background-image: url('/src/assets/images/beehive1.png');
-    /* background-image: url('/src/assets/images/blackhoneycomb.png'); */
-    /* background-image: url('/src/assets/images/largeblackhoneycomb.png'); */
     display: grid;
     gap: 24px;
     grid-template-columns: repeat(5, 1fr);
@@ -60,6 +58,13 @@
     border:2px solid black;
     min-width: 120px;
 } 
+
+.allPost{
+    grid-column:  4;
+    grid-row: 1;
+    align-self: end;
+
+}
 
 /* ----------------Bottom pfofile------------------ */
 

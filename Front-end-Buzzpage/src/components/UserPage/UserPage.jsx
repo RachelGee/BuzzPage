@@ -4,7 +4,6 @@ import { show } from '../../services/profileService';
 import PageTransition from '../PageTransition/PageTransition';
 import styles from './UserPage.module.css'
 import SideBar from '../SideBar/SideBar';
-import background from '../../assets/images/beehive1.png'
 
 const UserPage = (props) => {
     //gets users id
@@ -42,13 +41,14 @@ const UserPage = (props) => {
         </>
     );
 
-    console.log(background)
-
     return (  
         <main className={styles.container}>
-            {/* <PageTransition /> */}
+            <PageTransition />
             <div className={styles.sidebar}> 
                 <SideBar posts={user.posts} user={user}/>
+            </div>
+            <div className={styles.allPost}>   
+                <h1 className={"text fs-1 m-auto mt-2 "}>All Posts</h1>
             </div>
             <div className={`card bg-dark m-auto mt-2 border-warning ${styles.userInfo}`}>
                 {!isOpen && ( 
@@ -68,7 +68,7 @@ const UserPage = (props) => {
                 : 
                     <>
                         <div className="d-flex justify-content-center flex-column">
-                            <p className="card-body text-center fs-2 ">No hony in this nest</p>
+                            <p className="card-body text-center fs-2 ">No honey in this nest</p>
                             <div className="d-flex justify-content-center">
                                 <div className="spinner-grow text-warning " style={{width: '5rem', height: '5rem'}}>
                                     <span className="visually-hidden">no huny</span>
