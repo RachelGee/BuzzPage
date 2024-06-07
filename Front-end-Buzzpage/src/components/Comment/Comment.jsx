@@ -22,7 +22,7 @@ const Comment = (props) => {
 
                 <div className="input-group">
                     <span className="input-group-text">
-                        <button className="btn btn-secondary" type="submit">Add Comment</button>
+                        <button style={{ backgroundColor: "#F4BE1E", border:"none" }} className="btn btn-secondary" type="submit">Add Comment</button>
                     </span>
                     <input className="form-control" aria-label="With textarea"
                         type="text"
