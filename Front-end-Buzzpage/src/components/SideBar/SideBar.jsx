@@ -36,14 +36,15 @@ const SideBar = (props) => {
                 <div className="container d-flex flex-column">
                     <div className="row p-2">
                         <div className="col">
-                            <button className="btn btn-warning" onClick={handleClick}>New Post</button>
+                            <button className="btn btn-warning p-3" onClick={handleClick}>New Post</button>
                         </div>
                         <div className="col">
-                            <button className="btn btn-warning" onClick={handleEdit}>Edit user</button>
+                            <button className="btn btn-warning p-3" onClick={handleEdit}>Edit user</button>
                         </div>
                     </div>
                 
                     <input
+                        className="form-control me-2 text-warning border-warning"
                         type="text"
                         placeholder="Search..."
                         value={searchQuery}
