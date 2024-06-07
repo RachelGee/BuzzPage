@@ -78,7 +78,7 @@ const PostDetails = (props) => {
             <button className="btn btn-secondary" onClick={() => handleLikeClick("dislike")}>Dislike</button>
             <hr />
             <div className={styles.container}>
-                <div className="card" style={{ width: "30rem" }}>
+                <div className="card" style={{ width: "40rem" }}>
                     <img src={post.photo} className="card-img-top" alt="..." />
                     <div className="card-body">
                         <h5 className="card-title">{post.title}</h5>
