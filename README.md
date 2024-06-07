@@ -37,7 +37,7 @@ TBD
 Project planning link: https://trello.com/invite/b/9mBCE5mu/ATTIa876f0ab15aa8fddde6385b57a697f2f7C6508FE/unit-3-project-buzzpage-by-beekeepers
 
 
-💻 TECHNOLOGIES USED: REACT, Express, Node, JavaScript, BootStrap, Canva (graphic design app)
+💻 TECHNOLOGIES USED: REACT, Express, Node, JavaScript, JWT Token Auth, BootStrap, Canva (graphic design app)
 
 NEXT STEPS:
 - Animation (honey drip or page transitions)
