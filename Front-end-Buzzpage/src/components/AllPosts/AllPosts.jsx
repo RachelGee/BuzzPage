@@ -70,10 +70,6 @@ const AllPosts = (props) => {
         setPost(updatedPost);
     };
 
-
-
-
-
     return (
         <main className="mx-2">
             <div className="row">
@@ -87,11 +83,89 @@ const AllPosts = (props) => {
                                         className={`${styles.link}`}
                                         to={`/posts/${post._id}`}
                                     >
-                                        {post.title}
+                                        <p>
+                                            {post.title} by {post.author.username}
+                                        </p>
                                     </Link>
                                 </h5>
-                                <p className={`card-text h-25 ${styles.text}`}>{post.text}</p>
-                                <Comment handleAddComment={handleAddComment} postId={post._id} />
+                                <p className={`card-text ${styles.text}`}>{post.text}</p>
+                                <button
+                                    className={`btn btn-link ${styles.btn}`}
+                                    type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#collapseExample"
+                                    aria-expanded="false"
+                                    aria-controls="collapseExample"
+                                >
+                                    {post.comments.length ? <h6>{post.comments.length} comments</h6> : <h6>No Comments</h6>}
+                                </button>
+
+                                <div className="collapse" id="collapseExample">
+                                    <div className="card card-body">
+                                        <div className="comment-section">
+                                            <h1>Comments</h1>
+                                            <div className="comments">
+                                                <ol>
+                                                    {post.comments &&
+                                                        post.comments.map((comment, index) => (
+                                                            <li key={index}>
+                                                                {editCommentId === comment._id ? (
+                                                                    <>
+                                                                        <input
+                                                                            type="text"
+                                                                            value={editedCommentText.text}
+                                                                            onChange={(e) =>
+                                                                                setEditedCommentText({ text: e.target.value })
+                                                                            }
+                                                                        />
+                                                                        <button onClick={() => handleSaveEdit(comment._id)}>
+                                                                            Save
+                                                                        </button>
+                                                                    </>
+                                                                ) : (
+                                                                    <>
+                                                                        {comment.text}
+                                                                        {currentUser && currentUser._id === post.author._id && (
+                                                                            <>
+                                                                                <button
+                                                                                    onClick={() =>
+                                                                                        handleToggleEdit(comment._id, comment.text)
+                                                                                    }
+                                                                                >
+                                                                                    Edit
+                                                                                </button>
+                                                                                <button
+                                                                                    onClick={() =>
+                                                                                        handleDeleteComment(comment._id)
+                                                                                    }
+                                                                                >
+                                                                                    Delete
+                                                                                </button>
+                                                                            </>
+                                                                        )}
+                                                                    </>
+                                                                )
+                                                                }
+                                                            </li>
+                                                        ))}
+                                                </ol>
+                                            </div>
+                                            <Comment handleAddComment={handleAddComment} postId={post._id} />
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+
+
+
+
+
+
+
+
+
 
                             </div>
                         </div>
