@@ -73,9 +73,9 @@ const PostDetails = (props) => {
 
     return (
         <>
-            <button onClick={() => handleLikeClick("like")}>Like</button>
+            <button className="btn btn-secondary" onClick={() => handleLikeClick("like")}>Like</button>
             {post.like}
-            <button onClick={() => handleLikeClick("dislike")}>Dislike</button>
+            <button className="btn btn-secondary" onClick={() => handleLikeClick("dislike")}>Dislike</button>
             <hr />
             <div className={styles.container}>
                 <div className="card" style={{ width: "30rem" }}>
@@ -93,20 +93,15 @@ const PostDetails = (props) => {
                                     <Link
                                         className={styles.link}
                                         to={`/users/${currentUser._id}/posts/${postId}/edit`}
-                                        style={{ textDecoration: 'none', color: 'white' }}
-                                    >
-                                        Edit
-                                    </Link>
+                                        style={{ textDecoration: 'none', color: 'white' }}>Edit</Link>
                                 </button>
                                 <button
                                     className="btn btn-secondary"
-                                    onClick={() => props.handleDeletePost(post._id)}
-                                >
-                                    Delete
+                                    onClick={() => props.handleDeletePost(post._id)}> Delete
                                 </button>
                             </>
                         )}
-    
+
                         <div className="d-inline-flex gap-1">
                             <button
                                 className="btn btn-secondary"
@@ -115,9 +110,8 @@ const PostDetails = (props) => {
                                 data-bs-target="#collapseExample"
                                 aria-expanded="false"
                                 aria-controls="collapseExample"
-                            >
-                                Comments
-                            </button>
+                            >Comments</button>
+                            
                             <button className="btn btn-secondary" onClick={handleClick}>Back to the Hive
                             </button>
                         </div>
@@ -166,14 +160,15 @@ const PostDetails = (props) => {
                                                                     </>
                                                                 )}
                                                             </>
-                                                        )}
+                                                        )
+                                                        }
                                                     </li>
                                                 ))}
                                         </ol>
                                     </div>
                                     <Comment handleAddComment={handleAddComment} postId={post._id} />
                                 </div>
-                                <hr />
+
                             </div>
                         </div>
                         <hr />
