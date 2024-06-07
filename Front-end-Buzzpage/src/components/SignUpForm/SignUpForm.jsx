@@ -41,7 +41,6 @@ const SignUpForm = (props) => {
 
     return (
         <>
-            <PageTransitionEvent />
             <div className={styles.container}>
                 <div className={styles.logoImage}>
                     <p className='display-3'>What's all the BUZZ about?</p>
