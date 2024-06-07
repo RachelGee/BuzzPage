@@ -12,7 +12,7 @@ See what all the BUZZ is about!
 
 
 -- 🌟 LINK TO DEPLOYED SITE 🌟 -- 
-TBD
+https://buzzpage-0469aeee4872.herokuapp.com/
 
 
 -- 🌌 ASSETS 🌌 -- Image assets that I created in Canva for the site are included in the "assets' folder in this repository.
@@ -37,7 +37,7 @@ TBD
 Project planning link: https://trello.com/invite/b/9mBCE5mu/ATTIa876f0ab15aa8fddde6385b57a697f2f7C6508FE/unit-3-project-buzzpage-by-beekeepers
 
 
-💻 TECHNOLOGIES USED: REACT, Express, Node, JavaScript, JWT Token Auth, BootStrap, Canva (graphic design app)
+💻 TECHNOLOGIES USED: REACT, REACT Router, Express, Node, JavaScript, JWT Token Auth, BootStrap, Canva (graphic design app)
 
 NEXT STEPS:
 - Animation (honey drip or page transitions)
