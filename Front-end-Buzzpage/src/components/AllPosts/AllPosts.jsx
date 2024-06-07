@@ -10,7 +10,7 @@ const AllPosts = (props) => {
 
             {props.AllPosts.map((post, index) => (
                 <div className="card" style={{ width: "40rem" }} key={index}>
-                    <h2 class="card-title">
+                    <h2 className="card-title">
                     <Link className={styles.link} to={`/posts/${post._id}`}>{post.title}</Link>
                     </h2>
                     
