@@ -54,7 +54,7 @@ const NavBar = (props) => {
                         <div className="display-4">BuzzPage</div>
                     </Link>
                     <div className={styles.links}>
-                        {/* <Link className='h2' to={`/users/profile/${props.user._id}`}><img src={image} alt="" className={`img-fluid ${styles.profile}`} />Hello {props.user.username}</Link> */}
+                        <Link className='h2' to={`/users/profile/${props.user._id}`}>Hello {props.user.username}</Link>
                         <Link className='h2' to='users/signin' onClick={props.handleSignout}>Sign Out</Link>
                     </div>
                 </nav>
@@ -83,9 +83,9 @@ const NavBar = (props) => {
                     <button type="button" className="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div className="offcanvas-body">
-                    <p className='text-center h3 mb-3'>Daily News</p>
+                    {/* <p className='text-center h3 mb-3'>Daily News</p> */}
 
-                    <NewsSlider />
+                    {/* <NewsSlider /> */}
                     <button data-bs-dismiss="offcanvas" className={`btn mb-3 ${styles.createPostBtn}`} onClick={handleClick}>
                         Create New Post
                     </button>
