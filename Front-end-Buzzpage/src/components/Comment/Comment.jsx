@@ -17,23 +17,24 @@ const Comment = (props) => {
 
     return (
         <>
-        <form onSubmit={handleSubmit}>
-            <label htmlFor="text"></label>
+            <form onSubmit={handleSubmit}>
+                <label htmlFor="text"></label>
 
-            <div class="input-group">
-            <span class="input-group-text">Add A Comment</span>
-            <textarea class="form-control" aria-label="With textarea"
-                type="text"
-                name="text"
-                id="text"
-                value={formData.text}
-                onChange={handleChange}>
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <button className="btn btn-secondary" type="submit">Add Comment</button>
+                    </span>
+                    <input class="form-control" aria-label="With textarea"
+                        type="text"
+                        name="text"
+                        id="text"
+                        value={formData.text}
+                        onChange={handleChange}>
 
-            </textarea>
-            </div>
+                    </input>
+                </div>
 
-            <button className="btn btn-secondary" type="submit">Publish</button>
-        </form>
+            </form>
         </>
     );
 

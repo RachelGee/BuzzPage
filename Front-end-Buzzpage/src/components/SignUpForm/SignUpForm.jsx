@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { signup } from '../../services/authService';
 import { useNavigate } from 'react-router-dom';
 import styles from './SignUpForm.module.css';
-import LoginSignup from '../../assets/images/LoginSignup.png';
 import Logo from '../../assets/images/logo.png'
 
 const SignUpForm = (props) => {
