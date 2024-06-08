@@ -1,0 +1,65 @@
+.container {
+    background: no-repeat center center fixed;
+}
+
+.boxC,
+.boxL,
+.boxR {
+    position: relative;
+    border-radius: 2rem;
+}
+
+.boxL,.boxR {
+    animation: movingBox1 10s ease infinite;
+}
+
+.boxC {
+    animation: movingBox2 10s ease infinite;
+}
+
+.eyes{
+    width: 50px;
+    aspect-ratio: 1/1;
+    background-color: white;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pupils{
+    width: 25px;
+    aspect-ratio: 1/1;
+    border-radius: 100%;
+    background-color: black;
+}
+
+
+
+
+
+@keyframes movingBox1 {
+    0%,
+    50%,
+    100% {
+        transform: translateY(-10px);
+    }
+
+    25%,
+    75% {
+        transform: translateY(10px);
+    }
+}
+
+@keyframes movingBox2 {
+    0%,
+    50%,
+    100% {
+        transform: translateY(10px);
+    }
+
+    25%,
+    75% {
+        transform: translateY(-10px);
+    }
+}

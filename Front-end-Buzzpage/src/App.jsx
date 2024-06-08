@@ -24,6 +24,7 @@ import * as postService from './services/postService';
 import * as profileService from './services/profileService'
 
 import NewsSlider from './components/NewsSlider/NewsSlider';
+import LandingPage from './components/LandingPage/LandingPage';
 
 export const AuthedUserContext = createContext(null);
 
@@ -48,8 +49,8 @@ const App = () => {
     setUser(null);
     navigate('/users/signin');
   }
-  const handleAddPost = async (photoData,postData) => {
-    const newPost = await postService.create(photoData,postData);
+  const handleAddPost = async (photoData, postData) => {
+    const newPost = await postService.create(photoData, postData);
     setPosts([...posts, newPost])
     navigate('/')
   }
@@ -62,12 +63,11 @@ const App = () => {
 
   const handleUpdatePost = async (postId, formData) => {
     try {
-    const updatedPost = await postService.update(postId, formData);
-      const filteredPosts = posts.filter((post) => post._id !== updatedPost._id ) 
+      const updatedPost = await postService.update(postId, formData);
+      const filteredPosts = posts.filter((post) => post._id !== updatedPost._id)
       setPosts([updatedPost, ...filteredPosts]);
-      console.log('post updated sucessfully', updatedPost);
       navigate(`/`);
-    } catch (error){
+    } catch (error) {
       console.error('Failed to update post', error);
     }
   }
@@ -80,8 +80,8 @@ const App = () => {
   const handleDeletePost = async (postId) => {
     try {
       const deletedPost = await postService.deletePost(postId);
-        setPosts(posts.filter(post => post._id !== deletedPost._id))
-        navigate('/'); // Navigate to the home page after deleting
+      setPosts(posts.filter(post => post._id !== deletedPost._id))
+      navigate('/');
     } catch (error) {
       console.error('Failed to delete post', error);
     }
@@ -93,7 +93,7 @@ const App = () => {
     <AuthedUserContext.Provider value={user}>
       <NavBar user={user} handleSignout={handleSignout} posts={posts} />
       <Routes>
-        <Route path="/" element={<HiveFeed AllPosts={posts} />} />
+        <Route path="/" element={user ? <HiveFeed AllPosts={posts} /> : <LandingPage />} />
 
         <Route path="/comment" element={<Comment />} />
 
