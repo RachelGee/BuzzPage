@@ -37,6 +37,7 @@ const NavBar = (props) => {
             const userData = await show(props.user._id)
             setImage(userData.user.image);
         }
+        fetchUser();
     }, []);
 
 
@@ -54,7 +55,7 @@ const NavBar = (props) => {
                         <div className="display-4">BuzzPage</div>
                     </Link>
                     <div className={styles.links}>
-                        <Link className='h2' to={`/users/profile/${props.user._id}`}>Hello {props.user.username}</Link>
+                        <Link className='h2' to={`/users/profile/${props.user._id}`}><img src={image} alt="" className={`img-fluid ${styles.profile}`} />Hello {props.user.username}</Link>
                         <Link className='h2' to='users/signin' onClick={props.handleSignout}>Sign Out</Link>
                     </div>
                 </nav>
