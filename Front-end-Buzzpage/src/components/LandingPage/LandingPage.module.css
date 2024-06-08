@@ -9,7 +9,8 @@
     border-radius: 2rem;
 }
 
-.boxL,.boxR {
+.boxL,
+.boxR {
     animation: movingBox1 10s ease infinite;
 }
 
@@ -17,7 +18,7 @@
     animation: movingBox2 10s ease infinite;
 }
 
-.eyes{
+.eyes {
     width: 50px;
     aspect-ratio: 1/1;
     background-color: white;
@@ -27,7 +28,7 @@
     align-items: center;
 }
 
-.pupils{
+.pupils {
     width: 25px;
     aspect-ratio: 1/1;
     border-radius: 100%;
@@ -39,6 +40,7 @@
 
 
 @keyframes movingBox1 {
+
     0%,
     50%,
     100% {
@@ -52,10 +54,11 @@
 }
 
 @keyframes movingBox2 {
+
     0%,
     50%,
     100% {
-        transform: translateY(10px);
+        transform: translateY(10px) scale(1.1);
     }
 
     25%,
