@@ -14,8 +14,6 @@ const AllPosts = (props) => {
     const navigate = useNavigate();
     const currentUser = useContext(AuthedUserContext);
 
-    console.log(currentUser);
-
     const [post, setPost] = useState({
         title: '',
         text: '',
