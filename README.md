@@ -12,8 +12,7 @@ See what all the BUZZ is about!
 
 
 -- 🌟 LINK TO DEPLOYED SITE 🌟 -- 
-https://buzzpage-0469aeee4872.herokuapp.com/
-
+](https://buzzpage-cc6f7350ca02.herokuapp.com/)
 
 -- 🌌 ASSETS 🌌 -- Image assets that I created in Canva for the site are included in the "assets' folder in this repository.
 
