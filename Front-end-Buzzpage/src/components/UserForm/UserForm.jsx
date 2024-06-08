@@ -44,60 +44,62 @@ const UserForm = (props) => {
     }
 
     return (
-        <main className={styles.container} >
+        <div>
             <PageTransition />
-            <div className={styles.form}>
-                <form onSubmit={handleSubmit} className="card bg-dark p-5 border-warning">
-                    <div className="form-text text-warning text-center fs-1">Your page is buzzing for a change</div>
-                    <div className={`mt-3 mb-4  ${styles.pictureFrame}`}>
-                        <label htmlFor="picture"></label>
-                        <select className={styles.picture} name="image" id="picture" value={formData.image} style={{backgroundiImage: `url("${formData.image}")`}} onChange={handleChange}>
-                            <option className={styles.d1} value={default1}>yellow</option>
-                            <option className={styles.d2} value={default2}>red</option>
-                            <option className={styles.d3} value={default3}>black</option>
-                        </select>
-                    </div>
-                    <div className="row">
-                        <div className="col">
-                            <input
+            <main className={styles.container} >
+                <div className={styles.form}>
+                    <form onSubmit={handleSubmit} className="card bg-dark p-5 border-warning">
+                        <div className="form-text text-warning text-center fs-1">Your page is buzzing for a change</div>
+                        <div className={`mt-3 mb-4  ${styles.pictureFrame}`}>
+                            <label htmlFor="picture"></label>
+                            <select className={styles.picture} name="image" id="picture" value={formData.image} style={{ backgroundiImage: `url("${formData.image}")` }} onChange={handleChange}>
+                                <option className={styles.d1} value={default1}>yellow</option>
+                                <option className={styles.d2} value={default2}>red</option>
+                                <option className={styles.d3} value={default3}>black</option>
+                            </select>
+                        </div>
+                        <div className="row">
+                            <div className="col">
+                                <input
+                                    type="text"
+                                    className="form-control me-2 border-warning"
+                                    name="firstName"
+                                    id="firstName"
+                                    value={formData.firstName}
+                                    onChange={handleChange}
+                                />
+                            </div>
+                            <div className="col" >
+                                <input
+                                    type="text"
+                                    className="form-control me-2 border-warning"
+                                    name="lastName"
+                                    id="lastName"
+                                    value={formData.lastName}
+                                    onChange={handleChange}
+                                />
+                            </div>
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="bio" className="form-label">Bio:</label>
+                            <textarea
                                 type="text"
-                                className="form-control me-2 border-warning"
-                                name="firstName"
-                                id="firstName"
-                                value={formData.firstName}
+                                className="form-control border-warning"
+                                name="bio"
+                                id="bio"
+                                rows="3"
+                                value={formData.bio}
                                 onChange={handleChange}
                             />
                         </div>
-                        <div className="col" >
-                            <input
-                                type="text"
-                                className="form-control me-2 border-warning"
-                                name="lastName"
-                                id="lastName"
-                                value={formData.lastName}
-                                onChange={handleChange}
-                            />
+                        <button type='submit' className="btn btn-warning border-dark">Edit info</button>
+                        <div className='d-flex align-self-center mt-3'>
+                            <button onClick={handleBack} className="btn-close bg-warning " />
                         </div>
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="bio" className="form-label">Bio:</label>
-                        <textarea
-                            type="text"
-                            className="form-control border-warning"
-                            name="bio"
-                            id="bio"
-                            rows="3"
-                            value={formData.bio}
-                            onChange={handleChange}
-                        />
-                    </div>
-                    <button type='submit' className="btn btn-warning border-dark">Edit info</button>
-                    <div className='d-flex align-self-center mt-3'>
-                        <button onClick={handleBack} className="btn-close bg-warning "/>
-                    </div>
-                </form> 
-            </div>
-        </main>
+                    </form>
+                </div>
+            </main>
+        </div>
     );
 }
 
