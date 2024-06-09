@@ -11,13 +11,13 @@ const handleClick = (e) => {
 
 const HiveFeed = (props) => {
     return (
-        <>
+        <div className={styles.container}>
             <PageTransition />
-            <main className={styles.container}>
+            <main>
                 <h1 className='text-center'>Welcome to the HIVE! Here's the latest BUZZ:</h1>
-                {props.AllPosts.length > 0 ? <AllPosts AllPosts={props.AllPosts} /> : "No Post Yet!"}
+                {props.AllPosts.length > 0 ? <AllPosts AllPosts={props.AllPosts} /> : <h1 className='text-center'>No Post Yet!</h1>}
             </main>
-        </>
+        </div>
 
     )
 }
