@@ -1,5 +1,5 @@
 .container {
-    background: no-repeat center center fixed;
+    min-height: 100vh;
 }
 
 .boxC,
@@ -34,10 +34,6 @@
     border-radius: 100%;
     background-color: black;
 }
-
-
-
-
 
 @keyframes movingBox1 {
 
