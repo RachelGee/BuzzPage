@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema({
     },
     image2:{
         type:String,
-        default:"../../Front-end-Buzzpage/src/assets/images/logo.png"
+        default:"/src/assets/images/logo.png"
     },
     bio:{
         type: String,
