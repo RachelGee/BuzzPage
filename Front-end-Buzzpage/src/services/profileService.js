@@ -2,12 +2,14 @@ const BACKEND_URL = `/api/profiles`;
 
 // index to show the users profile page
 const show = async (userId) => {
+
     try {
         //makes a fetch requst to the backend profile inedx route
         const res = await fetch(`${BACKEND_URL}/${userId}`, {
             headers: { Authorization: `Bearer ${localStorage.getItem('token')}`}
         })
-      return res.json()
+        console.log(res.json());
+      // return res.json()
     } catch (error) {
       throw error
     }
