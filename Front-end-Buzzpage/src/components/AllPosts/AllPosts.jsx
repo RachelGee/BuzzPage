@@ -5,12 +5,10 @@ import { useContext, useState, useEffect } from "react";
 import { AuthedUserContext } from "../../App";
 import Comment from '../Comment/Comment';
 import * as postService from '../../services/postService';
-import { show } from '../../services/profileService';
 
 
 
 const AllPosts = (props) => {
-    const { postId } = useParams();
     const navigate = useNavigate();
     const currentUser = useContext(AuthedUserContext);
 
@@ -22,14 +20,9 @@ const AllPosts = (props) => {
         author: "",
         comments: []
     });
+
     const [editCommentId, setEditCommentId] = useState(null);
     const [editedCommentText, setEditedCommentText] = useState({ text: "" });
-
-
-    useEffect(() => {
-
-    }, [postId, editCommentId]);
-
 
     const handleAddComment = async (comment) => {
         const updatedPost = { ...post };
@@ -37,7 +30,7 @@ const AllPosts = (props) => {
         setPost(updatedPost);
     }
 
-    const handleDeleteComment = async (commentId) => {
+    const handleDeleteComment = async (postId, commentId) => {
         await postService.deleteComment(postId, commentId);
         const updatedPost = { ...post };
         updatedPost.comments = updatedPost.comments.filter(comment => comment._id !== commentId);
@@ -49,13 +42,12 @@ const AllPosts = (props) => {
         setEditedCommentText(commentText);
     }
 
-    const handleSaveEdit = async (commentId) => {
+    const handleSaveEdit = async (commentId, postId) => {
         await postService.updateComment(postId, commentId, editedCommentText);
         setEditCommentId(null);
-    }
-
-    const handleClick = () => {
-        navigate(`/`);
+        const updatedPost = await postService.getPost(postId);
+        setPost(updatedPost);
+        setEditCommentId(null);
     }
 
     const handleLikeClick = async (arg) => {
@@ -119,13 +111,13 @@ const AllPosts = (props) => {
                                                                                 setEditedCommentText({ text: e.target.value })
                                                                             }
                                                                         />
-                                                                        <button onClick={() => handleSaveEdit(comment._id)}>
+                                                                        <button onClick={() => handleSaveEdit(comment._id, post._id)}>
                                                                             Save
                                                                         </button>
                                                                     </>
                                                                 ) : (
                                                                     <>
-                                                                        {`BeeKeeper#${comment.author.substring(0, 4)}`}: {comment.text}
+                                                                        {comment.authorName}: {comment.text}
                                                                         {currentUser && currentUser._id === post.author._id && (
                                                                             <>
                                                                                 <button
@@ -137,7 +129,7 @@ const AllPosts = (props) => {
                                                                                 </button>
                                                                                 <button
                                                                                     onClick={() =>
-                                                                                        handleDeleteComment(comment._id)
+                                                                                        handleDeleteComment(post._id, comment._id)
                                                                                     }
                                                                                 >
                                                                                     Delete
