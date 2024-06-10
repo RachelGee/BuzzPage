@@ -16,7 +16,6 @@ router.use(verifyToken);
 
 // create post return created post
 router.post('/photoUpload',upload.single('photo'), async (req, res) => {
-  console.log("req",req);
     try {
       if (req.file) {
           // updating the filename
@@ -136,6 +135,8 @@ router.delete('/:postId', async (req, res) => {
 router.post('/:postId/comments', async (req, res) => {
   try {
     req.body.author = req.user._id;
+    const author = await User.findById(req.user._id);
+    req.body.authorName = author.username;
     req.body.post = req.params.postId;
     const posts = await Post.findById(req.params.postId);
     posts.comments.push(req.body);

@@ -7,6 +7,9 @@ const commentSchema = new mongoose.Schema(
         required: true
       },
       author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+      authorName:{
+        type: String,
+      },
       post: { type: mongoose.Schema.Types.ObjectId, ref: 'Post' },
       like: Number
     },
