@@ -30,8 +30,6 @@ const UserPage = (props) => {
         navigate(`/users/${user._id}/posts/new`)
     }
 
-    console.log(user)
-
     //show loading until its gets user
     if (!user) return (
         <>
