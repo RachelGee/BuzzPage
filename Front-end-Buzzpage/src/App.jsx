@@ -40,7 +40,6 @@ const App = () => {
       setUserPost(postsData.filter(post => post.author._id === user._id))
     }
     if (user) fetchAllPosts();
-    console.log({ user })
   }, [user]);
 
   const navigate = useNavigate();

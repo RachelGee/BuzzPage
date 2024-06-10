@@ -40,7 +40,6 @@ const create = async (photoData=null,postFormData) => {
         // actual url for the aws photo link
         uploadedPhoto = await photoRes.json(); 
       }
-      // console.log(postFormData);
 
       // adding url to the post.photo if it exist or leave blank 
       postFormData.photo = uploadedPhoto ? uploadedPhoto : "";

@@ -37,7 +37,6 @@ const NavBar = (props) => {
     useEffect(() => {
         const fetchUser = async () => {
             const userData = await show(props.user._id)
-            console.log({ userData });
             setImage(userData.user.image);
             setImage2(userData.user.image2);
             setImage3(userData.user.image3);
@@ -60,11 +59,7 @@ const NavBar = (props) => {
                         <div className="display-4">BuzzPage</div>
                     </Link>
                     <div className={styles.links}>
-                        {/* <Link className='h2' to={`/users/profile/${props.user._id}`}>Hello {props.user.username}</Link> */}
-                        <Link className='h2' to={`/users/profile/${props.user._id}`}><img src={image} alt="" className={`img-fluid ${styles.profile}`} />Hello {props.user.username}</Link>
-                        <Link className='h2' to={`/users/profile/${props.user._id}`}><img src={image2} alt="" className={`img-fluid ${styles.profile}`} />Hello {props.user.username}</Link>
-                        <Link className='h2' to={`/users/profile/${props.user._id}`}><img src={image3} alt="" className={`img-fluid ${styles.profile}`} />Hello {props.user.username}</Link>
-                        <Link className='h2' to={`/users/profile/${props.user._id}`}><img src="../../assets/images/logo.png" alt="" className={`img-fluid ${styles.profile}`} />Hello {props.user.username}</Link>
+                        <Link className='h2' to={`/users/profile/${props.user._id}`}><img src="https://i.imgur.com/okczncm.png" alt="" className={`img-fluid ${styles.profile}`} />Hello {props.user.username}</Link>
                         <Link className='h2' to='users/signin' onClick={props.handleSignout}>Sign Out</Link>
                     </div>
                 </nav>

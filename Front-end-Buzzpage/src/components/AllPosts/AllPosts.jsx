@@ -35,7 +35,6 @@ const AllPosts = (props) => {
     }, [postIdEdit, editCommentId]);
 
     const handleAddComment = async (comment, postId) => {
-        console.log("inside handleAddcomment", postId)
         const updatedPost = { ...post };
         updatedPost.comments.push(comment);
         setPost(updatedPost);
