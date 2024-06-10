@@ -3,7 +3,6 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
-const Logo = require("../../Front-end-Buzzpage/src/assets/images/default%20icon%201.png");
 
 
 
@@ -12,7 +11,6 @@ const SALT_LENGTH = 12;
 // create a user and return the user and jwt token
 router.post('/signup', async (req, res) => {
     try {
-        console.log(Logo);
         // Check if the username is already taken
         const userInDatabase = await User.findOne({ username: req.body.username });
         if (userInDatabase) {
@@ -25,6 +23,8 @@ router.post('/signup', async (req, res) => {
             firstName: req.body.firstName,
             lastName: req.body.lastName
         })
+
+        console.log(user);
 
         // create a token using the username and id
         const token = jwt.sign({ username: user.username, _id: user._id }, process.env.JWT_SECRET);
