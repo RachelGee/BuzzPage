@@ -31,6 +31,7 @@ const NavBar = (props) => {
     //gets users id
     const [image, setImage] = useState(null)
     const [image2, setImage2] = useState(null)
+    const [image3, setImage3] = useState(null)
 
     //gets the current users data 
     useEffect(() => {
@@ -39,6 +40,7 @@ const NavBar = (props) => {
             console.log({ userData });
             setImage(userData.user.image);
             setImage2(userData.user.image2);
+            setImage3(userData.user.image3);
         }
         fetchUser();
     }, []);
@@ -61,6 +63,8 @@ const NavBar = (props) => {
                         {/* <Link className='h2' to={`/users/profile/${props.user._id}`}>Hello {props.user.username}</Link> */}
                         <Link className='h2' to={`/users/profile/${props.user._id}`}><img src={image} alt="" className={`img-fluid ${styles.profile}`} />Hello {props.user.username}</Link>
                         <Link className='h2' to={`/users/profile/${props.user._id}`}><img src={image2} alt="" className={`img-fluid ${styles.profile}`} />Hello {props.user.username}</Link>
+                        <Link className='h2' to={`/users/profile/${props.user._id}`}><img src={image3} alt="" className={`img-fluid ${styles.profile}`} />Hello {props.user.username}</Link>
+                        <Link className='h2' to={`/users/profile/${props.user._id}`}><img src="../../assets/images/logo.png" alt="" className={`img-fluid ${styles.profile}`} />Hello {props.user.username}</Link>
                         <Link className='h2' to='users/signin' onClick={props.handleSignout}>Sign Out</Link>
                     </div>
                 </nav>
