@@ -11,7 +11,7 @@ const Comment = (props) => {
     const handleSubmit = async (evt) => {
         evt.preventDefault();
         const newComment = await postService.createComment(props.postId, formData);
-        props.handleAddComment(newComment);
+        props.handleAddComment(newComment, props.postId);
         setFormData({ text: '' });
     };
 
@@ -22,7 +22,7 @@ const Comment = (props) => {
 
                 <div className="input-group">
                     <span className="input-group-text">
-                        <button style={{ backgroundColor: "#F4BE1E", border:"none" }} className="btn btn-secondary" type="submit">Add Comment</button>
+                        <button style={{ backgroundColor: "#F4BE1E", border: "none" }} className="btn btn-secondary" type="submit">Add Comment</button>
                     </span>
                     <input className="form-control" aria-label="With textarea"
                         type="text"

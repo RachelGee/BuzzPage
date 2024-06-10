@@ -21,13 +21,25 @@ const AllPosts = (props) => {
         comments: []
     });
 
+    const [postIdEdit, setPostIdEdit] = useState(null);
+
     const [editCommentId, setEditCommentId] = useState(null);
     const [editedCommentText, setEditedCommentText] = useState({ text: "" });
 
-    const handleAddComment = async (comment) => {
+    useEffect(() => {
+        const fetchPostComment = async () => {
+            const postData = await postService.show(postIdEdit);
+            setPost(postData);
+        };
+        if (postIdEdit) fetchPostComment();
+    }, [postIdEdit, editCommentId]);
+
+    const handleAddComment = async (comment, postId) => {
+        console.log("inside handleAddcomment", postId)
         const updatedPost = { ...post };
         updatedPost.comments.push(comment);
         setPost(updatedPost);
+        setPostIdEdit(postId);
     }
 
     const handleDeleteComment = async (postId, commentId) => {
