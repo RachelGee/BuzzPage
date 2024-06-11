@@ -30,16 +30,13 @@ const NavBar = (props) => {
 
     //gets users id
     const [image, setImage] = useState(null)
-    const [image2, setImage2] = useState(null)
-    const [image3, setImage3] = useState(null)
+
 
     //gets the current users data 
     useEffect(() => {
         const fetchUser = async () => {
             const userData = await show(props.user._id)
             setImage(userData.user.image);
-            setImage2(userData.user.image2);
-            setImage3(userData.user.image3);
         }
         fetchUser();
     }, []);
@@ -90,7 +87,7 @@ const NavBar = (props) => {
                 <div className="offcanvas-body">
                     <p className='text-center h3 mb-3'>Daily News</p>
 
-                    <NewsSlider />
+                    {/* <NewsSlider /> */}
                     <button data-bs-dismiss="offcanvas" className={`btn mb-3 ${styles.createPostBtn}`} onClick={handleClick}>
                         Create New Post
                     </button>
