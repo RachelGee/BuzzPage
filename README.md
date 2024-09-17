@@ -1,3 +1,5 @@
+This was a group project.
+
 NAME: 🐝 BuzzPage 🐝  
 BuzzPage is a mini social media app that keeps you up on all the latest Buzz! You can create a user profile and bio, post to the "Hive", 
 comment on other posts and stay up-to-date on the latest news! You can also search posts by category or keywords to find posts about topics you are interested in.
